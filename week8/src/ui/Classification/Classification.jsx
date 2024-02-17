@@ -1,4 +1,4 @@
-import { Button } from "./Buttons";
+import { Button } from "./ButtonStyle";
 import "./Classification.css";
 
 export function Classification() {
