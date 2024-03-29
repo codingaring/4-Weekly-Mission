@@ -1,5 +1,5 @@
 import { ModalButtonBlue } from "../ModalElements/ModalButtonBlue";
-import { Modal } from "../Modal";
+import Modal from "../Modal";
 import * as S from "./AddToFolderStyled";
 import { AddToFolderProps } from "../ModalProp";
 

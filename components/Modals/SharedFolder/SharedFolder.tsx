@@ -10,13 +10,13 @@ declare global {
   }
 }
 
-const { Kakao } = window;
-
 export function SharedFolder({
   isOpenModal,
   handleModalClose,
   selectFolder,
 }: DeleteFolderProps) {
+  const { Kakao } = window;
+
   useEffect(() => {
     Kakao.cleanup();
     console.log("key:", process.env.REACT_APP_KAKAO_KEY);
