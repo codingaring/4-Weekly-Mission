@@ -1,5 +1,4 @@
 import * as S from "./SharedStyled";
-import { useGetFolder } from "../../data-access/useGetFolder";
 import { SearchBar } from "../../components/SearchBar";
 import { CardList } from "../../components/CardList";
 import { CardItem } from "../../components/CardItem";
@@ -14,6 +13,8 @@ import { useRecoilValue } from "recoil";
 import { searchState } from "../../recoil/SearchKeyWord";
 import { SearchResultComment } from "../../components/SearchResultComment";
 import FolderInfo from "./components/AddLinkBar/FolderInfo";
+import { useGetFolder as getFolder } from "@data-access/useGetFolder";
+import { Layout } from "@components/Layout";
 
 export default function Shared() {
   const [folders, setFolders] = useState<FolderListDataForm[]>([]);
@@ -22,7 +23,7 @@ export default function Shared() {
   const searchKeyWord = useRecoilValue(searchState);
 
   const handleLoadData = async () => {
-    const { folder } = await useGetFolder<{ folder: FolderPageDataForm }>();
+    const { folder } = await getFolder<{ folder: FolderPageDataForm }>();
     setFolderInfo(folder);
     setFolderLinks(folder.links);
 
@@ -49,31 +50,35 @@ export default function Shared() {
   }, [searchKeyWord]);
 
   return (
-    <S.SharedPageContainer>
-      {folderInfo && (
-        <FolderInfo
-          profileImage={folderInfo.owner.profileImageSource}
-          ownerName={folderInfo.owner.name}
-          folderName={folderInfo.name}
-        />
-      )}
-      <S.SharedPageItems>
-        <SearchBar />
-        {searchKeyWord && <SearchResultComment searchKeyWord={searchKeyWord} />}
-        <CardList>
-          {folderLinks &&
-            folderLinks?.map((link) => (
-              <CardItem
-                url={link.url}
-                image_source={link.imageSource}
-                description={link.description}
-                created_at={link.createdAt}
-                data={folders}
-                key={link?.id}
-              />
-            ))}
-        </CardList>
-      </S.SharedPageItems>
-    </S.SharedPageContainer>
+    <Layout>
+      <S.SharedPageContainer>
+        {folderInfo && (
+          <FolderInfo
+            profileImage={folderInfo.owner.profileImageSource}
+            ownerName={folderInfo.owner.name}
+            folderName={folderInfo.name}
+          />
+        )}
+        <S.SharedPageItems>
+          <SearchBar />
+          {searchKeyWord && (
+            <SearchResultComment searchKeyWord={searchKeyWord} />
+          )}
+          <CardList>
+            {folderLinks &&
+              folderLinks?.map((link) => (
+                <CardItem
+                  url={link.url}
+                  image_source={link.imageSource}
+                  description={link.description}
+                  created_at={link.createdAt}
+                  data={folders}
+                  key={link?.id}
+                />
+              ))}
+          </CardList>
+        </S.SharedPageItems>
+      </S.SharedPageContainer>
+    </Layout>
   );
 }

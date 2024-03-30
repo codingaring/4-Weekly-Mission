@@ -2,6 +2,9 @@ import { ReactNode } from "react";
 import reactDom from "react-dom";
 
 const ModalPortal = ({ children }: { children: ReactNode }) => {
+  if (typeof window === "undefined") {
+    return;
+  }
   const el = document.getElementById("modal"); // 독립 공간
   if (el) {
     return reactDom.createPortal(children, el);

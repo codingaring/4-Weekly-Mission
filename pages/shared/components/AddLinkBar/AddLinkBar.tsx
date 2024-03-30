@@ -4,7 +4,13 @@ import { ADD_ICON } from "./constant";
 import { AddToFolder } from "../../../../components/Modals/AddToFolder";
 import { FolderListDataForm } from "../../../../types/DataForm";
 
-export function AddLinkBar({ data }: { data: FolderListDataForm[] }) {
+export function AddLinkBar({
+  data,
+  isFloting = false,
+}: {
+  data: FolderListDataForm[];
+  isFloting?: boolean;
+}) {
   const [inputValue, setInputValue] = useState<string>();
   const [isEmpty, setIsEmpty] = useState(false);
   const [isShowAddToFolder, setIsAddToFolder] = useState(false);
@@ -26,7 +32,7 @@ export function AddLinkBar({ data }: { data: FolderListDataForm[] }) {
   };
 
   return (
-    <S.AddLinkContainer>
+    <S.AddLinkContainer isFloting={isFloting}>
       <S.AddLinkBar isEmpty={isEmpty}>
         <S.AddLinkInputContainer>
           <S.AddLinkIcon src={ADD_ICON} alt="링크 추가하기 아이콘" />
@@ -41,14 +47,12 @@ export function AddLinkBar({ data }: { data: FolderListDataForm[] }) {
           {" "}
           추가하기{" "}
         </S.AddInputButton>
-        {isShowAddToFolder && (
-          <AddToFolder
-            isOpenModal={isShowAddToFolder}
-            handleModalClose={handleCloseAddToFolder}
-            linkURL={inputValue}
-            data={data}
-          />
-        )}
+        <AddToFolder
+          isOpenModal={isShowAddToFolder}
+          handleModalClose={handleCloseAddToFolder}
+          linkURL={inputValue}
+          data={data}
+        />
       </S.AddLinkBar>
     </S.AddLinkContainer>
   );

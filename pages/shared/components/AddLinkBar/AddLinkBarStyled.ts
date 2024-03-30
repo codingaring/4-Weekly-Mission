@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-export const AddLinkContainer = styled.div`
+export const AddLinkContainer = styled.div<{ isFloting: boolean }>`
   background-color: var(--light-blue);
   width: 100%;
   padding: 3.75rem 20rem 5.625rem;
   display: flex;
   justify-content: space-evenly;
+
+  ${({ isFloting }) =>
+    isFloting
+      ? "position : fixed; bottom : 0; left:0; right : 0; z-index : 2;"
+      : ""}
 `;
 
 export const AddLinkBar = styled.div<{ isEmpty: boolean }>`

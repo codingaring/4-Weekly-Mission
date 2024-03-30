@@ -1,4 +1,4 @@
-import { useGetUser } from "../../data-access/useGetUser";
+import { useGetUser as getUser } from "../../data-access/useGetUser";
 import { Footer } from "../Footer";
 import { useEffect, useState } from "react";
 import { NavigationBar } from "../NavigationBar";
@@ -12,7 +12,7 @@ export const Layout = ({ children }: ChildrenProp) => {
   });
 
   const handleLoadUser = async () => {
-    const { data } = await useGetUser();
+    const { data } = await getUser();
     const { email, image_source } = data[0] || {};
     setUserInfo({
       email,

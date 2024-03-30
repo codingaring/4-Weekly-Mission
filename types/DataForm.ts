@@ -58,6 +58,12 @@ export interface UserDataForm {
   name: string;
 }
 
+// userInfoData
+export interface UserInfo {
+  email: string;
+  imageSource: string;
+}
+
 //
 export interface CardInfoDataForm {
   url: string;
