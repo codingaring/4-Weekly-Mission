@@ -26,6 +26,7 @@ export const InputHiddenButton = styled.button`
   position: absolute;
   right: 2rem;
   top: 50%;
+  transform: translate(0, -50%);
   width: 1.6rem;
   height: 1.6rem;
 `;

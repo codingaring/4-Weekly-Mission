@@ -6,45 +6,47 @@ import { useState } from "react";
 function SignInput({
   inputTitle,
   inputType,
-  errorMessage,
   validationCallBack,
 }: {
   inputTitle: string;
   inputType: InputTypes;
-  errorMessage: InputErrorMessageProps;
-  validationCallBack: (e: React.FocusEvent<HTMLInputElement>) => void;
+  validationCallBack: (insertInputValue: string) => InputErrorMessageProps;
 }) {
   const [isHidden, setIsHidden] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
+  const [errorMessage, setErrorMessage] =
+    useState<InputErrorMessageProps>("correctInsert");
 
   const handleHidden = () => {
     isHidden ? setIsHidden(false) : setIsHidden(true);
     isHidden ? setPasswordType("text") : setPasswordType("password");
   };
 
-  return inputType === "text" ? (
+  return (
     <S.InputContainer>
       <S.InputTitle>{inputTitle}</S.InputTitle>
-      <S.InputBox
-        type={inputType}
-        placeholder="내용 입력"
-        onBlur={validationCallBack}
-      />
+      {inputType === "text" ? (
+        <>
+          <S.InputBox
+            type={inputType}
+            placeholder="내용 입력"
+            onBlur={(e) => {
+              setErrorMessage(validationCallBack(e.target.value));
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <S.InputBox type={passwordType} placeholder="내용 입력" />
+          <S.InputHiddenButton type="button" onClick={handleHidden}>
+            <S.InputHiddenIcon
+              src={isHidden ? "/images/eye-on.svg" : "/images/eye-off.svg"}
+            ></S.InputHiddenIcon>
+          </S.InputHiddenButton>
+        </>
+      )}
       <S.InputErrorMessage>
-        {errorMessage ? InputErrorMessageComment[errorMessage] : ""}
-      </S.InputErrorMessage>
-    </S.InputContainer>
-  ) : (
-    <S.InputContainer>
-      <S.InputTitle>{inputTitle}</S.InputTitle>
-      <S.InputBox type={passwordType} placeholder="내용 입력" />
-      <S.InputHiddenButton type="button" onClick={handleHidden}>
-        <S.InputHiddenIcon
-          src={isHidden ? "/images/eye-on.svg" : "/images/eye-off.svg"}
-        ></S.InputHiddenIcon>
-      </S.InputHiddenButton>
-      <S.InputErrorMessage>
-        {errorMessage ? InputErrorMessageComment[errorMessage] : ""}
+        {InputErrorMessageComment[errorMessage]}
       </S.InputErrorMessage>
     </S.InputContainer>
   );
