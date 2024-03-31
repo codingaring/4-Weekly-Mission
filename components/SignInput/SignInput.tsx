@@ -1,13 +1,18 @@
-import { InputTypes } from "./InputTypes";
+import { InputErrorMessageProps, InputTypes } from "./InputTypes";
+import { InputErrorMessageComment } from "./constant";
 import * as S from "./SignInputStyled";
 import { useState } from "react";
 
 function SignInput({
   inputTitle,
   inputType,
+  errorMessage,
+  validationCallBack,
 }: {
   inputTitle: string;
   inputType: InputTypes;
+  errorMessage: InputErrorMessageProps;
+  validationCallBack: (e: React.FocusEvent<HTMLInputElement>) => void;
 }) {
   const [isHidden, setIsHidden] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
@@ -20,8 +25,14 @@ function SignInput({
   return inputType === "text" ? (
     <S.InputContainer>
       <S.InputTitle>{inputTitle}</S.InputTitle>
-      <S.InputBox type={inputType} placeholder="내용 입력" />
-      <S.InputErrorMessage></S.InputErrorMessage>
+      <S.InputBox
+        type={inputType}
+        placeholder="내용 입력"
+        onBlur={validationCallBack}
+      />
+      <S.InputErrorMessage>
+        {errorMessage ? InputErrorMessageComment[errorMessage] : ""}
+      </S.InputErrorMessage>
     </S.InputContainer>
   ) : (
     <S.InputContainer>
@@ -32,7 +43,9 @@ function SignInput({
           src={isHidden ? "/images/eye-on.svg" : "/images/eye-off.svg"}
         ></S.InputHiddenIcon>
       </S.InputHiddenButton>
-      <S.InputErrorMessage></S.InputErrorMessage>
+      <S.InputErrorMessage>
+        {errorMessage ? InputErrorMessageComment[errorMessage] : ""}
+      </S.InputErrorMessage>
     </S.InputContainer>
   );
 }

@@ -1,6 +1,6 @@
 import { InputErrorMessageTypes } from "./InputTypes";
 
-export const InputErrorMessage: InputErrorMessageTypes = {
+export const InputErrorMessageComment: InputErrorMessageTypes = {
   loginEmail: "일치하는 이메일 정보가 없습니다.",
   loginPassword: "비밀번호를 확인해 주세요.",
   signupEmail: "이메일 형식이 올바르지 않습니다.",

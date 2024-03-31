@@ -35,4 +35,5 @@ export const InputHiddenIcon = styled.img``;
 export const InputErrorMessage = styled.p`
   color: var(--red);
   font-size: 1.4rem;
+  height: 1.8rem;
 `;
