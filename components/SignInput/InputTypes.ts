@@ -11,5 +11,3 @@ export type InputErrorMessageTypes = {
 export type InputErrorMessageProps = keyof InputErrorMessageTypes;
 
 export type InputTypes = "text" | "password";
-
-export type BorderType = "normal" | "writing" | "error";
