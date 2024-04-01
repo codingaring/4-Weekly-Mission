@@ -1,11 +1,11 @@
 import * as S from "./ModalFolderStyled";
 
-interface ModalBase {
+interface ModalFolderListProp {
   folderList: number;
   title: string;
 }
 
-export const ModalFolderList = ({ folderList, title }: ModalBase) => {
+export const ModalFolderList = ({ folderList, title }: ModalFolderListProp) => {
   return (
     <S.TitleContainer>
       <S.SubTitle>{title}</S.SubTitle>
