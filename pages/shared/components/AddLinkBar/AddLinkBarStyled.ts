@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-export const AddLinkContainer = styled.div<{ isFloting: boolean }>`
+export const AddLinkContainer = styled.div<{ isFloating: boolean }>`
   background-color: var(--light-blue);
   width: 100%;
   padding: 3.75rem 20rem 5.625rem;
   display: flex;
   justify-content: space-evenly;
 
-  ${({ isFloting }) =>
-    isFloting
+  ${({ isFloating }) =>
+    isFloating
       ? "position : fixed; bottom : 0; left:0; right : 0; z-index : 2;"
       : ""}
 `;

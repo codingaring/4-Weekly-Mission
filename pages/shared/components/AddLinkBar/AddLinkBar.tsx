@@ -6,10 +6,10 @@ import { FolderListDataForm } from "../../../../types/DataForm";
 
 export function AddLinkBar({
   data,
-  isFloting = false,
+  isFloating = false,
 }: {
   data: FolderListDataForm[];
-  isFloting?: boolean;
+  isFloating?: boolean;
 }) {
   const [inputValue, setInputValue] = useState<string>();
   const [isEmpty, setIsEmpty] = useState(false);
@@ -32,7 +32,7 @@ export function AddLinkBar({
   };
 
   return (
-    <S.AddLinkContainer isFloting={isFloting}>
+    <S.AddLinkContainer isFloating={isFloating}>
       <S.AddLinkBar isEmpty={isEmpty}>
         <S.AddLinkInputContainer>
           <S.AddLinkIcon src={ADD_ICON} alt="링크 추가하기 아이콘" />

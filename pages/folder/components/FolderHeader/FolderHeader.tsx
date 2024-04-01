@@ -8,7 +8,7 @@ import * as S from "./FolderHeaderStyled";
 
 const FolderHeader = forwardRef(
   (
-    { data, isFloting }: { data: FolderListDataForm[]; isFloting: boolean },
+    { data, isFloating }: { data: FolderListDataForm[]; isFloating: boolean },
     ref
   ) => {
     const [userInfo, setUserInfo] = useState({
@@ -33,7 +33,7 @@ const FolderHeader = forwardRef(
       <div ref={ref as React.RefObject<HTMLDivElement>}>
         <S.FolderHeaderContainer>
           <NavigationBar userInfo={userInfo}></NavigationBar>
-          <AddLinkBar data={data} isFloting={isFloting} />
+          <AddLinkBar data={data} isFloating={isFloating} />
         </S.FolderHeaderContainer>
       </div>
     );
