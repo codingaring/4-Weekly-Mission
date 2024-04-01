@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
+export const SignInBody = styled.div`
+  height: 100vh;
+  background-color: var(--light-blue);
+`;
+
 export const SignInContainer = styled.div`
   width: 40rem;
-  background-color: var(--light-blue);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 3rem;
