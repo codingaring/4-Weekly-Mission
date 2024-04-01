@@ -67,6 +67,4 @@ const Footer = forwardRef(({}, ref) => {
   );
 });
 
-Footer.displayName = "Footer";
-
 export default Footer;
