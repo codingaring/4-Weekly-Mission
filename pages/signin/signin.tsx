@@ -2,7 +2,8 @@ import SignInput from "@components/SignInput";
 import * as S from "./signinStyled";
 import Link from "next/link";
 import { InputErrorMessageProps } from "@components/SignInput/InputTypes";
-import { checkValidationEmail } from "@util/checkValidationEmail";
+import { checkValidation } from "@util/checkValidationEmail";
+import { EmailRegex } from "@util/regex/constant";
 
 export default function SignIn() {
   const emailInputValidate = (
@@ -10,7 +11,7 @@ export default function SignIn() {
   ): InputErrorMessageProps => {
     if (insertInputValue === "") {
       return "emailEmpty";
-    } else if (!checkValidationEmail(insertInputValue)) {
+    } else if (!checkValidation(EmailRegex, insertInputValue)) {
       return "validationEmail";
     }
     return "correctInsert";
@@ -48,12 +49,12 @@ export default function SignIn() {
         <S.SocialLoginBox>
           <span>소셜 로그인</span>
           <S.SnsIconsContainer>
-            <a>
+            <Link href="https://www.google.com" target="_blank">
               <img src="/images/google.svg" alt="google login" />
-            </a>
-            <a>
+            </Link>
+            <Link href="https://www.kakaocorp.com/page" target="_blank">
               <img src="/images/kakaoTalk.svg" alt="kakaotalk login" />
-            </a>
+            </Link>
           </S.SnsIconsContainer>
         </S.SocialLoginBox>
       </S.SignInContainer>

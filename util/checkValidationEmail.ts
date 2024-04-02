@@ -1,8 +1,5 @@
-const EmailRegex =
-  "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])";
+export function checkValidation(Regex: string, checkValue: string) {
+  let regex = new RegExp(Regex);
 
-let regex = new RegExp(EmailRegex);
-
-export function checkValidationEmail(checkEmail: string) {
-  return regex.test(checkEmail);
+  return regex.test(checkValue);
 }
