@@ -1,5 +1,5 @@
 import { useGetUser as getUser } from "../../data-access/useGetUser";
-import { Footer } from "../Footer";
+import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import { NavigationBar } from "../NavigationBar";
 import { DEFAULT_PROFILE_IMAGE } from "../NavigationBar/constant";

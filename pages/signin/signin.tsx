@@ -36,12 +36,18 @@ export default function SignIn() {
             validationCallBack={emailInputValidate}
           />
         </S.InputContainer>
-        <button type="submit">로그인</button>
-        <div>
+        <S.PrimaryButton type="submit">로그인</S.PrimaryButton>
+        <S.SocialLoginBox>
           <span>소셜 로그인</span>
-          <img src="/images/google.svg" />
-          <img src="/images/kakaoTalk.svg" />
-        </div>
+          <S.SnsIconsContainer>
+            <a>
+              <img src="/images/google.svg" alt="google login" />
+            </a>
+            <a>
+              <img src="/images/kakaoTalk.svg" alt="kakaotalk login" />
+            </a>
+          </S.SnsIconsContainer>
+        </S.SocialLoginBox>
       </S.SignInContainer>
     </S.SignInBody>
   );

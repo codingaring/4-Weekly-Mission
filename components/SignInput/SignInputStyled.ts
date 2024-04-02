@@ -7,7 +7,7 @@ export const InputContainer = styled.div`
   gap: 1.2rem;
 `;
 
-export const InputTitle = styled.p`
+export const InputTitle = styled.label`
   font-size: 1.4rem;
 `;
 
