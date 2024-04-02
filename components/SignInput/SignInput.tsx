@@ -7,10 +7,12 @@ function SignInput({
   inputTitle,
   inputType,
   validationCallBack,
+  placeholder = "내용 입력",
 }: {
   inputTitle: string;
   inputType: InputTypes;
   validationCallBack: (insertInputValue: string) => InputErrorMessageProps;
+  placeholder?: string;
 }) {
   const [isHidden, setIsHidden] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
@@ -29,7 +31,7 @@ function SignInput({
         <>
           <S.InputBox
             type={inputType}
-            placeholder="내용 입력"
+            placeholder={placeholder}
             onBlur={(e) => {
               setErrorMessage(validationCallBack(e.target.value));
             }}

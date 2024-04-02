@@ -1,7 +1,7 @@
 export type InputErrorMessageTypes = {
   loginEmail: string;
   loginPassword: string;
-  signupEmail: string;
+  validationEmail: string;
   signupPasswordRepeat: string;
   emailEmpty: string;
   passwordEmpty: string;
