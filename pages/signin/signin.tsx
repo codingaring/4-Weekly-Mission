@@ -17,6 +17,12 @@ export default function SignIn() {
     return "correctInsert";
   };
 
+  const passwordInputValidate = (
+    insertInputValue: string
+  ): InputErrorMessageProps => {
+    return insertInputValue === "" ? "passwordEmpty" : "correctInsert";
+  };
+
   return (
     <S.SignInBody>
       <S.SignInContainer>
@@ -41,7 +47,7 @@ export default function SignIn() {
           <SignInput
             inputType="password"
             inputTitle="비밀번호"
-            validationCallBack={emailInputValidate}
+            validationCallBack={passwordInputValidate}
             placeholder="비밀번호를 입력해 주세요."
           />
         </S.InputContainer>

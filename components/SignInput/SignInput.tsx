@@ -39,7 +39,13 @@ function SignInput({
         </>
       ) : (
         <>
-          <S.InputBox type={passwordType} placeholder="내용 입력" />
+          <S.InputBox
+            type={passwordType}
+            placeholder={placeholder}
+            onBlur={(e) => {
+              setErrorMessage(validationCallBack(e.target.value));
+            }}
+          />
           <S.InputHiddenButton type="button" onClick={handleHidden}>
             <S.InputHiddenIcon
               src={isHidden ? "/images/eye-on.svg" : "/images/eye-off.svg"}
