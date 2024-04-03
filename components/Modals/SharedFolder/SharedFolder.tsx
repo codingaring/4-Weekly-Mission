@@ -23,6 +23,7 @@ export function SharedFolder({
     Kakao.init(process.env.REACT_APP_KAKAO_KEY);
     console.log("check!!:", Kakao.isInitialized());
   }, []);
+  const { Kakao } = window;
 
   const shareKakao = () => {
     Kakao.Share.sendDefault({

@@ -61,7 +61,7 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
 
   useEffect(() => {
     handleLoadFolder({ folderId, searchKeyWord });
-  }, [folderId, searchKeyWord]);
+  }, [folderId, searchKeyWord, isAddToFolder]);
 
   return (
     <>
