@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FolderListDataForm } from "../../types/DataForm";
-import * as S from "./FolderStyled";
+import * as S from "../../styles/pagesStyledComponents/FolderStyled";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { getCategory } from "@data-access/getCategory";
 import FolderHeader from "@components/folder/FolderHeader";

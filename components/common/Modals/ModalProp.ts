@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { FolderListDataForm } from "../../types/DataForm";
+import { FolderListDataForm } from "../../../types/DataForm";
 
 export interface BaseModalProps {
   isOpenModal?: boolean;

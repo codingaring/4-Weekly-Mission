@@ -1,4 +1,4 @@
-import * as SS from "../signin/signinStyled";
+import * as SS from "./signinStyled";
 import styled from "styled-components";
 
 export const SignupBody = styled(SS.SignInBody)``;
