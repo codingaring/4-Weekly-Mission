@@ -40,4 +40,6 @@ const FolderHeader = forwardRef(
   }
 );
 
+FolderHeader.displayName = "FolderHeader";
+
 export default FolderHeader;

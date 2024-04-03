@@ -1,9 +1,5 @@
 import { useGetUser as getUser } from "../../data-access/useGetUser";
-<<<<<<< Updated upstream
 import Footer from "../Footer";
-=======
-import { Footer } from "../Footer";
->>>>>>> Stashed changes
 import { useEffect, useState } from "react";
 import { NavigationBar } from "../NavigationBar";
 import { DEFAULT_PROFILE_IMAGE } from "../NavigationBar/constant";

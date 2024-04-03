@@ -86,10 +86,18 @@ export default function SignIn() {
           <span>소셜 로그인</span>
           <S.SnsIconsContainer>
             <Link href="https://www.google.com" target="_blank">
-              <img src="/images/google.svg" alt="google login" />
+              <S.SnsIconBox>
+                <S.SnsIcon fill src="/images/google.svg" alt="google login" />
+              </S.SnsIconBox>
             </Link>
             <Link href="https://www.kakaocorp.com/page" target="_blank">
-              <img src="/images/kakaoTalk.svg" alt="kakaotalk login" />
+              <S.SnsIconBox>
+                <S.SnsIcon
+                  fill
+                  src="/images/kakaoTalk.svg"
+                  alt="kakaotalk login"
+                />
+              </S.SnsIconBox>
             </Link>
           </S.SnsIconsContainer>
         </S.SocialLoginBox>

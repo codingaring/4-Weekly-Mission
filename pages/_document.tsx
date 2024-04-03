@@ -7,11 +7,7 @@ export default function Document() {
       <Head></Head>
       <body>
         <Main />
-<<<<<<< Updated upstream
         <div id="modal"></div>
-=======
-        <div id="portal"></div>
->>>>>>> Stashed changes
         <NextScript />
         <Script src="https://t1.kakaocdn.net/kakao_js_sdk/v1/kakao.min.js" />
       </body>

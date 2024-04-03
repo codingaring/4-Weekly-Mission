@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const SignInBody = styled.div`
   height: 100vh;
@@ -85,3 +86,11 @@ export const SnsIconsContainer = styled.div`
   gap: 1.6rem;
   align-items: center;
 `;
+
+export const SnsIconBox = styled.div`
+  width: 4.2rem;
+  height: 4.2rem;
+  position: relative;
+`;
+
+export const SnsIcon = styled(Image)``;

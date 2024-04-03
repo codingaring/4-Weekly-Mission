@@ -20,7 +20,7 @@ export function AddToFolder({
         <S.SelectLink>{linkURL}</S.SelectLink>
         <S.FolderListContainer>
           {data?.map((folder) => (
-            <S.SelectFolder>
+            <S.SelectFolder key={folder.id}>
               <S.FolderName>{folder.name}</S.FolderName>
               <S.FolderCount>{folder.link.count}개 링크</S.FolderCount>
               <S.SelectFolderIcon />
