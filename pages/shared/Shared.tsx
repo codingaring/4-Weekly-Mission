@@ -22,32 +22,31 @@ export default function Shared() {
   const [folderLinks, setFolderLinks] = useState<LinkDataForm[]>([]);
   const searchKeyWord = useRecoilValue(searchState);
 
-  const handleLoadData = async () => {
-    const { folder } = await getFolder<{ folder: FolderPageDataForm }>();
-    setFolderInfo(folder);
-    setFolderLinks(folder.links);
-
-    if (searchKeyWord) {
-      setFolderLinks((prevFolderLinks) =>
-        prevFolderLinks?.filter(
-          (link) =>
-            link.description?.includes(searchKeyWord) ||
-            link.url?.includes(searchKeyWord) ||
-            link.title?.includes(searchKeyWord)
-        )
-      );
-    }
-  };
-
   const handleLoadFolders = async (folderId = "") => {
     const { data } = await getFolders({ folderId });
     setFolders(data);
   };
 
   useEffect(() => {
+    const handleLoadData = async () => {
+      const { folder } = await getFolder<{ folder: FolderPageDataForm }>();
+      setFolderInfo(folder);
+      setFolderLinks(folder.links);
+
+      if (searchKeyWord) {
+        setFolderLinks((prevFolderLinks) =>
+          prevFolderLinks?.filter(
+            (link) =>
+              link.description?.includes(searchKeyWord) ||
+              link.url?.includes(searchKeyWord) ||
+              link.title?.includes(searchKeyWord)
+          )
+        );
+      }
+    };
+
     handleLoadFolders();
-    handleLoadData();
-  }, [searchKeyWord, handleLoadData]);
+  }, [searchKeyWord]);
 
   return (
     <Layout>

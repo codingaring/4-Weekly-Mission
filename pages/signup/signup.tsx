@@ -18,12 +18,12 @@ export default function Signup() {
           </S.HeaderTextBox>
         </S.SignUpHeader>
         <S.InputContainer>
-          <SignInput
+          {/* <SignInput
             inputTitle="이메일"
             inputName="email"
             inputType="text"
             placeholder="이메일을 입력해 주세요."
-          />
+          /> */}
           {/* <SignInput />
           <SignInput /> */}
           <S.PrimaryButton type="submit">회원가입</S.PrimaryButton>
