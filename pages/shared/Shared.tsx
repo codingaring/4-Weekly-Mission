@@ -1,8 +1,4 @@
 import * as S from "./SharedStyled";
-import { SearchBar } from "../../components/SearchBar";
-import { CardList } from "../../components/CardList";
-import { CardItem } from "../../components/CardItem";
-import { getFolders } from "../../data-access/getFolders";
 import { useEffect, useState } from "react";
 import {
   FolderListDataForm,
@@ -10,11 +6,14 @@ import {
   LinkDataForm,
 } from "../../types/DataForm";
 import { useRecoilValue } from "recoil";
-import { searchState } from "../../recoil/SearchKeyWord";
-import { SearchResultComment } from "../../components/SearchResultComment";
-import FolderInfo from "./components/AddLinkBar/FolderInfo";
-import { useGetFolder as getFolder } from "@data-access/useGetFolder";
-import { Layout } from "@components/Layout";
+import { getFolders } from "@data-access/getFolders";
+import { searchState } from "recoil/SearchKeyWord";
+import { Layout } from "@components/common/Layout";
+import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
+import { SearchBar } from "@components/common/SearchBar";
+import { SearchResultComment } from "@components/common/SearchResultComment";
+import { CardList } from "@components/common/CardList";
+import { CardItem } from "@components/common/CardItem";
 
 export default function Shared() {
   const [folders, setFolders] = useState<FolderListDataForm[]>([]);
@@ -29,7 +28,7 @@ export default function Shared() {
 
   useEffect(() => {
     const handleLoadData = async () => {
-      const { folder } = await getFolder<{ folder: FolderPageDataForm }>();
+      const { folder } = await getFolders({ folderId: "" });
       setFolderInfo(folder);
       setFolderLinks(folder.links);
 

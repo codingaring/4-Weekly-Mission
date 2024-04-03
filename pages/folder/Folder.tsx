@@ -1,12 +1,12 @@
-import * as S from "./FolderStyled";
-import { FolderContent } from "./components/FolderContent/FolderContent";
 import { useEffect, useState } from "react";
 import { FolderListDataForm } from "../../types/DataForm";
-import { getCategory } from "@data-access/getCategory";
-import { SearchBar } from "@components/SearchBar";
-import FolderHeader from "./components/FolderHeader/FolderHeader";
-import Footer from "@components/Footer";
+import * as S from "./FolderStyled";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+import { getCategory } from "@data-access/getCategory";
+import FolderHeader from "@components/folder/FolderHeader";
+import { SearchBar } from "@components/common/SearchBar";
+import { FolderContent } from "@components/folder/FolderContent/FolderContent";
+import Footer from "@components/common/Footer";
 
 export default function Folder() {
   const [categoryData, setCategoryData] = useState<FolderListDataForm[]>([]);
