@@ -1,18 +1,24 @@
 import { InputErrorMessageProps, InputTypes } from "./InputTypes";
 import { InputErrorMessageComment } from "./constant";
 import * as S from "./SignInputStyled";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 function SignInput({
   inputTitle,
   inputType,
   validationCallBack,
   placeholder = "내용 입력",
+  inputName,
+  onChange,
+  value,
 }: {
   inputTitle: string;
   inputType: InputTypes;
   validationCallBack: (insertInputValue: string) => InputErrorMessageProps;
   placeholder?: string;
+  inputName: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 }) {
   const [isHidden, setIsHidden] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
@@ -26,10 +32,12 @@ function SignInput({
 
   return (
     <S.InputContainer>
-      <S.InputTitle>{inputTitle}</S.InputTitle>
+      <S.InputTitle htmlFor={inputName}>{inputTitle}</S.InputTitle>
       {inputType === "text" ? (
         <>
           <S.InputBox
+            value={value}
+            onChange={onChange}
             type={inputType}
             placeholder={placeholder}
             onBlur={(e) => {
@@ -40,6 +48,9 @@ function SignInput({
       ) : (
         <>
           <S.InputBox
+            value={value}
+            onChange={onChange}
+            id={inputName}
             type={passwordType}
             placeholder={placeholder}
             onBlur={(e) => {

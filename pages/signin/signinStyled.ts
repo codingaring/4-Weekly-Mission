@@ -52,7 +52,7 @@ export const HeaderToLink = styled.span`
   text-underline-offset: 0.4rem;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;

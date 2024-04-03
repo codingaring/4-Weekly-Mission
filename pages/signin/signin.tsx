@@ -1,11 +1,19 @@
-import SignInput from "@components/SignInput";
 import * as S from "./signinStyled";
 import Link from "next/link";
 import { InputErrorMessageProps } from "@components/SignInput/InputTypes";
 import { checkValidation } from "@util/checkValidationEmail";
 import { EmailRegex } from "@util/regex/constant";
+import SignInput from "@components/SignInput";
+import { FormEvent } from "react";
+import { checkSignin } from "@data-access/checkSignin";
+import { useRouter } from "next/router";
+import { useInputValue } from "@hooks/useInputValue";
 
 export default function SignIn() {
+  const { insertValue: emailValue, onChange: emailChange } = useInputValue();
+  const { insertValue: passwordValue, onChange: passwordChange } =
+    useInputValue();
+  const router = useRouter();
   const emailInputValidate = (
     insertInputValue: string
   ): InputErrorMessageProps => {
@@ -23,6 +31,22 @@ export default function SignIn() {
     return insertInputValue === "" ? "passwordEmpty" : "correctInsert";
   };
 
+  const handleSignSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const inputValue: { email: string; password: string } = {
+      email: emailValue,
+      password: passwordValue,
+    };
+
+    try {
+      await checkSignin(inputValue);
+      router.push("/folder");
+    } catch {
+      return;
+    }
+  };
+
   return (
     <S.SignInBody>
       <S.SignInContainer>
@@ -37,21 +61,27 @@ export default function SignIn() {
             </Link>
           </S.HeaderTextBox>
         </S.SigninHeader>
-        <S.InputContainer>
+        <S.InputContainer onSubmit={handleSignSubmit}>
           <SignInput
+            onChange={emailChange}
+            value={emailValue}
+            inputName="email"
             inputType="text"
             inputTitle="이메일"
             validationCallBack={emailInputValidate}
             placeholder="이메일을 입력해 주세요."
           />
           <SignInput
+            onChange={passwordChange}
+            value={passwordValue}
+            inputName="password"
             inputType="password"
             inputTitle="비밀번호"
             validationCallBack={passwordInputValidate}
             placeholder="비밀번호를 입력해 주세요."
           />
+          <S.PrimaryButton type="submit">로그인</S.PrimaryButton>
         </S.InputContainer>
-        <S.PrimaryButton type="submit">로그인</S.PrimaryButton>
         <S.SocialLoginBox>
           <span>소셜 로그인</span>
           <S.SnsIconsContainer>
