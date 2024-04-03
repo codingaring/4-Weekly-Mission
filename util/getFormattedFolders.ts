@@ -1,8 +1,8 @@
 import { getElapsedTime } from "./getElapsedTime";
 import { formatData } from "./formatDate";
-import { FolderPageDataForm, LinkDataForm } from "interface/DataForm";
+import { FolderPageDataForm, LinkDataForm } from "../types/DataForm";
 
-export const getFormattedFolders = (folder: FolderPageDataForm) => {
+const getFormattedFolders = (folder: FolderPageDataForm) => {
   const { name, owner, links } = folder;
 
   const mapLinks = (link: LinkDataForm) => {
@@ -25,3 +25,5 @@ export const getFormattedFolders = (folder: FolderPageDataForm) => {
     links: links?.map(mapLinks) ?? [],
   };
 };
+
+export default getFormattedFolders;

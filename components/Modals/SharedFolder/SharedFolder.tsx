@@ -15,13 +15,13 @@ export function SharedFolder({
   handleModalClose,
   selectFolder,
 }: DeleteFolderProps) {
+  const { Kakao } = window;
   useEffect(() => {
-    const { Kakao } = window;
     Kakao.cleanup();
     console.log("key:", process.env.REACT_APP_KAKAO_KEY);
     Kakao.init(process.env.REACT_APP_KAKAO_KEY);
     console.log("check!!:", Kakao.isInitialized());
-  }, []);
+  }, [Kakao]);
 
   const shareKakao = () => {
     Kakao.Share.sendDefault({

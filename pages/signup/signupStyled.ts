@@ -12,3 +12,5 @@ export const InputContainer = styled(SS.InputContainer)``;
 export const PrimaryButton = styled(SS.PrimaryButton)``;
 export const SocialSignupBox = styled(SS.SocialLoginBox)``;
 export const SnsIconsContainer = styled(SS.SnsIconsContainer)``;
+export const SnsIconBox = styled(SS.SnsIconBox)``;
+export const SnsIcon = styled(SS.SnsIcon)``;
