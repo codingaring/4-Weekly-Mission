@@ -1,4 +1,4 @@
-import { BaseModalProps } from "interface/ModalProp";
+import { BaseModalProps } from "../ModalProp";
 import styled from "styled-components";
 
 export const CloseButtonModal = styled.button`

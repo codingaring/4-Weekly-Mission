@@ -47,7 +47,7 @@ export default function Shared() {
   useEffect(() => {
     handleLoadFolders();
     handleLoadData();
-  }, [searchKeyWord]);
+  }, [searchKeyWord, handleLoadData]);
 
   return (
     <Layout>

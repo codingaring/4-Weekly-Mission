@@ -1,4 +1,4 @@
-import { Modal } from "../Modal/Modal";
+import Modal from "../Modal/Modal";
 import { ModalButtonRed } from "../ModalElements/ModalButtonRed";
 import * as S from "./DeleteLinkStyled";
 import { DeleteLinkProps } from "../ModalProp";

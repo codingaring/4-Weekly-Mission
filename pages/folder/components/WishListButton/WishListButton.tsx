@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EMPTY_STAR, FULL_STAR } from "./constant";
 import * as S from "./WishListButtonStyled";
 import { MouseEvent } from "react";
+import Image from "next/image";
 
 export default function WishListButton() {
   const [wishListBtn, setWishListBtn] = useState(EMPTY_STAR);
@@ -16,11 +17,7 @@ export default function WishListButton() {
 
   return (
     <S.WishListButtonContainer onClick={handleWishListBtn}>
-      <img
-        className="WishListButton-button"
-        src={wishListBtn}
-        alt="즐겨찾기로 추가하기 버튼"
-      />
+      <Image fill src={wishListBtn} alt="즐겨찾기로 추가하기 버튼" />
     </S.WishListButtonContainer>
   );
 }
