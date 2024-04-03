@@ -1,5 +1,5 @@
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import type { ChildrenProp } from "interface/ChildrenProp";
 
 export const ContainerModal = styled.div`
   position: absolute;
@@ -17,6 +17,6 @@ export const ContainerModal = styled.div`
   z-index: 2;
 `;
 
-export function ModalContainer({ children }: ChildrenProp) {
+export function ModalContainer({ children }: PropsWithChildren) {
   return <ContainerModal>{children}</ContainerModal>;
 }
