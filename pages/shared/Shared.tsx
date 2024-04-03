@@ -14,6 +14,7 @@ import { SearchBar } from "@components/common/SearchBar";
 import { SearchResultComment } from "@components/common/SearchResultComment";
 import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
+import { useGetFolder as getFolder } from "@data-access/useGetFolder";
 
 export default function Shared() {
   const [folders, setFolders] = useState<FolderListDataForm[]>([]);
@@ -28,7 +29,7 @@ export default function Shared() {
 
   useEffect(() => {
     const handleLoadData = async () => {
-      const { folder } = await getFolders({ folderId: "" });
+      const { folder } = await getFolder<{ folder: FolderPageDataForm }>();
       setFolderInfo(folder);
       setFolderLinks(folder.links);
 
@@ -43,7 +44,7 @@ export default function Shared() {
         );
       }
     };
-
+    handleLoadData();
     handleLoadFolders();
   }, [searchKeyWord]);
 
