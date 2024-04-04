@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
-import * as S from "./CtaStyled";
+import * as S from "@styles/common/PrimaryButton";
 
 export const Cta = ({ children }: PropsWithChildren) => {
-  return <S.CtaContainer>{children}</S.CtaContainer>;
+  return <S.PrimaryButton>{children}</S.PrimaryButton>;
 };

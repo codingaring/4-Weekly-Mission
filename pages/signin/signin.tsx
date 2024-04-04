@@ -1,5 +1,5 @@
 import { InputErrorMessageProps } from "@components/common/SignInput/InputTypes";
-import * as S from "../../styles/pagesStyledComponents/signinStyled";
+import * as S from "../../styles/pages/signinStyled";
 import Link from "next/link";
 import { useInputValue } from "@hooks/useInputValue";
 import { useRouter } from "next/router";

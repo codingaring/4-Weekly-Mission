@@ -1,4 +1,4 @@
-import ModalPortal from "setting-files/Portal";
+import ModalPortal from "@components/Portal";
 import { ModalCloseButton } from "../ModalElements/ModalCloseButton";
 import { ModalContainer } from "../ModalElements/ModalContainer";
 import { ModalDim } from "../ModalElements/ModalDim";

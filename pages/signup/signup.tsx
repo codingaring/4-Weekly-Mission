@@ -1,5 +1,5 @@
 import Link from "next/link";
-import * as S from "../../styles/pagesStyledComponents/signupStyled";
+import * as S from "../../styles/pages/signupStyled";
 
 export default function Signup() {
   return (

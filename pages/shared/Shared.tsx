@@ -1,4 +1,4 @@
-import * as S from "../../styles/pagesStyledComponents/SharedStyled";
+import * as S from "../../styles/pages/SharedStyled";
 import { useEffect, useState } from "react";
 import {
   FolderListDataForm,
