@@ -18,45 +18,9 @@ export const SignInContainer = styled.div`
   gap: 3rem;
 `;
 
-export const SigninHeader = styled.div`
-  width: 21rem;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.6rem;
-`;
-
-export const LinkbraryLogo = styled.img`
-  width: 21rem;
-`;
-
-export const HeaderTextBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.8rem;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const HeaderText = styled.p`
-  font-size: 1.3rem;
-  line-height: 2.4rem;
-`;
-
-export const HeaderToLink = styled.span`
-  color: var(--primary);
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.4rem;
-`;
-
 export const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
 `;
 
 export const PrimaryButton = styled.button`
@@ -94,3 +58,38 @@ export const SnsIconBox = styled.div`
 `;
 
 export const SnsIcon = styled(Image)``;
+
+export const InputTitle = styled.label`
+  font-size: 1.4rem;
+`;
+
+export const InputBox = styled.input`
+  margin-top: 1.2rem;
+  border-radius: 0.8rem;
+  padding: 1.8rem 1.5rem;
+  padding-right: 3.6rem;
+  border: 0.1rem solid var(--gray20);
+
+  &:focus {
+    border-color: var(--primary);
+  }
+`;
+
+export const InputErrorMessage = styled.p`
+  margin-top: 0.6rem;
+  color: var(--red);
+  font-size: 1.4rem;
+  min-height: 2rem;
+  margin-bottom: 2.4rem;
+`;
+
+export const InputHiddenButton = styled.button`
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 1.6rem;
+  height: 1.6rem;
+`;
+
+export const InputHiddenIcon = styled.img``;

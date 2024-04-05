@@ -25,6 +25,11 @@
       "@styles/*": ["styles/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/sign/SignInForm"
+  ],
   "exclude": ["node_modules"]
 }
