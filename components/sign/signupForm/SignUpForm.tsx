@@ -14,6 +14,7 @@ export function SignUpForm() {
   const router = useRouter();
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>({
@@ -27,6 +28,12 @@ export function SignUpForm() {
     } catch {
       return "이미 사용 중인 이메일입니다.";
     }
+  };
+
+  const isConfirmPasswordRepeat = (insertPasswordRepeat: string) => {
+    return getValues("password") === insertPasswordRepeat
+      ? true
+      : "비밀번호가 일치하지 않아요.";
   };
 
   const handleSignup: SubmitHandler<IFormInput> = async (data) => {
@@ -75,7 +82,7 @@ export function SignUpForm() {
       <S.InputBox
         id="password"
         type="password"
-        placeholder="비밀번호를 입력해 주세요."
+        placeholder="영문, 숫자를 조합해 8자 이상 입력해 주세요."
         {...register("password", {
           required: {
             value: true,
@@ -97,11 +104,15 @@ export function SignUpForm() {
       <S.InputBox
         id="confirmPassword"
         type="password"
-        placeholder="이메일을 입력해 주세요."
+        placeholder="비밀번호와 일치하는 값을 입력해 주세요."
         {...register("confirmPassword", {
           required: {
             value: true,
             message: "비밀번호가 일치하지 않아요.",
+          },
+          validate: (value) => {
+            const result = isConfirmPasswordRepeat(value);
+            return result;
           },
         })}
         aria-invalid={errors.confirmPassword ? "true" : "false"}
