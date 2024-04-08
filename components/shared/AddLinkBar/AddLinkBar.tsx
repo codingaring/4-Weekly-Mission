@@ -44,8 +44,7 @@ export function AddLinkBar({
           />
         </S.AddLinkInputContainer>
         <S.AddInputButton onClick={handleAddToFolder} disabled={isEmpty}>
-          {" "}
-          추가하기{" "}
+          추가하기
         </S.AddInputButton>
         <AddToFolder
           isOpenModal={isShowAddToFolder}
