@@ -21,7 +21,7 @@ export const AddLinkBar = styled.div<{ isEmpty: boolean }>`
   align-items: center;
   gap: 0.8rem;
   border: 0.1rem solid
-    ${({ isEmpty }) => (isEmpty ? "var(--primary)" : "var(--red)")};
+    ${({ isEmpty }) => (isEmpty ? "var(--red)" : "var(--primary)")};
   width: 80rem;
   border-radius: 1.5rem;
 

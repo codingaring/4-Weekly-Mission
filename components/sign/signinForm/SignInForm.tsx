@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../constant";
 import * as S from "../SignFormStyled";
+import { useEffectOnce } from "@hooks/useEffectOnce";
 
 interface IFormInput {
   email: string;
@@ -25,7 +26,9 @@ export function SignForm() {
 
     try {
       await checkSignin(inputValue);
+      const token = await checkSignin(inputValue);
       router.push("/folder");
+      window.localStorage.setItem("accessToken", token);
     } catch {
       setError("email", {
         message: "이메일을 확인해 주세요.",
@@ -35,6 +38,18 @@ export function SignForm() {
       });
     }
   };
+
+  function hasAccessToken() {
+    const localStorageToken = localStorage.getItem("accessToken");
+    if (localStorageToken === null) {
+      return;
+    } else {
+      router.push("/folder");
+    }
+  }
+
+  useEffectOnce(hasAccessToken);
+
   return (
     <S.InputContainer onSubmit={handleSubmit(handleInputValue)}>
       <S.InputTitle htmlFor="email">이메일</S.InputTitle>

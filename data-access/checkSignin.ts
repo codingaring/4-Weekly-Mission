@@ -16,6 +16,7 @@ export async function checkSignin(trySignValue: {
     throw new Error("로그인에 실패했습니다.");
   }
 
-  const token = await response.json();
-  return token;
+  const { data } = await response.json();
+  const { accessToken } = data;
+  return accessToken;
 }
