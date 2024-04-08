@@ -2,6 +2,7 @@ import { KebabMenu } from "@components/folder/KebabMenu/KebabMenu";
 import * as S from "./CardContentStyled";
 import { MouseEvent, useState } from "react";
 import { FolderListDataForm } from "../../../types/DataForm";
+import Image from "next/image";
 
 interface CardContentProps {
   elapsedTime: string;
@@ -37,11 +38,9 @@ export const CardContent = ({
       <div className="CardContent-time-kebab">
         <S.ElapsedTime>{elapsedTime}</S.ElapsedTime>
         {currentLocation === "/folder" && (
-          <button
-            type="button"
-            className="CardContent-kebab-button"
-            onClick={handleClickMenu}
-          />
+          <S.KebabButton type="button" onClick={handleClickMenu}>
+            <Image fill src="/images/kebab.svg" alt="메뉴 보기" />
+          </S.KebabButton>
         )}
         {isOpened && <KebabMenu selectURL={selectURL} data={data} />}
       </div>

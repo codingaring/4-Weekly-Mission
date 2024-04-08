@@ -34,3 +34,10 @@ export const CreatedAtText = styled.span`
   font-size: 1.4rem;
   color: var(--text-content-black);
 `;
+
+export const KebabButton = styled.button`
+  position: absolute;
+  right: 2rem;
+  width: 2.1rem;
+  height: 1.7rem;
+`;
