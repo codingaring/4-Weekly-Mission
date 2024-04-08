@@ -25,7 +25,6 @@ export function SignForm() {
     };
 
     try {
-      await checkSignin(inputValue);
       const token = await checkSignin(inputValue);
       router.push("/folder");
       window.localStorage.setItem("accessToken", token);
