@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import * as S from "./KebabMenuStyled";
 import { MouseEvent } from "react";
 import { FolderListDataForm } from "../../../types/DataForm";
 import DeleteLink from "@components/common/Modals/DeleteLink";
 import { AddToFolder } from "@components/common/Modals/AddToFolder";
+import { ModalContext } from "@components/common/RefactorModal/ModalContext";
+import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 
 interface Props {
   selectURL: string;
@@ -11,54 +13,51 @@ interface Props {
 }
 
 export function KebabMenu({ selectURL, data }: Props) {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [addToFolderModal, setAddToFolderModal] = useState(false);
+  const modalState = useContext(ModalContext);
+  const [showModalState, setShowModalState] = useState(modalState);
 
-  const handleModalClose = (e: MouseEvent<HTMLElement>) => {
+  const handleShowModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setShowDeleteModal(false);
-    setAddToFolderModal(false);
-  };
 
-  const handleShowDeleteModal = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowDeleteModal(true);
-  };
-
-  const handleShowAddToFolderModal = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setAddToFolderModal(true);
+    switch (e.currentTarget.id) {
+      case "deleteLink":
+        setShowModalState({
+          ...showModalState,
+          isOpenModal: true,
+          selectURL: selectURL,
+          modalType: "deleteLink",
+        });
+        break;
+      case "addToFolder":
+        setShowModalState({
+          ...showModalState,
+          isOpenModal: true,
+          selectURL: selectURL,
+          data: data,
+          modalType: "addToFolder",
+        });
+    }
   };
 
   return (
-    <S.CardContentKebabMenu>
-      {showDeleteModal && (
-        <DeleteLink
-          isOpenModal={showDeleteModal}
-          handleModalClose={handleModalClose}
-          deleteURL={selectURL}
-        />
-      )}
-      {addToFolderModal && (
-        <AddToFolder
-          isOpenModal={addToFolderModal}
-          handleModalClose={handleModalClose}
-          linkURL={selectURL}
-          data={data}
-        />
-      )}
-      <S.CardContentKebabMenuDelete
-        type="button"
-        onClick={handleShowDeleteModal}
-      >
-        삭제하기
-      </S.CardContentKebabMenuDelete>
-      <S.CardContentKebabMenuDelete
-        type="button"
-        onClick={handleShowAddToFolderModal}
-      >
-        폴더에 추가
-      </S.CardContentKebabMenuDelete>
-    </S.CardContentKebabMenu>
+    <ModalContext.Provider value={showModalState}>
+      <RefactorModal />
+      <S.CardContentKebabMenu>
+        <S.CardContentKebabMenuDelete
+          type="button"
+          onClick={handleShowModal}
+          id="deleteLink"
+        >
+          삭제하기
+        </S.CardContentKebabMenuDelete>
+        <S.CardContentKebabMenuDelete
+          type="button"
+          onClick={handleShowModal}
+          id="addToFolder"
+        >
+          폴더에 추가
+        </S.CardContentKebabMenuDelete>
+      </S.CardContentKebabMenu>
+    </ModalContext.Provider>
   );
 }

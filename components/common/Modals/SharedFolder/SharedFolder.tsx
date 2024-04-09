@@ -10,11 +10,7 @@ declare global {
   }
 }
 
-export function SharedFolder({
-  isOpenModal,
-  handleModalClose,
-  selectFolder,
-}: DeleteFolderProps) {
+export function SharedFolder({ selectFolder }: DeleteFolderProps) {
   const { Kakao } = window;
   useEffect(() => {
     Kakao.cleanup();
@@ -48,11 +44,7 @@ export function SharedFolder({
   };
 
   https: return (
-    <Modal
-      title="폴더 공유"
-      isOpenModal={isOpenModal}
-      handleModalClose={handleModalClose}
-    >
+    <>
       <S.FolderName>{selectFolder}</S.FolderName>
       <S.ButtonContainer>
         <S.SharedButton onClick={shareKakao}>
@@ -83,6 +75,6 @@ export function SharedFolder({
           <S.IconText>링크 복사</S.IconText>
         </S.SharedButton>
       </S.ButtonContainer>
-    </Modal>
+    </>
   );
 }

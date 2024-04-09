@@ -6,20 +6,20 @@ export interface BaseModalProps {
   handleModalClose: (e: MouseEvent<HTMLElement>) => void;
 }
 
-export interface DeleteLinkProps extends BaseModalProps {
+export interface DeleteLinkProps {
   deleteURL: string;
 }
 
-export interface DeleteFolderProps extends BaseModalProps {
+export interface DeleteFolderProps {
   selectFolder: string;
 }
 
-export interface ModalProps extends BaseModalProps {
+export interface ModalProps {
   children: JSX.Element | JSX.Element[];
   title: string;
 }
 
-export interface AddToFolderProps extends BaseModalProps {
+export interface AddToFolderProps {
   linkURL: string | undefined;
-  data: FolderListDataForm[];
+  data: FolderListDataForm[] | undefined;
 }
