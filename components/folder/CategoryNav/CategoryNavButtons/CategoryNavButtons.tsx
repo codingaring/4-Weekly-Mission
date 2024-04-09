@@ -6,31 +6,27 @@ import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 
 export function CategoryNavButtons({ selectFolder }: { selectFolder: string }) {
-  const modalState = useContext(ModalContext);
-  const [showModalState, setShowModalState] = useState(modalState);
+  const { handleModalState } = useContext(ModalContext);
 
   const handleShowModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     switch (e.currentTarget.id) {
       case "sharedFolder":
-        setShowModalState({
-          ...showModalState,
+        handleModalState({
           isOpenModal: true,
           modalType: "sharedFolder",
           selectFolder: selectFolder,
         });
         break;
       case "renameModal":
-        setShowModalState({
-          ...showModalState,
+        handleModalState({
           isOpenModal: true,
           modalType: "renameModal",
         });
         break;
       case "deleteFolder":
-        setShowModalState({
-          ...showModalState,
+        handleModalState({
           isOpenModal: true,
           modalType: "deleteFolder",
           selectFolder: selectFolder,
@@ -40,7 +36,7 @@ export function CategoryNavButtons({ selectFolder }: { selectFolder: string }) {
   };
 
   return (
-    <ModalContext.Provider value={showModalState}>
+    <>
       <RefactorModal />
       <S.CategoryNavButton onClick={handleShowModal} id="sharedFolder">
         <S.NavButtonIconContainer>
@@ -60,6 +56,6 @@ export function CategoryNavButtons({ selectFolder }: { selectFolder: string }) {
         </S.NavButtonIconContainer>
         <p>삭제</p>
       </S.CategoryNavButton>
-    </ModalContext.Provider>
+    </>
   );
 }

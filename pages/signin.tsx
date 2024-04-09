@@ -1,9 +1,9 @@
-import * as S from "../../styles/pages/signinStyled";
+import * as S from "../styles/pages/signinStyled";
 import { SignForm } from "@components/sign/signinForm/SignInForm";
 import { SignHeader } from "@components/sign/SignHeader";
 import { SignToSNS } from "@components/sign/SignToSNS";
 
-export default function SignIn() {
+function SignIn() {
   return (
     <S.SignInBody>
       <S.SignInContainer>
@@ -14,3 +14,5 @@ export default function SignIn() {
     </S.SignInBody>
   );
 }
+
+export default SignIn;

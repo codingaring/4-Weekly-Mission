@@ -1,10 +1,10 @@
-import * as S from "../../styles/pages/SharedStyled";
+import * as S from "../styles/pages/SharedStyled";
 import { useEffect, useState } from "react";
 import {
   FolderListDataForm,
   FolderPageDataForm,
   LinkDataForm,
-} from "../../types/DataForm";
+} from "../types/DataForm";
 import { useRecoilValue } from "recoil";
 import { getFolders } from "@data-access/getFolders";
 import { searchState } from "recoil/SearchKeyWord";
@@ -16,7 +16,7 @@ import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
 import { useGetFolder as getFolder } from "@data-access/useGetFolder";
 
-export default function Shared() {
+function Shared() {
   const [folders, setFolders] = useState<FolderListDataForm[]>([]);
   const [folderInfo, setFolderInfo] = useState<FolderPageDataForm>();
   const [folderLinks, setFolderLinks] = useState<LinkDataForm[]>([]);
@@ -81,3 +81,5 @@ export default function Shared() {
     </Layout>
   );
 }
+
+export default Shared;

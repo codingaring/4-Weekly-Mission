@@ -1,9 +1,9 @@
-import * as S from "../../styles/pages/signupStyled";
+import * as S from "../styles/pages/signupStyled";
 import { SignHeader } from "@components/sign/SignHeader";
 import { SignToSNS } from "@components/sign/SignToSNS";
 import { SignUpForm } from "@components/sign/signupForm/SignUpForm";
 
-export default function Signup() {
+function Signup() {
   return (
     <S.SignupBody>
       <S.SignupContainer>
@@ -14,3 +14,5 @@ export default function Signup() {
     </S.SignupBody>
   );
 }
+
+export default Signup;

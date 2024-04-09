@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import * as S from "./KebabMenuStyled";
 import { MouseEvent } from "react";
 import { FolderListDataForm } from "../../../types/DataForm";
-import DeleteLink from "@components/common/Modals/DeleteLink";
-import { AddToFolder } from "@components/common/Modals/AddToFolder";
 import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 
@@ -13,24 +11,21 @@ interface Props {
 }
 
 export function KebabMenu({ selectURL, data }: Props) {
-  const modalState = useContext(ModalContext);
-  const [showModalState, setShowModalState] = useState(modalState);
+  const { handleModalState } = useContext(ModalContext);
 
   const handleShowModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     switch (e.currentTarget.id) {
       case "deleteLink":
-        setShowModalState({
-          ...showModalState,
+        handleModalState({
           isOpenModal: true,
           selectURL: selectURL,
           modalType: "deleteLink",
         });
         break;
       case "addToFolder":
-        setShowModalState({
-          ...showModalState,
+        handleModalState({
           isOpenModal: true,
           selectURL: selectURL,
           data: data,
@@ -40,7 +35,7 @@ export function KebabMenu({ selectURL, data }: Props) {
   };
 
   return (
-    <ModalContext.Provider value={showModalState}>
+    <>
       <RefactorModal />
       <S.CardContentKebabMenu>
         <S.CardContentKebabMenuDelete
@@ -58,6 +53,6 @@ export function KebabMenu({ selectURL, data }: Props) {
           폴더에 추가
         </S.CardContentKebabMenuDelete>
       </S.CardContentKebabMenu>
-    </ModalContext.Provider>
+    </>
   );
 }

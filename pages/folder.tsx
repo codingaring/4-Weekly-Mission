@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { FolderListDataForm } from "../../types/DataForm";
-import * as S from "../../styles/pages/FolderStyled";
+import { FolderListDataForm } from "../types/DataForm";
+import * as S from "../styles/pages/FolderStyled";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { getCategory } from "@data-access/getCategory";
 import FolderHeader from "@components/folder/FolderHeader";
 import { SearchBar } from "@components/common/SearchBar";
 import { FolderContent } from "@components/folder/FolderContent/FolderContent";
 import Footer from "@components/common/Footer";
+import { ModalProvider } from "@components/common/RefactorModal/ModalProvider";
 
-export default function Folder() {
+function Folder() {
   const [categoryData, setCategoryData] = useState<FolderListDataForm[]>([]);
   const { isVisible: isHeaderVisible, targetRef: headerRef } =
     useIntersectionObserver();
@@ -27,7 +28,7 @@ export default function Folder() {
   }, []);
 
   return (
-    <>
+    <ModalProvider>
       <FolderHeader
         data={categoryData}
         ref={headerRef}
@@ -38,6 +39,8 @@ export default function Folder() {
         <FolderContent data={categoryData} />
       </S.ItemsContainer>
       <Footer ref={footerRef} />
-    </>
+    </ModalProvider>
   );
 }
+
+export default Folder;

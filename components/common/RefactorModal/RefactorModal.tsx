@@ -9,8 +9,9 @@ import { ModalContext } from "./ModalContext";
 import Modal from "../Modals/Modal";
 
 export function RefactorModal() {
+  const { modalStateProperty } = useContext(ModalContext);
   const { modalType, isOpenModal, selectURL, selectFolder, data } =
-    useContext(ModalContext);
+    modalStateProperty;
 
   let modalContent;
   let modalTitle = "";

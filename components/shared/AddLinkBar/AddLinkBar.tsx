@@ -14,29 +14,27 @@ export function AddLinkBar({
 }) {
   const [inputValue, setInputValue] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState(false);
-  const contextState = useContext(ModalContext);
-  const [isShowModal, setIsShowModal] = useState(contextState);
+  const { handleModalState } = useContext(ModalContext);
 
   const handleEmptyError = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsEmpty(e.target.value === "" ? true : false);
   };
 
-  const handleAddToFolder = () => {
-    setIsShowModal({
-      ...isShowModal,
+  function handleShowModal() {
+    handleModalState({
       isOpenModal: true,
       selectURL: inputValue,
       data: data,
       modalType: "addToFolder",
     });
-  };
+  }
 
   const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
   return (
-    <ModalContext.Provider value={isShowModal}>
+    <>
       <RefactorModal />
       <S.AddLinkContainer isFloating={isFloating}>
         <S.AddLinkBar isEmpty={isEmpty}>
@@ -49,11 +47,11 @@ export function AddLinkBar({
               onChange={handleInputValue}
             />
           </S.AddLinkInputContainer>
-          <S.AddInputButton onClick={handleAddToFolder} disabled={isEmpty}>
+          <S.AddInputButton onClick={handleShowModal} disabled={isEmpty}>
             추가하기
           </S.AddInputButton>
         </S.AddLinkBar>
       </S.AddLinkContainer>
-    </ModalContext.Provider>
+    </>
   );
 }
