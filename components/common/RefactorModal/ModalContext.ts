@@ -9,7 +9,9 @@ export type ModalContextType = {
     selectFolder: string;
     modalType: string;
   };
-  handleModalState: any;
+  handleModalState: (
+    newState: Partial<ModalContextType["modalStateProperty"]>
+  ) => void;
 };
 
 export const ModalContextInitial: ModalContextType = {

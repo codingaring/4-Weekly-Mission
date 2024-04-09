@@ -1,5 +1,5 @@
 import * as S from "./FolderContentStyled";
-import { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, MouseEvent, useContext } from "react";
 import { CategoryNav } from "../CategoryNav/CategoryNav";
 import { FolderListDataForm, getFolderDataForm } from "../../../types/DataForm";
 import { useRecoilValue } from "recoil";
@@ -11,6 +11,8 @@ import { Button } from "../CategoryButton/CategoryButtonStyled";
 import { EmptyLink } from "@components/common/EmptyLink";
 import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
+import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
+import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 
 interface LoadFolderDataProps {
   folderId: string;
@@ -21,7 +23,7 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
   const [folder, setFolder] = useState<getFolderDataForm[]>([]);
   const [folderId, setFolderId] = useState("");
   const [activeCategoryName, setActiveCategoryName] = useState("전체");
-  const [isAddToFolder, setIsAddToFolder] = useState(false);
+  const { handleModalState } = useContext(ModalContext);
   const searchKeyWord = useRecoilValue(searchState);
 
   const handleLoadFolder = async ({
@@ -48,26 +50,17 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
     setFolderId((e.target as HTMLButtonElement).id);
   };
 
-  const showAddFolderModal = () => {
-    setIsAddToFolder(true);
-  };
-
-  const CloseAddToFolderModal = () => {
-    setIsAddToFolder(false);
+  const handleShowModal = () => {
+    handleModalState({ isOpenModal: true, modalType: "addFolderContent" });
   };
 
   useEffect(() => {
     handleLoadFolder({ folderId, searchKeyWord });
-  }, [folderId, searchKeyWord, isAddToFolder]);
+  }, [folderId, searchKeyWord]);
 
   return (
     <>
-      {isAddToFolder && (
-        <AddFolderContent
-          isOpenModal={isAddToFolder}
-          handleModalClose={CloseAddToFolderModal}
-        />
-      )}
+      <RefactorModal />
       {searchKeyWord && <SearchResultComment searchKeyWord={searchKeyWord} />}
 
       <S.ClassificationContainer>
@@ -86,7 +79,7 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
             </Button>
           ))}
         </S.ClassificationButtons>
-        <S.AddFolderButton type="button" onClick={showAddFolderModal}>
+        <S.AddFolderButton type="button" onClick={handleShowModal}>
           폴더 추가 +
         </S.AddFolderButton>
       </S.ClassificationContainer>
