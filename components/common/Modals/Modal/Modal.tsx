@@ -8,9 +8,7 @@ import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { useContext } from "react";
 
 export default function Modal({ children, title }: ModalProps) {
-  const { modalStateProperty, handleModalState } = useContext(ModalContext);
-  const { isOpenModal } = modalStateProperty;
-
+  const { handleModalState } = useContext(ModalContext);
   function handleCloseModal() {
     handleModalState({
       isOpenModal: false,
@@ -18,15 +16,13 @@ export default function Modal({ children, title }: ModalProps) {
   }
 
   return (
-    isOpenModal && (
-      <ModalPortal>
-        <ModalDim onClick={handleCloseModal} />
-        <ModalContainer>
-          <ModalCloseButton handleModalClose={handleCloseModal} />
-          <ModalTitle>{title}</ModalTitle>
-          {children}
-        </ModalContainer>
-      </ModalPortal>
-    )
+    <ModalPortal>
+      <ModalDim onClick={handleCloseModal} />
+      <ModalContainer>
+        <ModalCloseButton handleModalClose={handleCloseModal} />
+        <ModalTitle>{title}</ModalTitle>
+        {children}
+      </ModalContainer>
+    </ModalPortal>
   );
 }
