@@ -1,8 +1,8 @@
 import * as S from "./SharedFolderStyled";
-import { useEffect } from "react";
 import { DeleteFolderProps } from "../ModalProp";
-import Modal from "../Modal";
 import { handleCopyClipBoard } from "@util/copyClipBoard";
+import Link from "next/link";
+import { shareKakao } from "@util/sharedKakao";
 
 declare global {
   interface Window {
@@ -11,47 +11,19 @@ declare global {
 }
 
 export function SharedFolder({ selectFolder }: DeleteFolderProps) {
-  const { Kakao } = window;
-  useEffect(() => {
-    Kakao.cleanup();
-    console.log("key:", process.env.REACT_APP_KAKAO_KEY);
-    Kakao.init(process.env.REACT_APP_KAKAO_KEY);
-    console.log("check!!:", Kakao.isInitialized());
-  }, [Kakao]);
-
-  const shareKakao = () => {
-    Kakao.Share.sendDefault({
-      objectType: "feed",
-      content: {
-        title: "Linkbrary",
-        description: "세상의 모든 정보를 쉽게 저장하고 관리해 보세요",
-        imageUrl: "https://codingaring-week11-linkbrary.netlify.app",
-        link: {
-          mobileWebUrl:
-            "https://codingaring-week11-linkbrary.netlify.app/folder",
-        },
-      },
-      buttons: [
-        {
-          title: "Linkbrary",
-          link: {
-            mobileWebUrl:
-              "https://codingaring-week11-linkbrary.netlify.app/folder",
-          },
-        },
-      ],
-    });
+  const handleSharedKakao = () => {
+    shareKakao("https://codingaring-week11-linkbrary.netlify.app");
   };
 
   https: return (
     <>
       <S.FolderName>{selectFolder}</S.FolderName>
       <S.ButtonContainer>
-        <S.SharedButton onClick={shareKakao}>
+        <S.SharedButton onClick={handleSharedKakao}>
           <S.KakaoTalkIcon />
           <S.IconText>카카오톡</S.IconText>
         </S.SharedButton>
-        <a
+        <Link
           target="_blank"
           href={
             "http://www.facebook.com/sharer/sharer.php?u=" +
@@ -63,7 +35,7 @@ export function SharedFolder({ selectFolder }: DeleteFolderProps) {
             <S.FacebookIcon />
             <S.IconText>페이스북</S.IconText>
           </S.SharedButton>
-        </a>
+        </Link>
         <S.SharedButton
           onClick={() => {
             handleCopyClipBoard(

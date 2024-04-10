@@ -1,24 +1,21 @@
 import styled from "styled-components";
-import kakaotalk from "@public/images/kakaoTalk.svg";
-import Facebook from "@public/images/facebookShared.svg";
-import Copy from "@public/images/link.svg";
 
 export const KakaoTalkIcon = styled.div`
   width: 4.2rem;
   height: 4.2rem;
-  background-image: url(${kakaotalk});
+  background-image: url("/images/kakaoTalk.svg");
 `;
 
 export const FacebookIcon = styled.div`
   width: 4.2rem;
   height: 4.2rem;
-  background-image: url(${Facebook});
+  background-image: url("/images/facebookShared.svg");
 `;
 
 export const CopyIcon = styled.div`
   width: 1.8rem;
   height: 1.8rem;
-  background-image: url(${Copy});
+  background-image: url("/images/link.svg");
   background-position: center;
   margin: 1.2rem;
 `;
