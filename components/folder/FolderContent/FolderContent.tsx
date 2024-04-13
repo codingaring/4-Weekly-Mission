@@ -83,7 +83,10 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
           폴더 추가 +
         </S.AddFolderButton>
       </S.ClassificationContainer>
-      <CategoryNav activeCategoryName={activeCategoryName} />
+      <CategoryNav
+        activeCategoryName={activeCategoryName}
+        folderId={folderId}
+      />
       {!folder.length ? (
         <EmptyLink />
       ) : (

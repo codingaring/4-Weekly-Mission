@@ -5,7 +5,13 @@ import Image from "next/image";
 import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 
-export function CategoryNavButtons({ selectFolder }: { selectFolder: string }) {
+export function CategoryNavButtons({
+  selectFolder,
+  folderId,
+}: {
+  selectFolder: string;
+  folderId: string;
+}) {
   const { handleModalState } = useContext(ModalContext);
 
   const handleShowModal = (e: MouseEvent<HTMLButtonElement>) => {
@@ -17,6 +23,7 @@ export function CategoryNavButtons({ selectFolder }: { selectFolder: string }) {
           isOpenModal: true,
           modalType: "sharedFolder",
           selectFolder: selectFolder,
+          selectFolderId: folderId,
         });
         break;
       case "renameModal":

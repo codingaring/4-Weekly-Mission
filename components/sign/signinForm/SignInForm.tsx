@@ -4,8 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../constant";
 import * as S from "../SignFormStyled";
 import { useEffectOnce } from "@hooks/useEffectOnce";
-import { useContext } from "react";
-import { UserContext } from "context/UserContext";
 
 interface IFormInput {
   email: string;
@@ -13,7 +11,6 @@ interface IFormInput {
 }
 
 export function SignForm() {
-  const { handleUserDataState } = useContext(UserContext);
   const router = useRouter();
   const {
     register,
@@ -31,9 +28,8 @@ export function SignForm() {
       const data = await checkSignin(inputValue);
       const { accessToken, refreshToken } = data;
       router.push("/folder");
-      handleUserDataState();
-      localStorage.setItem("accessToken", JSON.stringify(accessToken));
-      localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
     } catch {
       setError("email", {
         message: "이메일을 확인해 주세요.",

@@ -1,6 +1,4 @@
 export async function getRefreshToken() {
-  const accessToken = localStorage.getItem("accessToken");
-  const refreshToken = localStorage.getItem("refreshToken");
   try {
     const response = await fetch(
       `https://bootcamp-api.codeit.kr/api/refresh-token`,

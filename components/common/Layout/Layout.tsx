@@ -34,7 +34,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div>
-        <NavigationBar userInfo={userInfo} />
+        <NavigationBar />
         <main>{children}</main>
         <Footer />
       </div>

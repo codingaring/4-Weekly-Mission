@@ -38,9 +38,7 @@ export function SharedFolder({ selectFolder }: DeleteFolderProps) {
         </Link>
         <S.SharedButton
           onClick={() => {
-            handleCopyClipBoard(
-              "https://codingaring-week11-linkbrary.netlify.app/folder"
-            );
+            handleCopyClipBoard(`http://localhost:3000/shared/`);
           }}
         >
           <S.CopyIcon />

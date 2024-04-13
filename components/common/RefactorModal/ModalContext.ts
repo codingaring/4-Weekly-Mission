@@ -8,6 +8,7 @@ export type ModalContextType = {
     data: FolderListDataForm[] | undefined;
     selectFolder: string;
     modalType: string;
+    selectFolderId: string;
   };
   handleModalState: (
     newState: Partial<ModalContextType["modalStateProperty"]>
@@ -21,6 +22,7 @@ export const ModalContextInitial: ModalContextType = {
     data: [],
     selectFolder: "",
     modalType: "",
+    selectFolderId: "",
   },
   handleModalState: () => {},
 };

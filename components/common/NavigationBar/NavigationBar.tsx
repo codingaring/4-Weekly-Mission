@@ -3,18 +3,38 @@ import { Profile } from "./Profile";
 import { LOGO_IMAGE, TEXT } from "./constant";
 import { useRouter } from "next/router";
 import { ROUTE } from "@util/constant";
+import { useEffectOnce } from "@hooks/useEffectOnce";
+import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
+import { useContext, useState } from "react";
+import { UserContext } from "context/UserContext";
 
-interface UserInfo {
-  userInfo: {
-    email: string;
-    imageSource: string;
-  };
-}
-
-export const NavigationBar = ({ userInfo }: UserInfo) => {
+export const NavigationBar = () => {
+  const { handleUserDataState } = useContext(UserContext);
+  const router = useRouter();
+  const [profile, setProfile] = useState({
+    auth_id: "",
+    email: "",
+    image_source: "",
+  });
   const Location = useRouter();
   const LocationPath = Location.pathname;
-  const { email, imageSource } = userInfo || {};
+
+  async function handleLoadUserInfo() {
+    try {
+      const { data } = await getLoginUserInfo();
+      const { email, image_source, auth_id } = data[0] || [];
+      setProfile({
+        auth_id: auth_id,
+        email: email,
+        image_source: image_source,
+      });
+      handleUserDataState({ userId: auth_id });
+    } catch (error) {
+      router.push("/signin");
+    }
+  }
+
+  useEffectOnce(handleLoadUserInfo);
 
   return (
     <S.NavigationBarContainer pathName={LocationPath}>
@@ -22,8 +42,11 @@ export const NavigationBar = ({ userInfo }: UserInfo) => {
         <a href={ROUTE.랜딩}>
           <S.Logo src={LOGO_IMAGE} alt="Linkbrary 서비스 로고" />
         </a>
-        {email && imageSource ? (
-          <Profile userEmail={email} userImgSource={imageSource} />
+        {profile ? (
+          <Profile
+            userEmail={profile.email}
+            userImgSource={profile.image_source}
+          />
         ) : (
           <a href={ROUTE.로그인}>
             <S.LoginButton>

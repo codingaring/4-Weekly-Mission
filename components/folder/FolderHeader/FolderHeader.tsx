@@ -32,7 +32,7 @@ const FolderHeader = forwardRef(
     return (
       <div ref={ref as React.RefObject<HTMLDivElement>}>
         <S.FolderHeaderContainer>
-          <NavigationBar userInfo={userInfo}></NavigationBar>
+          <NavigationBar></NavigationBar>
           <AddLinkBar data={data} isFloating={isFloating} />
         </S.FolderHeaderContainer>
       </div>

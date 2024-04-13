@@ -1,12 +1,20 @@
 import React from "react";
 
 export interface UserContextProp {
-  isLogin: boolean;
-  handleUserDataState: () => void;
+  loginData: {
+    isLogin: boolean;
+    userId: string;
+  };
+  handleUserDataState: (
+    newState: Partial<UserContextProp["loginData"]>
+  ) => void;
 }
 
 const InitialModalStateValue: UserContextProp = {
-  isLogin: false,
+  loginData: {
+    isLogin: false,
+    userId: "",
+  },
   handleUserDataState: () => {},
 };
 

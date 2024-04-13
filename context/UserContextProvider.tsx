@@ -2,18 +2,22 @@ import { ReactNode, useState } from "react";
 import { UserContext, UserContextProp } from "./UserContext";
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
-  const [isLogin, setIsLogin] = useState(false);
+  const [loginData, setLoginData] = useState({
+    isLogin: false,
+    userId: "",
+  });
 
-  function handleUserDataState() {
-    if (isLogin) {
-      setIsLogin(false);
-    } else {
-      setIsLogin(true);
-    }
+  function handleUserDataState(
+    newState: Partial<UserContextProp["loginData"]>
+  ) {
+    setLoginData((prevState) => ({
+      ...prevState,
+      ...newState,
+    }));
   }
 
   const userStateValue = {
-    isLogin,
+    loginData,
     handleUserDataState,
   };
 

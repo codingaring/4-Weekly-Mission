@@ -5,42 +5,78 @@ import { useEffect, useState } from "react";
 import { CardItem } from "@components/common/CardItem";
 import { useRouter } from "next/router";
 import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
-import { getFolders } from "@data-access/getFolders";
 import Footer from "@components/common/Footer";
-import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
+import { NavigationBar } from "@components/common/NavigationBar";
+import { getFolderInfo } from "@data-access/getFolderInfo";
+import { getUserProfile } from "@data-access/getUserProfile";
+import { getFolderList } from "@data-access/getFolderList";
+import { EmptyLink } from "@components/common/EmptyLink";
 
 function Shared() {
   const router = useRouter();
   const { folderId } = router.query;
   const [linkListData, setLinkListData] = useState();
+  const [folderInfo, setFolderInfo] = useState({
+    user_id: "",
+    folderName: "",
+  });
+  const [folderOwnerProfile, setFolderOwnerProfile] = useState({
+    ownerName: "",
+    profileImage: "",
+  });
 
-  async function handleLoadLinks(folderIdQuery: string | string[] | undefined) {
-    const { data } = await getFolders(folderIdQuery);
-    setLinkListData(data);
-  }
+  async function handleLoadUserInfo(
+    folderIdQuery: string | string[] | undefined,
+    userId: string
+  ) {
+    try {
+      const { data } = await getFolderInfo(folderIdQuery);
+      const { user_id, name } = data[0];
+      setFolderInfo({
+        user_id: user_id,
+        folderName: name,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
 
-  async function handleLoadUserInfo() {
-    const { data } = getLoginUserInfo();
+    try {
+      const { data } = await getUserProfile(folderInfo.user_id);
+      const { image_source, name } = data[0];
+      setFolderOwnerProfile({
+        ownerName: name,
+        profileImage: image_source,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    try {
+      const { data } = await getFolderList(folderIdQuery, userId);
+      setLinkListData(data);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   useEffect(() => {
-    handleLoadLinks(folderId);
-    handleLoadUserInfo();
-  }, [folderId]);
+    handleLoadUserInfo(folderId, folderInfo.user_id);
+  }, [folderId, folderInfo.user_id]);
 
   return (
     <>
+      <NavigationBar />
       <S.SharedPageContainer>
         <FolderInfo
-          profileImage="fg"
-          ownerName="dfdfdfd"
-          folderName="asdfdfd"
+          profileImage={folderOwnerProfile.profileImage}
+          ownerName={folderOwnerProfile.ownerName}
+          folderName={folderInfo.folderName}
         />
         <S.SharedPageItems>
           <SearchBar />
-          <CardList>
-            {linkListData &&
-              linkListData.map((link) => (
+          {linkListData?.length !== 0 ? (
+            <CardList>
+              {linkListData?.map((link) => (
                 <CardItem
                   url={link.url}
                   image_source={link.image_source}
@@ -49,7 +85,10 @@ function Shared() {
                   key={link?.id}
                 />
               ))}
-          </CardList>
+            </CardList>
+          ) : (
+            <EmptyLink />
+          )}
         </S.SharedPageItems>
       </S.SharedPageContainer>
       <Footer />

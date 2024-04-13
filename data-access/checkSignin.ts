@@ -18,6 +18,5 @@ export async function checkSignin(trySignValue: {
 
   const { data } = await response.json();
   const { accessToken, refreshToken } = data;
-  console.log(typeof accessToken, typeof refreshToken);
   return { accessToken, refreshToken };
 }
