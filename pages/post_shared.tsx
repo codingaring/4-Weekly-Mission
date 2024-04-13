@@ -14,9 +14,9 @@ import { SearchBar } from "@components/common/SearchBar";
 import { SearchResultComment } from "@components/common/SearchResultComment";
 import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
-import { useGetFolder as getFolder } from "@data-access/useGetFolder";
+import { useGetUser as getFolder } from "@data-access/useGetUser";
 
-function Shared() {
+function PostShared() {
   const [folders, setFolders] = useState<FolderListDataForm[]>([]);
   const [folderInfo, setFolderInfo] = useState<FolderPageDataForm>();
   const [folderLinks, setFolderLinks] = useState<LinkDataForm[]>([]);
@@ -71,7 +71,6 @@ function Shared() {
                   image_source={link.imageSource}
                   description={link.description}
                   created_at={link.createdAt}
-                  data={folders}
                   key={link?.id}
                 />
               ))}
@@ -82,4 +81,4 @@ function Shared() {
   );
 }
 
-export default Shared;
+export default PostShared;

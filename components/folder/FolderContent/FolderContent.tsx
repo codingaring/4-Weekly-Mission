@@ -30,7 +30,7 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
     folderId,
     searchKeyWord,
   }: LoadFolderDataProps) => {
-    const { data } = await getFolders({ folderId });
+    const { data } = await getFolders(folderId);
     setFolder(data);
 
     if (searchKeyWord) {
@@ -95,7 +95,6 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
               image_source={link.image_source}
               description={link.description}
               created_at={link.created_at}
-              data={data}
             />
           ))}
         </CardList>

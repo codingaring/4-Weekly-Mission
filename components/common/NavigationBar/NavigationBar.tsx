@@ -1,8 +1,7 @@
+import * as S from "./NavigationBarStyled";
 import { Profile } from "./Profile";
 import { LOGO_IMAGE, TEXT } from "./constant";
-import { Cta } from "./Cta/Cta";
 import { useRouter } from "next/router";
-import * as S from "./NavigationBarStyled";
 import { ROUTE } from "@util/constant";
 
 interface UserInfo {
@@ -27,9 +26,9 @@ export const NavigationBar = ({ userInfo }: UserInfo) => {
           <Profile userEmail={email} userImgSource={imageSource} />
         ) : (
           <a href={ROUTE.로그인}>
-            <Cta>
+            <S.LoginButton>
               <S.LoginText>{TEXT.LOGIN}</S.LoginText>
-            </Cta>
+            </S.LoginButton>
           </a>
         )}
       </S.ItemsContainer>

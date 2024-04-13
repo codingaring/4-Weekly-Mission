@@ -19,7 +19,7 @@ function Folder() {
   const floatingState = !isHeaderVisible && !isFooterVisible ? true : false;
 
   const handleLoadCategory = async () => {
-    const { data } = await getCategory<{ data: FolderListDataForm[] }>();
+    const { data } = await getCategory();
     setCategoryData(data);
   };
 

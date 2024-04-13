@@ -25,9 +25,12 @@ export function SignForm() {
     };
 
     try {
-      const token = await checkSignin(inputValue);
+      const data = await checkSignin(inputValue);
+      const accessToken = data;
+      const refreshToken = data;
       router.push("/folder");
-      window.localStorage.setItem("accessToken", token);
+      window.localStorage.setItem("accessToken", accessToken as any);
+      window.localStorage.setItem("refreshToken", refreshToken as any);
     } catch {
       setError("email", {
         message: "이메일을 확인해 주세요.",

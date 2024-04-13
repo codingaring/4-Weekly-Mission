@@ -11,7 +11,6 @@ interface CardContentProps {
   isHovered: boolean;
   currentLocation: string;
   selectURL: string;
-  data: FolderListDataForm[];
 }
 
 export const CardContent = ({
@@ -21,7 +20,6 @@ export const CardContent = ({
   isHovered,
   currentLocation,
   selectURL,
-  data,
 }: CardContentProps) => {
   const [isOpened, setIsClick] = useState(false);
   const className = isHovered
@@ -42,7 +40,7 @@ export const CardContent = ({
             <Image fill src="/images/kebab.svg" alt="메뉴 보기" />
           </S.KebabButton>
         )}
-        {isOpened && <KebabMenu selectURL={selectURL} data={data} />}
+        {isOpened && <KebabMenu selectURL={selectURL} />}
       </div>
 
       <S.Description>{description}</S.Description>

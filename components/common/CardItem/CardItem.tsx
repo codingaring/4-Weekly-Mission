@@ -13,7 +13,6 @@ export const CardItem = ({
   image_source,
   description,
   created_at,
-  data,
 }: CardInfoDataForm) => {
   const [isHovered, setIsHovered] = useState(false);
   const location = useRouter();
@@ -35,7 +34,6 @@ export const CardItem = ({
             isHovered={isHovered}
             currentLocation={currentLocation}
             selectURL={url}
-            data={data}
           />
         </Card>
       </a>

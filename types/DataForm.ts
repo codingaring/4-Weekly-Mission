@@ -70,5 +70,24 @@ export interface CardInfoDataForm {
   image_source: string;
   description: string;
   created_at: string;
-  data: FolderListDataForm[];
+}
+
+// getLoginUserInfo
+export interface GetUserInfoForm {
+  auth_id: string;
+  created_at: string;
+  email: string;
+  image_source: string;
+  name: string;
+}
+
+// useGetUserInfo
+export interface UseGetUserInfo {
+  auth_id: string;
+  created_at: string;
+  profile: {
+    email: string;
+    image_source: string;
+    name: string;
+  };
 }

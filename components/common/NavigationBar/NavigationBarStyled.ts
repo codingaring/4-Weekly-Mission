@@ -1,3 +1,4 @@
+import { PrimaryButton } from "@styles/common/PrimaryButton";
 import styled from "styled-components";
 
 export const NavigationBarContainer = styled.header<{ pathName: string }>`
@@ -57,4 +58,8 @@ export const LoginText = styled.span`
     padding: 1.6rem 0;
     font-size: 1.8rem;
   }
+`;
+
+export const LoginButton = styled(PrimaryButton)`
+  padding: 0;
 `;
