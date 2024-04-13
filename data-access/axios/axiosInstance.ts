@@ -1,20 +1,49 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
-const BASE_URL = "https://bootcamp-api.codeit.kr/api/";
-
-const config: AxiosRequestConfig = {
-  baseURL: BASE_URL,
-};
-const axiosInstance = axios.create(config);
-
-axiosInstance.interceptors.request.use((config: any) => {
-  const access_token = localStorage.getItem("accessToken");
-  const refresh_token = localStorage.getItem("refreshToken");
-
-  if (config.url === "refresh-token") {
-    config.headers.Refresh = refresh_token;
-  } else {
-    config.headers.Authorization = access_token;
-  }
-  return config;
+const axiosInstance = axios.create({
+  baseURL: "https://bootcamp-api.codeit.kr/api",
 });
+
+axiosInstance.interceptors.request.use(
+  async (config) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        const refreshToken = localStorage.getItem("refreshToken");
+        const response = await axios.post("/refresh-token", { refreshToken });
+        const newAccessToken = response.data.accessToken;
+
+        localStorage.setItem("accessToken", newAccessToken);
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return axios(originalRequest);
+      } catch (error) {
+        console.log("회원 정보 인증에 실패했습니다.");
+        logout();
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+function logout() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+}

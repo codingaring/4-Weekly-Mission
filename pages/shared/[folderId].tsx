@@ -6,17 +6,12 @@ import { CardItem } from "@components/common/CardItem";
 import { useRouter } from "next/router";
 import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
 import { getFolders } from "@data-access/getFolders";
-import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
-import { NavigationBar } from "@components/common/NavigationBar";
 import Footer from "@components/common/Footer";
+import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
 
 function Shared() {
   const router = useRouter();
   const { folderId } = router.query;
-  const [userInfo, setUserInfo] = useState({
-    email: "",
-    image_source: "",
-  });
   const [linkListData, setLinkListData] = useState();
 
   async function handleLoadLinks(folderIdQuery: string | string[] | undefined) {
@@ -24,19 +19,17 @@ function Shared() {
     setLinkListData(data);
   }
 
-  async function useGetUserInfo() {
+  async function handleLoadUserInfo() {
     const { data } = getLoginUserInfo();
-    setUserInfo(data);
   }
 
   useEffect(() => {
     handleLoadLinks(folderId);
-    useGetUserInfo();
+    handleLoadUserInfo();
   }, [folderId]);
 
   return (
     <>
-      <NavigationBar userInfo={userInfo} />
       <S.SharedPageContainer>
         <FolderInfo
           profileImage="fg"
