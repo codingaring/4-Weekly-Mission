@@ -1,1 +1,1 @@
-export const ADD_ICON = "images/addLink.svg";
+export const ADD_ICON = "/images/addLink.svg";

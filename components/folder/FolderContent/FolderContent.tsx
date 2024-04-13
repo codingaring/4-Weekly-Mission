@@ -5,7 +5,6 @@ import { FolderListDataForm, getFolderDataForm } from "../../../types/DataForm";
 import { useRecoilValue } from "recoil";
 import { searchState } from "recoil/SearchKeyWord";
 import { getFolders } from "@data-access/getFolders";
-import { AddFolderContent } from "@components/common/Modals/AddFolderContent";
 import { SearchResultComment } from "@components/common/SearchResultComment";
 import { Button } from "../CategoryButton/CategoryButtonStyled";
 import { EmptyLink } from "@components/common/EmptyLink";
@@ -13,6 +12,7 @@ import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 import { ModalContext } from "@components/common/RefactorModal/ModalContext";
+import { useRouter } from "next/router";
 
 interface LoadFolderDataProps {
   folderId: string;
@@ -25,6 +25,7 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
   const [activeCategoryName, setActiveCategoryName] = useState("전체");
   const { handleModalState } = useContext(ModalContext);
   const searchKeyWord = useRecoilValue(searchState);
+  const router = useRouter();
 
   const handleLoadFolder = async ({
     folderId,
@@ -46,8 +47,11 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
   };
 
   const handleCategoryActive = (e: MouseEvent<HTMLButtonElement>) => {
-    setActiveCategoryName((e.target as HTMLButtonElement).value);
-    setFolderId((e.target as HTMLButtonElement).id);
+    setActiveCategoryName(e.currentTarget.value);
+    setFolderId(e.currentTarget.id);
+    const currentPath = "/folder";
+    const folderPath = `${currentPath}/${e.currentTarget.id}`;
+    router.push(folderPath);
   };
 
   const handleShowModal = () => {

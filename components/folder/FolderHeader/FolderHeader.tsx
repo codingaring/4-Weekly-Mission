@@ -11,24 +11,6 @@ const FolderHeader = forwardRef(
     { data, isFloating }: { data: FolderListDataForm[]; isFloating: boolean },
     ref
   ) => {
-    const [userInfo, setUserInfo] = useState({
-      email: "",
-      imageSource: DEFAULT_IMAGE,
-    });
-
-    const handleLoadUser = async () => {
-      const { data } = await getUser();
-      const { email, image_source } = data[0] || {};
-      setUserInfo({
-        email,
-        imageSource: image_source,
-      });
-    };
-
-    useEffect(() => {
-      handleLoadUser();
-    }, []);
-
     return (
       <div ref={ref as React.RefObject<HTMLDivElement>}>
         <S.FolderHeaderContainer>
