@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: "https://bootcamp-api.codeit.kr/api",
 });
 
@@ -36,14 +36,8 @@ axios.interceptors.response.use(
         return axios(originalRequest);
       } catch (error) {
         console.log("회원 정보 인증에 실패했습니다.");
-        logout();
       }
     }
     return Promise.reject(error);
   }
 );
-
-function logout() {
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
-}

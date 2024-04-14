@@ -22,7 +22,7 @@ export function KebabMenu({ selectURL }: Props) {
       setCategoryList(data);
     };
 
-    useEffectOnce(handleCategoryList);
+    handleCategoryList();
 
     switch (e.currentTarget.id) {
       case "deleteLink":

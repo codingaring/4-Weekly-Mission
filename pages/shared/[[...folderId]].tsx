@@ -11,11 +11,12 @@ import { getFolderInfo } from "@data-access/getFolderInfo";
 import { getUserProfile } from "@data-access/getUserProfile";
 import { getFolderList } from "@data-access/getFolderList";
 import { EmptyLink } from "@components/common/EmptyLink";
+import { getFolderDataForm } from "../../types/DataForm";
 
 function Shared() {
   const router = useRouter();
   const { folderId } = router.query;
-  const [linkListData, setLinkListData] = useState();
+  const [linkListData, setLinkListData] = useState<getFolderDataForm[]>();
   const [folderInfo, setFolderInfo] = useState({
     user_id: "",
     folderName: "",
@@ -37,7 +38,7 @@ function Shared() {
         folderName: name,
       });
     } catch (error) {
-      console.log(error.message);
+      return;
     }
 
     try {
@@ -48,20 +49,20 @@ function Shared() {
         profileImage: image_source,
       });
     } catch (error) {
-      console.log(error.message);
+      return;
     }
 
     try {
       const { data } = await getFolderList(folderIdQuery, userId);
       setLinkListData(data);
     } catch (error) {
-      console.log(error.message);
+      return;
     }
   }
 
   useEffect(() => {
     handleLoadUserInfo(folderId, folderInfo.user_id);
-  }, [folderId, folderInfo.user_id]);
+  }, [folderId, folderInfo.user_id, handleLoadUserInfo]);
 
   return (
     <>

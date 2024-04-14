@@ -1,14 +1,10 @@
 import { GetUserInfoForm } from "../types/DataForm";
+import { axiosInstance } from "./axios/axiosInstance";
 
 export async function getLoginUserInfo(): Promise<{
   data: GetUserInfoForm[];
 }> {
-  const response = await fetch(`https://bootcamp-api.codeit.kr/api/users`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")!}`,
-    },
-  });
+  const response = await axiosInstance.get(`/users`);
 
-  const result = response.json();
-  return result;
+  return response.data;
 }
