@@ -1,20 +1,15 @@
 import ModalPortal from "@components/Portal";
-import { ModalCloseButton } from "../ModalElements/ModalCloseButton";
-import { ModalContainer } from "../ModalElements/ModalContainer";
-import { ModalDim } from "../ModalElements/ModalDim";
-import { ModalTitle } from "../ModalElements/ModalTitle";
 import { ModalProps } from "../ModalProp";
-import { ModalContext } from "@components/common/RefactorModal/ModalContext";
-import { useContext } from "react";
+import { ModalDim } from "../ModalElements/ModalDim";
+import { ModalContainer } from "../ModalElements/ModalContainer";
+import { ModalCloseButton } from "../ModalElements/ModalCloseButton";
+import { ModalTitle } from "../ModalElements/ModalTitle";
 
-export default function Modal({ children, title }: ModalProps) {
-  const { handleModalState } = useContext(ModalContext);
-  function handleCloseModal() {
-    handleModalState({
-      isOpenModal: false,
-    });
-  }
-
+export default function Modal({
+  children,
+  title,
+  handleCloseModal,
+}: ModalProps) {
   return (
     <ModalPortal>
       <ModalDim onClick={handleCloseModal} />

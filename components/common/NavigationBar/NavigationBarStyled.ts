@@ -13,7 +13,7 @@ export const NavigationBarContainer = styled.header<{ pathName: string }>`
           position: sticky;
           top: 0;
         `}
-  z-index: var(--z-index-nav);
+  z-index: 1;
   width: 100%;
   background-color: var(--light-blue);
 `;

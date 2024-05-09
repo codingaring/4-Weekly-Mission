@@ -3,12 +3,16 @@ import * as S from "./AddToFolderStyled";
 import { AddToFolderProps } from "../ModalProp";
 import Modal from "../Modal";
 
-export function AddToFolder({ linkURL, data }: AddToFolderProps) {
+export function AddToFolder({
+  linkURL,
+  folderList,
+  handleCloseModal,
+}: AddToFolderProps) {
   return (
-    <Modal title={"폴더에 추가"}>
+    <Modal handleCloseModal={handleCloseModal} title={"폴더에 추가"}>
       <S.SelectLink>{linkURL}</S.SelectLink>
       <S.FolderListContainer>
-        {data?.map((folder) => (
+        {folderList?.map((folder) => (
           <S.SelectFolder key={folder.id}>
             <S.FolderName>{folder.name}</S.FolderName>
             <S.FolderCount>{folder.link.count}개 링크</S.FolderCount>

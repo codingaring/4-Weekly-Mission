@@ -4,6 +4,8 @@ import { ADD_ICON } from "./constant";
 import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 import { FolderListDataForm } from "@data-access/getCategory";
+import { useModal } from "@hooks/useModal";
+import { AddToFolder } from "@components/common/Modals/AddToFolder";
 
 export function AddLinkBar({
   folderInfo,
@@ -14,20 +16,10 @@ export function AddLinkBar({
 }) {
   const [inputValue, setInputValue] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState(false);
-  const { handleModalState } = useContext(ModalContext);
-
+  const { isOpenModal, toggleModal } = useModal();
   const handleEmptyError = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsEmpty(e.target.value === "" ? true : false);
   };
-
-  function handleShowModal() {
-    handleModalState({
-      isOpenModal: true,
-      selectURL: inputValue,
-      data: folderInfo,
-      modalType: "addToFolder",
-    });
-  }
 
   const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -35,7 +27,13 @@ export function AddLinkBar({
 
   return (
     <>
-      <RefactorModal />
+      {isOpenModal && (
+        <AddToFolder
+          linkURL={inputValue}
+          folderList={folderInfo}
+          handleCloseModal={toggleModal}
+        />
+      )}
       <S.AddLinkContainer isFloating={isFloating}>
         <S.AddLinkBar isEmpty={isEmpty}>
           <S.AddLinkInputContainer>
@@ -47,7 +45,7 @@ export function AddLinkBar({
               onChange={handleInputValue}
             />
           </S.AddLinkInputContainer>
-          <S.AddInputButton onClick={handleShowModal} disabled={isEmpty}>
+          <S.AddInputButton onClick={toggleModal} disabled={isEmpty}>
             추가하기
           </S.AddInputButton>
         </S.AddLinkBar>

@@ -41,5 +41,11 @@ export function RefactorModal() {
       modalContent = <></>;
   }
 
-  return isOpenModal ? <Modal title={modalTitle}>{modalContent}</Modal> : <></>;
+  return isOpenModal ? (
+    <Modal handleCloseModal={() => {}} title={modalTitle}>
+      {modalContent}
+    </Modal>
+  ) : (
+    <></>
+  );
 }

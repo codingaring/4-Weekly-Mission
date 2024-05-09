@@ -1,5 +1,5 @@
+import { FolderListDataForm } from "@data-access/getCategory";
 import { MouseEvent } from "react";
-import { FolderListDataForm } from "../../../types/DataForm";
 
 export interface BaseModalProps {
   isOpenModal?: boolean;
@@ -15,11 +15,13 @@ export interface DeleteFolderProps {
 }
 
 export interface ModalProps {
+  handleCloseModal: () => void;
   children: JSX.Element | JSX.Element[];
   title: string;
 }
 
 export interface AddToFolderProps {
+  handleCloseModal: () => void;
   linkURL: string | undefined;
-  data: FolderListDataForm[] | undefined;
+  folderList: FolderListDataForm[];
 }
