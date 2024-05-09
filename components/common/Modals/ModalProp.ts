@@ -1,27 +1,23 @@
 import { FolderListDataForm } from "@data-access/getCategory";
-import { MouseEvent } from "react";
 
 export interface BaseModalProps {
-  isOpenModal?: boolean;
-  handleModalClose: (e: MouseEvent<HTMLElement>) => void;
+  handleCloseModal: () => void;
 }
 
-export interface DeleteLinkProps {
+export interface DeleteLinkProps extends BaseModalProps {
   deleteURL: string;
 }
 
-export interface DeleteFolderProps {
+export interface DeleteFolderProps extends BaseModalProps {
   selectFolder: string;
 }
 
-export interface ModalProps {
-  handleCloseModal: () => void;
+export interface ModalProps extends BaseModalProps {
   children: JSX.Element | JSX.Element[];
   title: string;
 }
 
-export interface AddToFolderProps {
-  handleCloseModal: () => void;
+export interface AddToFolderProps extends BaseModalProps {
   linkURL: string | undefined;
   folderList: FolderListDataForm[];
 }

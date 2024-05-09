@@ -12,9 +12,9 @@ export const CloseButtonModal = styled.button`
   right: 1.2rem;
 `;
 
-export function ModalCloseButton({ handleModalClose }: BaseModalProps) {
+export function ModalCloseButton({ handleCloseModal }: BaseModalProps) {
   return (
-    <CloseButtonModal type="button" onClick={handleModalClose}>
+    <CloseButtonModal type="button" onClick={handleCloseModal}>
       X
     </CloseButtonModal>
   );

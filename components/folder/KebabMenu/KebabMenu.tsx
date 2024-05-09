@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import * as S from "./KebabMenuStyled";
 import { MouseEvent } from "react";
-import { ModalContext } from "@components/common/RefactorModal/ModalContext";
-import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 import { getCategory } from "@data-access/getCategory";
-import { useEffectOnce } from "@hooks/useEffectOnce";
+import { useModal } from "@hooks/useModal";
+import DeleteLink from "@components/common/Modals/DeleteLink";
+import { AddToFolder } from "@components/common/Modals/AddToFolder";
 
 interface Props {
   selectURL: string;
@@ -12,7 +12,8 @@ interface Props {
 
 export function KebabMenu({ selectURL }: Props) {
   const [categoryList, setCategoryList] = useState();
-  const { handleModalState } = useContext(ModalContext);
+  const deleteLinkModal = useModal();
+  const addToFolderModal = useModal();
 
   const handleShowModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -23,28 +24,23 @@ export function KebabMenu({ selectURL }: Props) {
     };
 
     handleCategoryList();
-
-    switch (e.currentTarget.id) {
-      case "deleteLink":
-        handleModalState({
-          isOpenModal: true,
-          selectURL: selectURL,
-          modalType: "deleteLink",
-        });
-        break;
-      case "addToFolder":
-        handleModalState({
-          isOpenModal: true,
-          selectURL: selectURL,
-          data: categoryList,
-          modalType: "addToFolder",
-        });
-    }
   };
 
   return (
     <>
-      <RefactorModal />
+      {deleteLinkModal.isOpenModal && (
+        <DeleteLink
+          deleteURL={selectURL}
+          handleCloseModal={deleteLinkModal.toggleModal}
+        />
+      )}
+      {addToFolderModal.isOpenModal && (
+        <AddToFolder
+          handleCloseModal={addToFolderModal.toggleModal}
+          linkURL={selectURL}
+          folderList={categoryList!}
+        />
+      )}
       <S.CardContentKebabMenu>
         <S.CardContentKebabMenuDelete
           type="button"

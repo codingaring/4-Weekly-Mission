@@ -14,7 +14,7 @@ export default function Modal({
     <ModalPortal>
       <ModalDim onClick={handleCloseModal} />
       <ModalContainer>
-        <ModalCloseButton handleModalClose={handleCloseModal} />
+        <ModalCloseButton handleCloseModal={handleCloseModal} />
         <ModalTitle>{title}</ModalTitle>
         {children}
       </ModalContainer>

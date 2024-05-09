@@ -3,6 +3,7 @@ import { DeleteFolderProps } from "../ModalProp";
 import { handleCopyClipBoard } from "@util/copyClipBoard";
 import Link from "next/link";
 import { shareKakao } from "@util/sharedKakao";
+import Modal from "../Modal";
 
 declare global {
   interface Window {
@@ -10,13 +11,16 @@ declare global {
   }
 }
 
-export function SharedFolder({ selectFolder }: DeleteFolderProps) {
+export function SharedFolder({
+  selectFolder,
+  handleCloseModal,
+}: DeleteFolderProps) {
   const handleSharedKakao = () => {
     shareKakao("https://codingaring-week11-linkbrary.netlify.app");
   };
 
   https: return (
-    <>
+    <Modal title={"폴더 공유"} handleCloseModal={handleCloseModal}>
       <S.FolderName>{selectFolder}</S.FolderName>
       <S.ButtonContainer>
         <S.SharedButton onClick={handleSharedKakao}>
@@ -45,6 +49,6 @@ export function SharedFolder({ selectFolder }: DeleteFolderProps) {
           <S.IconText>링크 복사</S.IconText>
         </S.SharedButton>
       </S.ButtonContainer>
-    </>
+    </Modal>
   );
 }

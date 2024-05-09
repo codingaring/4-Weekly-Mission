@@ -5,7 +5,6 @@ import { FolderListDataForm, getCategory } from "@data-access/getCategory";
 import FolderHeader from "@components/folder/FolderHeader";
 import { FolderContent } from "@components/folder/FolderContent/FolderContent";
 import Footer from "@components/common/Footer";
-import { ModalProvider } from "@components/common/RefactorModal/ModalProvider";
 import { SearchBar } from "@components/common/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 
@@ -33,7 +32,7 @@ function Folder() {
   }, [data]);
 
   return (
-    <ModalProvider>
+    <>
       <FolderHeader
         folderInfo={folderInfo}
         ref={headerRef}
@@ -44,7 +43,7 @@ function Folder() {
         <FolderContent folderInfo={folderInfo} />
       </S.ItemsContainer>
       <Footer ref={footerRef} />
-    </ModalProvider>
+    </>
   );
 }
 
