@@ -1,7 +1,8 @@
 import { KebabMenu } from "@components/folder/KebabMenu/KebabMenu";
 import * as S from "./CardContentStyled";
-import { MouseEvent, useState } from "react";
 import Image from "next/image";
+import { usePortalContents } from "@hooks/usePortalContents";
+import { FolderListDataForm } from "@data-access/getCategory";
 
 interface CardContentProps {
   elapsedTime: string;
@@ -10,6 +11,7 @@ interface CardContentProps {
   isHovered: boolean;
   currentLocation: string;
   selectURL: string;
+  folderList: FolderListDataForm[];
 }
 
 export const CardContent = ({
@@ -19,24 +21,22 @@ export const CardContent = ({
   isHovered,
   currentLocation,
   selectURL,
+  folderList,
 }: CardContentProps) => {
-  const [isOpened, setIsClick] = useState(false);
-
-  const handleClickMenu = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsClick(isOpened === false ? true : false);
-  };
+  const kebabMenu = usePortalContents();
 
   return (
     <S.CardContentContainer isHovered={isHovered}>
       <>
         <S.ElapsedTime>{elapsedTime}</S.ElapsedTime>
         {!currentLocation.includes("shared") && (
-          <S.KebabButton type="button" onClick={handleClickMenu}>
+          <S.KebabButton type="button" onClick={kebabMenu.toggleContents}>
             <Image fill src="/images/kebab.svg" alt="메뉴 보기" />
           </S.KebabButton>
         )}
-        {isOpened && <KebabMenu selectURL={selectURL} />}
+        {kebabMenu.isOpenModal && (
+          <KebabMenu folderList={folderList} selectURL={selectURL} />
+        )}
       </>
 
       <S.Description>{description}</S.Description>

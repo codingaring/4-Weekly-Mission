@@ -1,5 +1,7 @@
 //favorite, link, name, user_id
 
+import { FolderListDataForm } from "@data-access/getCategory";
+
 //getFolders
 export interface getFolderDataForm {
   created_at: string;
@@ -58,6 +60,7 @@ export interface CardInfoDataForm {
   image_source: string;
   description: string;
   created_at: string;
+  folderList: FolderListDataForm[];
 }
 
 // getLoginUserInfo

@@ -1,7 +1,7 @@
 import { DELETE_ICON, RENAME_ICON, SHARED_ICON } from "./constant";
 import * as S from "./CategoryNavButtonsStyled";
 import Image from "next/image";
-import { useModal } from "@hooks/useModal";
+import { usePortalContents } from "@hooks/usePortalContents";
 import { RenameModal } from "@components/common/Modals/RenameModal";
 import DeleteFolder from "@components/common/Modals/DeleteFolder";
 import { SharedFolder } from "@components/common/Modals/SharedFolder/SharedFolder";
@@ -13,9 +13,9 @@ export function CategoryNavButtons({
   selectFolder: string;
   folderId: string;
 }) {
-  const shardFolderModal = useModal();
-  const renameModal = useModal();
-  const deleteFolderModal = useModal();
+  const shardFolderModal = usePortalContents();
+  const renameModal = usePortalContents();
+  const deleteFolderModal = usePortalContents();
 
   return (
     <>

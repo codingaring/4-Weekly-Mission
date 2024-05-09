@@ -12,7 +12,7 @@ import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
 import { useRouter } from "next/router";
 import { FolderListDataForm } from "@data-access/getCategory";
-import { useModal } from "@hooks/useModal";
+import { usePortalContents } from "@hooks/usePortalContents";
 import { AddFolder } from "@components/common/Modals/AddFolder";
 
 interface LoadFolderDataProps {
@@ -30,7 +30,7 @@ export function FolderContent({
   const [activeCategoryName, setActiveCategoryName] = useState("전체");
   const searchKeyWord = useRecoilValue(searchState);
   const router = useRouter();
-  const addFolderModal = useModal();
+  const addFolderModal = usePortalContents();
 
   const handleLoadFolder = async ({
     folderId,
@@ -66,7 +66,7 @@ export function FolderContent({
   return (
     <>
       {addFolderModal.isOpenModal && (
-        <AddFolder handleCloseModal={addFolderModal.toggleModal} />
+        <AddFolder handleCloseModal={addFolderModal.toggleContents} />
       )}
       {searchKeyWord && <SearchResultComment searchKeyWord={searchKeyWord} />}
 
@@ -86,7 +86,10 @@ export function FolderContent({
             </Button>
           ))}
         </S.ClassificationButtons>
-        <S.AddFolderButton type="button" onClick={addFolderModal.toggleModal}>
+        <S.AddFolderButton
+          type="button"
+          onClick={addFolderModal.toggleContents}
+        >
           폴더 추가 +
         </S.AddFolderButton>
       </S.ClassificationContainer>
@@ -100,6 +103,7 @@ export function FolderContent({
         <CardList>
           {folder?.map((link) => (
             <CardItem
+              folderList={folderInfo}
               key={link?.id}
               url={link.url}
               image_source={link.image_source}

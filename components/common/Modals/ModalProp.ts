@@ -1,7 +1,8 @@
 import { FolderListDataForm } from "@data-access/getCategory";
+import { MouseEvent } from "react";
 
 export interface BaseModalProps {
-  handleCloseModal: () => void;
+  handleCloseModal: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface DeleteLinkProps extends BaseModalProps {

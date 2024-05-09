@@ -1,7 +1,7 @@
-import { ModalButtonBlue } from "../ModalElements/ModalButtonBlue";
 import * as S from "./AddToFolderStyled";
 import { AddToFolderProps } from "../ModalProp";
 import Modal from "../Modal";
+import { PrimaryButton } from "@styles/common/PrimaryButton";
 
 export function AddToFolder({
   linkURL,
@@ -20,7 +20,7 @@ export function AddToFolder({
           </S.SelectFolder>
         ))}
       </S.FolderListContainer>
-      <ModalButtonBlue type="button">추가하기</ModalButtonBlue>
+      <PrimaryButton type="button">추가하기</PrimaryButton>
     </Modal>
   );
 }
