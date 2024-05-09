@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "../../styles/pages/FolderStyled";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { FolderListDataForm, getCategory } from "@data-access/getCategory";
@@ -7,7 +7,6 @@ import { FolderContent } from "@components/folder/FolderContent/FolderContent";
 import Footer from "@components/common/Footer";
 import { ModalProvider } from "@components/common/RefactorModal/ModalProvider";
 import { SearchBar } from "@components/common/SearchBar";
-import { useEffectOnce } from "@hooks/useEffectOnce";
 import { useQuery } from "@tanstack/react-query";
 
 function Folder() {
@@ -24,12 +23,14 @@ function Folder() {
   const floatingState = !isHeaderVisible && !isFooterVisible ? true : false;
 
   const handleLoadCategory = async () => {
-    if (data?.data) {
+    if (data && data.data) {
       setFolderInfo(data.data);
     }
   };
 
-  useEffectOnce(handleLoadCategory);
+  useEffect(() => {
+    handleLoadCategory();
+  }, [data]);
 
   return (
     <ModalProvider>
