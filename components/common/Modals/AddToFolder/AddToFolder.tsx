@@ -20,7 +20,7 @@ export function AddToFolder({
           </S.SelectFolder>
         ))}
       </S.FolderListContainer>
-      <ModalButtonBlue type="button">삭제하기</ModalButtonBlue>
+      <ModalButtonBlue type="button">추가하기</ModalButtonBlue>
     </Modal>
   );
 }
