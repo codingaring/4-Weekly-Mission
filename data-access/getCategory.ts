@@ -11,7 +11,7 @@ export interface FolderListDataForm {
   user_id: number;
 }
 
-export async function getCategory(): Promise<FolderListDataForm[]> {
+export async function getCategory(): Promise<{ data: FolderListDataForm[] }> {
   const response = await fetch(`${BASE_URL}users/1/folders`);
   const result = await response.json();
   return result;

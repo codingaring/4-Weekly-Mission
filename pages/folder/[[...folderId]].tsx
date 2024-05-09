@@ -8,6 +8,7 @@ import Footer from "@components/common/Footer";
 import { ModalProvider } from "@components/common/RefactorModal/ModalProvider";
 import { SearchBar } from "@components/common/SearchBar";
 import { useEffectOnce } from "@hooks/useEffectOnce";
+import { useQuery } from "@tanstack/react-query";
 
 function Folder() {
   const [folderInfo, setFolderInfo] = useState<FolderListDataForm[]>([]);
@@ -15,12 +16,17 @@ function Folder() {
     useIntersectionObserver();
   const { isVisible: isFooterVisible, targetRef: footerRef } =
     useIntersectionObserver();
+  const { data } = useQuery({
+    queryKey: ["folders"],
+    queryFn: getCategory,
+  });
 
   const floatingState = !isHeaderVisible && !isFooterVisible ? true : false;
 
   const handleLoadCategory = async () => {
-    const folderListInfo = await getCategory();
-    setFolderInfo(folderListInfo);
+    if (data?.data) {
+      setFolderInfo(data.data);
+    }
   };
 
   useEffectOnce(handleLoadCategory);
