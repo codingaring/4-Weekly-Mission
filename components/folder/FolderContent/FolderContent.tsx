@@ -1,7 +1,7 @@
 import * as S from "./FolderContentStyled";
 import { useEffect, useState, MouseEvent, useContext } from "react";
 import { CategoryNav } from "../CategoryNav/CategoryNav";
-import { FolderListDataForm, getFolderDataForm } from "../../../types/DataForm";
+import { getFolderDataForm } from "../../../types/DataForm";
 import { useRecoilValue } from "recoil";
 import { searchState } from "recoil/SearchKeyWord";
 import { getFolders } from "@data-access/getFolders";
@@ -13,13 +13,18 @@ import { CardItem } from "@components/common/CardItem";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
 import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { useRouter } from "next/router";
+import { FolderListDataForm } from "@data-access/getCategory";
 
 interface LoadFolderDataProps {
   folderId: string;
   searchKeyWord: string;
 }
 
-export function FolderContent({ data }: { data: FolderListDataForm[] }) {
+export function FolderContent({
+  folderInfo,
+}: {
+  folderInfo: FolderListDataForm[];
+}) {
   const [folder, setFolder] = useState<getFolderDataForm[]>([]);
   const [folderId, setFolderId] = useState("");
   const [activeCategoryName, setActiveCategoryName] = useState("전체");
@@ -72,7 +77,7 @@ export function FolderContent({ data }: { data: FolderListDataForm[] }) {
           <Button onClick={handleCategoryActive} id="" value="전체">
             전체
           </Button>
-          {data.map((category) => (
+          {folderInfo.map((category) => (
             <Button
               onClick={handleCategoryActive}
               value={category.name}

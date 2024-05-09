@@ -9,7 +9,7 @@ import Footer from "@components/common/Footer";
 import { ModalProvider } from "@components/common/RefactorModal/ModalProvider";
 
 function Folder() {
-  const [categoryData, setCategoryData] = useState<FolderListDataForm[]>([]);
+  const [folderInfo, setFolderInfo] = useState<FolderListDataForm[]>([]);
   const { isVisible: isHeaderVisible, targetRef: headerRef } =
     useIntersectionObserver();
   const { isVisible: isFooterVisible, targetRef: footerRef } =
@@ -19,7 +19,7 @@ function Folder() {
 
   const handleLoadCategory = async () => {
     const folderListInfo = await getCategory();
-    setCategoryData(folderListInfo);
+    setFolderInfo(folderListInfo);
   };
 
   useEffect(() => {
@@ -29,13 +29,13 @@ function Folder() {
   return (
     <ModalProvider>
       <FolderHeader
-        data={categoryData}
+        folderInfo={folderInfo}
         ref={headerRef}
         isFloating={floatingState}
       />
       <S.ItemsContainer>
         <SearchBar />
-        <FolderContent data={categoryData} />
+        <FolderContent folderInfo={folderInfo} />
       </S.ItemsContainer>
       <Footer ref={footerRef} />
     </ModalProvider>

@@ -1,15 +1,15 @@
 import { useState, ChangeEvent, useContext } from "react";
 import * as S from "./AddLinkBarStyled";
 import { ADD_ICON } from "./constant";
-import { FolderListDataForm } from "../../../types/DataForm";
 import { ModalContext } from "@components/common/RefactorModal/ModalContext";
 import { RefactorModal } from "@components/common/RefactorModal/RefactorModal";
+import { FolderListDataForm } from "@data-access/getCategory";
 
 export function AddLinkBar({
-  data,
+  folderInfo,
   isFloating = false,
 }: {
-  data: FolderListDataForm[];
+  folderInfo: FolderListDataForm[];
   isFloating?: boolean;
 }) {
   const [inputValue, setInputValue] = useState<string>("");
@@ -24,7 +24,7 @@ export function AddLinkBar({
     handleModalState({
       isOpenModal: true,
       selectURL: inputValue,
-      data: data,
+      data: folderInfo,
       modalType: "addToFolder",
     });
   }
