@@ -22,20 +22,20 @@ export function CategoryNavButtons({
       {shardFolderModal.isOpenModal && (
         <SharedFolder
           selectFolder={selectFolder}
-          handleCloseModal={shardFolderModal.toggleModal}
+          handleCloseModal={shardFolderModal.toggleContents}
         />
       )}
       {renameModal.isOpenModal && (
-        <RenameModal handleCloseModal={renameModal.toggleModal} />
+        <RenameModal handleCloseModal={renameModal.toggleContents} />
       )}
       {deleteFolderModal.isOpenModal && (
         <DeleteFolder
           selectFolder={selectFolder}
-          handleCloseModal={deleteFolderModal.toggleModal}
+          handleCloseModal={deleteFolderModal.toggleContents}
         />
       )}
       <S.CategoryNavButton
-        onClick={shardFolderModal.toggleModal}
+        onClick={shardFolderModal.toggleContents}
         id="sharedFolder"
       >
         <S.NavButtonIconContainer>
@@ -43,14 +43,17 @@ export function CategoryNavButtons({
         </S.NavButtonIconContainer>
         <p>공유</p>
       </S.CategoryNavButton>
-      <S.CategoryNavButton onClick={renameModal.toggleModal} id="renameModal">
+      <S.CategoryNavButton
+        onClick={renameModal.toggleContents}
+        id="renameModal"
+      >
         <S.NavButtonIconContainer>
           <Image fill src={RENAME_ICON} alt="이름 변경하기를 나타내는 아이콘" />
         </S.NavButtonIconContainer>
         <p>이름 변경</p>
       </S.CategoryNavButton>
       <S.CategoryNavButton
-        onClick={deleteFolderModal.toggleModal}
+        onClick={deleteFolderModal.toggleContents}
         id="deleteFolder"
       >
         <S.NavButtonIconContainer>

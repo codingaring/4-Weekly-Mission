@@ -1,6 +1,6 @@
 import * as S from "./AddToFolderStyled";
-import { AddToFolderProps } from "../ModalProp";
 import Modal from "../Modal";
+import { AddToFolderProps } from "../ModalProp";
 import { PrimaryButton } from "@styles/common/PrimaryButton";
 
 export function AddToFolder({

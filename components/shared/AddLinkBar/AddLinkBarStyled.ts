@@ -1,3 +1,4 @@
+import { PrimaryButton } from "@styles/common/PrimaryButton";
 import styled from "styled-components";
 
 export const AddLinkContainer = styled.div<{ isFloating: boolean }>`
@@ -64,13 +65,9 @@ export const AddLinkInput = styled.input`
   }
 `;
 
-export const AddInputButton = styled.button`
-  width: 8rem;
+export const AddInputButton = styled(PrimaryButton)`
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.671rem;
-  color: var(--gray-light);
-  background: linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%);
   padding: 1rem 1.6rem;
-  border-radius: 0.8rem;
 `;
