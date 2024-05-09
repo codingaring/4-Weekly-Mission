@@ -22,3 +22,7 @@ export interface AddToFolderProps extends BaseModalProps {
   linkURL: string | undefined;
   folderList: FolderListDataForm[];
 }
+
+export interface RenameFolderProps extends BaseModalProps {
+  selectFolderId: number;
+}

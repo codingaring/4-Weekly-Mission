@@ -26,7 +26,10 @@ export function CategoryNavButtons({
         />
       )}
       {renameModal.isOpenModal && (
-        <RenameModal handleCloseModal={renameModal.toggleContents} />
+        <RenameModal
+          selectFolderId={Number(folderId)}
+          handleCloseModal={renameModal.toggleContents}
+        />
       )}
       {deleteFolderModal.isOpenModal && (
         <DeleteFolder

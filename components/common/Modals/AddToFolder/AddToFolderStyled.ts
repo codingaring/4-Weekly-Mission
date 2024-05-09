@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const AddToFolderContainer = styled.div`
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+`;
 export const FolderListContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,7 +13,7 @@ export const FolderListContainer = styled.div`
   overflow: hidden scroll;
 `;
 
-export const SelectFolder = styled.div`
+export const SelectFolder = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -22,10 +27,15 @@ export const SelectFolder = styled.div`
 `;
 
 export const SelectLink = styled.p`
+  width: 30rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: var(--gray60);
   font-size: 1.4rem;
   line-height: 2.2rem;
   text-align: center;
+  margin: 0.5rem 0 2.5rem 0;
 `;
 
 export const FolderName = styled.p`
