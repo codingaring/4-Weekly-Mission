@@ -1,10 +1,11 @@
 import { ModalButtonBlue } from "../ModalElements/ModalButtonBlue";
 import * as S from "./AddToFolderStyled";
 import { AddToFolderProps } from "../ModalProp";
+import Modal from "../Modal";
 
 export function AddToFolder({ linkURL, data }: AddToFolderProps) {
   return (
-    <>
+    <Modal title={"폴더에 추가"}>
       <S.SelectLink>{linkURL}</S.SelectLink>
       <S.FolderListContainer>
         {data?.map((folder) => (
@@ -16,6 +17,6 @@ export function AddToFolder({ linkURL, data }: AddToFolderProps) {
         ))}
       </S.FolderListContainer>
       <ModalButtonBlue type="button">삭제하기</ModalButtonBlue>
-    </>
+    </Modal>
   );
 }

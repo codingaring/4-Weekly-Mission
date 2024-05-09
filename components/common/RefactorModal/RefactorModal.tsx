@@ -21,10 +21,6 @@ export function RefactorModal() {
       modalContent = <DeleteLink deleteURL={selectURL} />;
       modalTitle = "링크 삭제";
       break;
-    case "addToFolder":
-      modalContent = <AddToFolder linkURL={selectURL} data={data} />;
-      modalTitle = "폴더에 추가";
-      break;
     case "addFolderContent":
       modalContent = <AddFolder />;
       modalTitle = "폴더 추가";
