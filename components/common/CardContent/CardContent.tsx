@@ -1,7 +1,6 @@
 import { KebabMenu } from "@components/folder/KebabMenu/KebabMenu";
 import * as S from "./CardContentStyled";
 import { MouseEvent, useState } from "react";
-import { FolderListDataForm } from "../../../types/DataForm";
 import Image from "next/image";
 
 interface CardContentProps {
@@ -22,9 +21,6 @@ export const CardContent = ({
   selectURL,
 }: CardContentProps) => {
   const [isOpened, setIsClick] = useState(false);
-  const className = isHovered
-    ? "CardContent CardContent-hovered"
-    : "CardContent";
 
   const handleClickMenu = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -33,15 +29,15 @@ export const CardContent = ({
 
   return (
     <S.CardContentContainer isHovered={isHovered}>
-      <div className="CardContent-time-kebab">
+      <>
         <S.ElapsedTime>{elapsedTime}</S.ElapsedTime>
-        {currentLocation === "/folder" && (
+        {!currentLocation.includes("shared") && (
           <S.KebabButton type="button" onClick={handleClickMenu}>
             <Image fill src="/images/kebab.svg" alt="메뉴 보기" />
           </S.KebabButton>
         )}
         {isOpened && <KebabMenu selectURL={selectURL} />}
-      </div>
+      </>
 
       <S.Description>{description}</S.Description>
       <S.CreatedAtText>{createdAt}</S.CreatedAtText>
