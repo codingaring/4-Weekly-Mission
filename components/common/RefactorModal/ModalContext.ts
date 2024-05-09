@@ -1,4 +1,4 @@
-import { FolderListDataForm } from "../../../types/DataForm";
+import { FolderListDataForm } from "@data-access/getCategory";
 import React from "react";
 
 export type ModalContextType = {

@@ -1,7 +1,7 @@
 import { ModalInput } from "../ModalElements/ModalInput";
 import { ModalButtonBlue } from "../ModalElements/ModalButtonBlue";
 
-export function AddFolderContent() {
+export function AddFolder() {
   return (
     <>
       <ModalInput placeholder="내용 입력" type="text"></ModalInput>

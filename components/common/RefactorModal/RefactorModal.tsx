@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AddFolderContent } from "../Modals/AddFolderContent";
+import { AddFolder } from "../Modals/AddFolder";
 import { AddToFolder } from "../Modals/AddToFolder";
 import DeleteFolder from "../Modals/DeleteFolder";
 import DeleteLink from "../Modals/DeleteLink";
@@ -26,7 +26,7 @@ export function RefactorModal() {
       modalTitle = "폴더에 추가";
       break;
     case "addFolderContent":
-      modalContent = <AddFolderContent />;
+      modalContent = <AddFolder />;
       modalTitle = "폴더 추가";
       break;
     case "sharedFolder":
