@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { FolderListDataForm } from "../../types/DataForm";
 import * as S from "../../styles/pages/FolderStyled";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
-import { getCategory } from "@data-access/getCategory";
+import { FolderListDataForm, getCategory } from "@data-access/getCategory";
 import FolderHeader from "@components/folder/FolderHeader";
 import { SearchBar } from "@components/common/SearchBar";
 import { FolderContent } from "@components/folder/FolderContent/FolderContent";
@@ -19,8 +18,8 @@ function Folder() {
   const floatingState = !isHeaderVisible && !isFooterVisible ? true : false;
 
   const handleLoadCategory = async () => {
-    const { data } = await getCategory();
-    setCategoryData(data);
+    const folderListInfo = await getCategory();
+    setCategoryData(folderListInfo);
   };
 
   useEffect(() => {

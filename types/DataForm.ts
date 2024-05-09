@@ -1,17 +1,5 @@
 //favorite, link, name, user_id
 
-//getCategory
-export interface FolderListDataForm {
-  id: number | string;
-  created_at: string;
-  favorite: true;
-  link: {
-    count: number;
-  };
-  name: string;
-  user_id: number;
-}
-
 //getFolders
 export interface getFolderDataForm {
   created_at: string;
