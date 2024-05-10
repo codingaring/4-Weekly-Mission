@@ -14,10 +14,21 @@ import { useRouter } from "next/router";
 import { FolderListDataForm } from "@data-access/getCategory";
 import { usePortalContents } from "@hooks/usePortalContents";
 import { AddFolder } from "@components/common/Modals/AddFolder";
+import { useQuery } from "@tanstack/react-query";
 
 interface LoadFolderDataProps {
   folderId: string;
   searchKeyWord: string;
+}
+
+interface FolderContents {
+  id: number;
+  favorite: boolean;
+  created_at: string;
+  url: string;
+  title: string;
+  image_source: string;
+  description: string;
 }
 
 export function FolderContent({
@@ -25,19 +36,21 @@ export function FolderContent({
 }: {
   folderInfo: FolderListDataForm[];
 }) {
-  const [folder, setFolder] = useState<getFolderDataForm[]>([]);
+  const [folder, setFolder] = useState<FolderContents[]>([]);
   const [folderId, setFolderId] = useState("");
   const [activeCategoryName, setActiveCategoryName] = useState("전체");
   const searchKeyWord = useRecoilValue(searchState);
   const router = useRouter();
   const addFolderModal = usePortalContents();
+  const { data, isSuccess } = useQuery({
+    queryKey: ["folderContents", folderId],
+    queryFn: () => getFolders({ folderId: Number(folderId) }),
+  });
 
-  const handleLoadFolder = async ({
-    folderId,
-    searchKeyWord,
-  }: LoadFolderDataProps) => {
-    const { data } = await getFolders({ folderId: Number(folderId) });
-    setFolder(data);
+  const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
+    if (isSuccess) {
+      setFolder(data);
+    }
 
     if (searchKeyWord) {
       setFolder((prevFolder) =>
@@ -98,7 +111,7 @@ export function FolderContent({
         activeCategoryName={activeCategoryName}
         folderId={folderId}
       />
-      {folder && folder.length ? (
+      {!folder ? (
         <EmptyLink />
       ) : (
         <CardList>
