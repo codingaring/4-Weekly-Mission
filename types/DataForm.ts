@@ -1,6 +1,6 @@
 //favorite, link, name, user_id
 
-import { FolderListDataForm } from "@data-access/getCategory";
+import { FolderListDataForm } from "@data-access/axios/getCategory";
 
 //getFolders
 export interface getFolderDataForm {
@@ -60,7 +60,7 @@ export interface CardInfoDataForm {
   image_source: string;
   description: string;
   created_at: string;
-  folderList: FolderListDataForm[];
+  folderList: any;
 }
 
 // getLoginUserInfo

@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios/axiosInstance";
+import { axiosInstance } from "./axiosInstance";
 
 export interface FolderListDataForm {
   id: number | string;
@@ -11,9 +11,7 @@ export interface FolderListDataForm {
   user_id: number;
 }
 
-export async function getCategory(): Promise<{
-  data: FolderListDataForm[];
-}> {
+export async function getCategory(): Promise<FolderListDataForm[]> {
   const response = await axiosInstance.get(`/linkbrary/v1/folders`);
   return response.data;
 }

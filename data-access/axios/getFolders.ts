@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios/axiosInstance";
+import { axiosInstance } from "./axiosInstance";
 
 interface FolderContents {
   id: number;

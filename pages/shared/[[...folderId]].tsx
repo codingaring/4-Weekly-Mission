@@ -4,81 +4,73 @@ import { CardList } from "@components/common/CardList";
 import { useEffect, useState } from "react";
 import { CardItem } from "@components/common/CardItem";
 import { useRouter } from "next/router";
-import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
 import Footer from "@components/common/Footer";
 import { NavigationBar } from "@components/common/NavigationBar";
-import { getFolderInfo } from "@data-access/getFolderInfo";
-import { getUserProfile } from "@data-access/getUserProfile";
-import { getFolderList } from "@data-access/getFolderList";
 import { EmptyLink } from "@components/common/EmptyLink";
 import { getFolderDataForm } from "../../types/DataForm";
+import { useQuery } from "@tanstack/react-query";
+import { getFolderInfo } from "@data-access/axios/getFolderInfo";
+import { getUserProfile } from "@data-access/axios/getUserProfile";
+import { getFolders } from "@data-access/axios/getFolders";
+import { getCategory } from "@data-access/axios/getCategory";
+import { useEffectOnce } from "@hooks/useEffectOnce";
+import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
 
 function Shared() {
   const router = useRouter();
   const { folderId } = router.query;
+  const [folderIdNumber, setFolderIdNumber] = useState<string | string[]>("");
+
   const [linkListData, setLinkListData] = useState<getFolderDataForm[]>();
-  const [folderInfo, setFolderInfo] = useState({
-    user_id: "",
-    folderName: "",
+  const { data: folderInfo } = useQuery({
+    queryKey: ["folderInfo"],
+    queryFn: async () => await getFolderInfo({ folderId: folderIdNumber }),
+    enabled: !!folderId,
   });
-  const [folderOwnerProfile, setFolderOwnerProfile] = useState({
-    ownerName: "",
-    profileImage: "",
+  const userId = folderInfo && folderInfo.use_id;
+  const { data: folderOwnerInfo } = useQuery({
+    queryKey: ["ownerProfile"],
+    queryFn: () => getUserProfile({ userId: userId }),
+    enabled: !!userId,
   });
-
-  async function handleLoadUserInfo(
-    folderIdQuery: string | string[] | undefined,
-    userId: string
-  ) {
-    try {
-      const { data } = await getFolderInfo(folderIdQuery);
-      const { user_id, name } = data[0];
-      setFolderInfo({
-        user_id: user_id,
-        folderName: name,
-      });
-    } catch (error) {
-      return;
-    }
-
-    try {
-      const { data } = await getUserProfile(folderInfo.user_id);
-      const { image_source, name } = data[0];
-      setFolderOwnerProfile({
-        ownerName: name,
-        profileImage: image_source,
-      });
-    } catch (error) {
-      return;
-    }
-
-    try {
-      const { data } = await getFolderList(folderIdQuery, userId);
-      setLinkListData(data);
-    } catch (error) {
-      return;
-    }
-  }
+  const { data: linksData, isSuccess } = useQuery({
+    queryKey: ["folderContents", folderId],
+    queryFn: () => getFolders({ folderId: Number(folderIdNumber) }),
+  });
+  const { data: folderList } = useQuery({
+    queryKey: ["folders"],
+    queryFn: getCategory,
+  });
 
   useEffect(() => {
-    handleLoadUserInfo(folderId, folderInfo.user_id);
-  }, [folderId, folderInfo.user_id, handleLoadUserInfo]);
+    const handleLoadContents = async () => {
+      if (isSuccess) {
+        setLinkListData(linksData);
+      }
+
+      if (folderId) {
+        setFolderIdNumber(folderId);
+      }
+    };
+    handleLoadContents();
+  }, [folderId]);
 
   return (
     <>
       <NavigationBar />
       <S.SharedPageContainer>
-        <FolderInfo
-          profileImage={folderOwnerProfile.profileImage}
-          ownerName={folderOwnerProfile.ownerName}
-          folderName={folderInfo.folderName}
-        />
+        {/* <FolderInfo
+          profileImage={folderOwnerInfo.image_source}
+          ownerName={folderOwnerInfo.name}
+          folderName={folderInfo ? folderInfo.name : ""}
+        /> */}
         <S.SharedPageItems>
           <SearchBar />
           {linkListData?.length !== 0 ? (
             <CardList>
               {linkListData?.map((link) => (
                 <CardItem
+                  folderList={folderList}
                   url={link.url}
                   image_source={link.image_source}
                   description={link.description}

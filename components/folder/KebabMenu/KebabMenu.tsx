@@ -2,7 +2,7 @@ import * as S from "./KebabMenuStyled";
 import { usePortalContents } from "@hooks/usePortalContents";
 import DeleteLink from "@components/common/Modals/DeleteLink";
 import { AddToFolder } from "@components/common/Modals/AddToFolder";
-import { FolderListDataForm } from "@data-access/getCategory";
+import { FolderListDataForm } from "@data-access/axios/getCategory";
 
 interface KebabProps {
   selectURL: string;

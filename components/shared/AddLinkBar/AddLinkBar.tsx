@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, useContext } from "react";
 import * as S from "./AddLinkBarStyled";
 import { ADD_ICON } from "./constant";
-import { FolderListDataForm } from "@data-access/getCategory";
+import { FolderListDataForm } from "@data-access/axios/getCategory";
 import { usePortalContents } from "@hooks/usePortalContents";
 import { AddToFolder } from "@components/common/Modals/AddToFolder";
 
