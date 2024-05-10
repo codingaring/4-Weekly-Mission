@@ -36,7 +36,7 @@ export function FolderContent({
     folderId,
     searchKeyWord,
   }: LoadFolderDataProps) => {
-    const { data } = await getFolders(folderId);
+    const { data } = await getFolders({ folderId: Number(folderId) });
     setFolder(data);
 
     if (searchKeyWord) {
@@ -75,16 +75,17 @@ export function FolderContent({
           <Button onClick={handleCategoryActive} id="" value="전체">
             전체
           </Button>
-          {folderInfo.map((category) => (
-            <Button
-              onClick={handleCategoryActive}
-              value={category.name}
-              id={category.id as string}
-              key={category.id}
-            >
-              {category.name}
-            </Button>
-          ))}
+          {folderInfo &&
+            folderInfo.map((category) => (
+              <Button
+                onClick={handleCategoryActive}
+                value={category.name}
+                id={category.id as string}
+                key={category.id}
+              >
+                {category.name}
+              </Button>
+            ))}
         </S.ClassificationButtons>
         <S.AddFolderButton
           type="button"
@@ -97,7 +98,7 @@ export function FolderContent({
         activeCategoryName={activeCategoryName}
         folderId={folderId}
       />
-      {!folder.length ? (
+      {folder && folder.length ? (
         <EmptyLink />
       ) : (
         <CardList>
