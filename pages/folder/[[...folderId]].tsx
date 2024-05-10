@@ -9,7 +9,6 @@ import { SearchBar } from "@components/common/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 
 function Folder() {
-  const [folderInfo, setFolderInfo] = useState<FolderListDataForm[]>([]);
   const { isVisible: isHeaderVisible, targetRef: headerRef } =
     useIntersectionObserver();
   const { isVisible: isFooterVisible, targetRef: footerRef } =
@@ -21,26 +20,16 @@ function Folder() {
 
   const floatingState = !isHeaderVisible && !isFooterVisible ? true : false;
 
-  const handleLoadCategory = async () => {
-    if (data && data.data) {
-      setFolderInfo(data.data);
-    }
-  };
-
-  useEffect(() => {
-    handleLoadCategory();
-  }, [data]);
-
   return (
     <>
       <FolderHeader
-        folderInfo={folderInfo}
+        folderInfo={data}
         ref={headerRef}
         isFloating={floatingState}
       />
       <S.ItemsContainer>
         <SearchBar />
-        <FolderContent folderInfo={folderInfo} />
+        <FolderContent folderInfo={data} />
       </S.ItemsContainer>
       <Footer ref={footerRef} />
     </>

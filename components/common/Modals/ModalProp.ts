@@ -20,7 +20,7 @@ export interface ModalProps extends BaseModalProps {
 
 export interface AddToFolderProps extends BaseModalProps {
   linkURL: string | undefined;
-  folderList: FolderListDataForm[];
+  folderList: FolderListDataForm[] | undefined;
 }
 
 export interface RenameFolderProps extends BaseModalProps {

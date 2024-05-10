@@ -1,10 +1,11 @@
-import { BASE_URL } from "./BASE_URL";
+import { axiosInstance } from "./axios/axiosInstance";
 
-export async function getFolders(folderId: string | string[] | undefined) {
-  const query = `?folderId=${folderId}`;
+export async function getFolders({ folderId }: { folderId?: number }) {
+  const query = `/folders${folderId}`;
 
-  const response = await fetch(`${BASE_URL}users/1/links${query}`);
-  const result = await response.json();
+  const response = await axiosInstance.get(
+    `/linkbrary/v1${folderId && query}/links`
+  );
 
-  return result;
+  return response.data;
 }
