@@ -10,7 +10,11 @@ interface FolderContents {
   description: string;
 }
 
-export async function getFolders({ folderId }: { folderId: number }) {
+export async function getFolders({
+  folderId,
+}: {
+  folderId: number;
+}): Promise<FolderContents[]> {
   const query = folderId ? `/folders/${folderId}` : "";
 
   const response = await axiosInstance.get(`/linkbrary/v1${query}/links`);

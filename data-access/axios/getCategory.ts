@@ -11,7 +11,7 @@ export interface FolderListDataForm {
   user_id: number;
 }
 
-export async function getCategory(): Promise<FolderListDataForm[]> {
+export async function getCategory(): Promise<FolderListDataForm[] | undefined> {
   const response = await axiosInstance.get(`/linkbrary/v1/folders`);
   return response.data;
 }

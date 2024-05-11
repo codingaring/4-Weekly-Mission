@@ -9,7 +9,7 @@ export function AddLinkBar({
   folderInfo,
   isFloating = false,
 }: {
-  folderInfo: FolderListDataForm[];
+  folderInfo: FolderListDataForm[] | undefined;
   isFloating?: boolean;
 }) {
   const [inputValue, setInputValue] = useState<string>("");

@@ -17,7 +17,7 @@ function Folder() {
   const { isVisible: isFooterVisible, targetRef: footerRef } =
     useIntersectionObserver();
   const { data } = useQuery({
-    queryKey: ["folders"],
+    queryKey: ["folderList"],
     queryFn: getCategory,
   });
 

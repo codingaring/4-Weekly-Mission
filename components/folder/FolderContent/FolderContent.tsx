@@ -34,7 +34,7 @@ interface FolderContents {
 export function FolderContent({
   folderInfo,
 }: {
-  folderInfo: FolderListDataForm[];
+  folderInfo: FolderListDataForm[] | undefined;
 }) {
   const [folder, setFolder] = useState<FolderContents[]>([]);
   const [folderId, setFolderId] = useState("");
@@ -42,13 +42,13 @@ export function FolderContent({
   const searchKeyWord = useRecoilValue(searchState);
   const router = useRouter();
   const addFolderModal = usePortalContents();
-  const { data, isSuccess } = useQuery({
-    queryKey: ["folderContents", folderId],
+  const { data } = useQuery({
+    queryKey: [`folderContents-${folderId}`],
     queryFn: () => getFolders({ folderId: Number(folderId) }),
   });
 
   const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
-    if (isSuccess) {
+    if (data) {
       setFolder(data);
     }
 
@@ -74,7 +74,7 @@ export function FolderContent({
 
   useEffect(() => {
     handleLoadFolder({ folderId, searchKeyWord });
-  }, [folderId, searchKeyWord]);
+  }, [folderId, searchKeyWord, data]);
 
   return (
     <>
@@ -85,7 +85,7 @@ export function FolderContent({
 
       <S.ClassificationContainer>
         <S.ClassificationButtons>
-          <Button onClick={handleCategoryActive} id="" value="전체">
+          <Button onClick={handleCategoryActive} id={null} value="전체">
             전체
           </Button>
           {folderInfo &&
@@ -111,22 +111,22 @@ export function FolderContent({
         activeCategoryName={activeCategoryName}
         folderId={folderId}
       />
-      {!folder ? (
-        <EmptyLink />
-      ) : (
-        <CardList>
-          {folder?.map((link) => (
+      <CardList>
+        {folder && folder.length !== 0 ? (
+          folder.map((link) => (
             <CardItem
               folderList={folderInfo}
-              key={link?.id}
+              key={link.id}
               url={link.url}
               image_source={link.image_source}
               description={link.description}
               created_at={link.created_at}
             />
-          ))}
-        </CardList>
-      )}
+          ))
+        ) : (
+          <EmptyLink />
+        )}
+      </CardList>
     </>
   );
 }
