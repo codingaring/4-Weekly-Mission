@@ -7,68 +7,54 @@ import { useRouter } from "next/router";
 import Footer from "@components/common/Footer";
 import { NavigationBar } from "@components/common/NavigationBar";
 import { EmptyLink } from "@components/common/EmptyLink";
-import { getFolderDataForm } from "../../types/DataForm";
 import { useQuery } from "@tanstack/react-query";
 import { getFolderInfo } from "@data-access/axios/getFolderInfo";
 import { getUserProfile } from "@data-access/axios/getUserProfile";
 import { getFolders } from "@data-access/axios/getFolders";
 import { getCategory } from "@data-access/axios/getCategory";
-import { useEffectOnce } from "@hooks/useEffectOnce";
 import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
+import { DEFAULT_IMAGE } from "@components/common/CardImage/constant";
 
 function Shared() {
   const router = useRouter();
   const { folderId } = router.query;
-  const [folderIdNumber, setFolderIdNumber] = useState<string | string[]>("");
 
-  const [linkListData, setLinkListData] = useState<getFolderDataForm[]>();
   const { data: folderInfo } = useQuery({
     queryKey: ["folderInfo"],
-    queryFn: async () => await getFolderInfo({ folderId: folderIdNumber }),
+    queryFn: async () => await getFolderInfo({ folderId: folderId }),
     enabled: !!folderId,
   });
-  const userId = folderInfo && folderInfo.use_id;
+  const userId = folderInfo && folderInfo?.user_id;
   const { data: folderOwnerInfo } = useQuery({
-    queryKey: ["ownerProfile"],
+    queryKey: [`ownerProfile-${userId}`],
     queryFn: () => getUserProfile({ userId: userId }),
     enabled: !!userId,
   });
-  const { data: linksData, isSuccess } = useQuery({
-    queryKey: ["folderContents", folderId],
-    queryFn: () => getFolders({ folderId: Number(folderIdNumber) }),
+  const { data: linksData } = useQuery({
+    queryKey: [`folderContents-${folderId}`],
+    queryFn: () => getFolders({ folderId: Number(folderId) }),
   });
   const { data: folderList } = useQuery({
     queryKey: ["folders"],
     queryFn: getCategory,
   });
 
-  useEffect(() => {
-    const handleLoadContents = async () => {
-      if (isSuccess) {
-        setLinkListData(linksData);
-      }
-
-      if (folderId) {
-        setFolderIdNumber(folderId);
-      }
-    };
-    handleLoadContents();
-  }, [folderId]);
-
   return (
     <>
       <NavigationBar />
       <S.SharedPageContainer>
-        {/* <FolderInfo
-          profileImage={folderOwnerInfo.image_source}
-          ownerName={folderOwnerInfo.name}
+        <FolderInfo
+          profileImage={
+            folderOwnerInfo ? folderOwnerInfo.image_source : DEFAULT_IMAGE
+          }
+          ownerName={folderOwnerInfo ? folderOwnerInfo.name : ""}
           folderName={folderInfo ? folderInfo.name : ""}
-        /> */}
+        />
         <S.SharedPageItems>
           <SearchBar />
-          {linkListData?.length !== 0 ? (
+          {linksData?.length !== 0 ? (
             <CardList>
-              {linkListData?.map((link) => (
+              {linksData?.map((link: any) => (
                 <CardItem
                   folderList={folderList}
                   url={link.url}

@@ -5,7 +5,7 @@ interface FolderInfo {
   created_at: string;
   favorite: boolean;
   name: string;
-  use_id: number;
+  user_id: number;
 }
 
 export async function getFolderInfo({
@@ -15,5 +15,5 @@ export async function getFolderInfo({
 }): Promise<FolderInfo> {
   const response = await axiosInstance.get(`/linkbrary/v1/folders/${folderId}`);
 
-  return response.data;
+  return response.data[0];
 }
