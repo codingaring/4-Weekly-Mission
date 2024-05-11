@@ -14,6 +14,7 @@ export const CardItem = ({
   description,
   created_at,
   folderList,
+  linkId,
 }: CardInfoDataForm) => {
   const [isHovered, setIsHovered] = useState(false);
   const location = useRouter();
@@ -36,6 +37,7 @@ export const CardItem = ({
             currentLocation={currentLocation}
             selectURL={url}
             folderList={folderList}
+            linkId={linkId}
           />
         </Card>
       </a>

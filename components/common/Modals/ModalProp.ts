@@ -7,6 +7,7 @@ export interface BaseModalProps {
 
 export interface DeleteLinkProps extends BaseModalProps {
   deleteURL: string;
+  linkId: number;
 }
 
 export interface DeleteFolderProps extends BaseModalProps {

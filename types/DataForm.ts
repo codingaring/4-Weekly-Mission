@@ -61,6 +61,7 @@ export interface CardInfoDataForm {
   description: string;
   created_at: string;
   folderList: any;
+  linkId: number;
 }
 
 // getLoginUserInfo

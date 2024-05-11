@@ -93,7 +93,7 @@ export function FolderContent({
               <Button
                 onClick={handleCategoryActive}
                 value={category.name}
-                id={category.id as string}
+                id={category.id}
                 key={category.id}
               >
                 {category.name}
@@ -121,6 +121,7 @@ export function FolderContent({
               image_source={link.image_source}
               description={link.description}
               created_at={link.created_at}
+              linkId={link.id}
             />
           ))
         ) : (

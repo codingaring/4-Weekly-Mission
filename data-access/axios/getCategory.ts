@@ -1,14 +1,11 @@
 import { axiosInstance } from "./axiosInstance";
 
 export interface FolderListDataForm {
-  id: number | string;
+  id: number;
   created_at: string;
-  favorite: true;
-  link: {
-    count: number;
-  };
+  favorite: boolean;
   name: string;
-  user_id: number;
+  link_count: number;
 }
 
 export async function getCategory(): Promise<FolderListDataForm[] | undefined> {
