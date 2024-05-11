@@ -1,5 +1,5 @@
 import * as S from "./SharedFolderStyled";
-import { DeleteFolderProps } from "../ModalProp";
+import { SharedFolderProps } from "../ModalProp";
 import { handleCopyClipBoard } from "@util/copyClipBoard";
 import Link from "next/link";
 import { shareKakao } from "@util/sharedKakao";
@@ -14,7 +14,7 @@ declare global {
 export function SharedFolder({
   selectFolder,
   handleCloseModal,
-}: DeleteFolderProps) {
+}: SharedFolderProps) {
   const handleSharedKakao = () => {
     shareKakao("https://codingaring-week11-linkbrary.netlify.app");
   };
