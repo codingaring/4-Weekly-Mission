@@ -2,7 +2,7 @@ import { FolderListDataForm } from "@data-access/axios/getCategory";
 import { MouseEvent } from "react";
 
 export interface BaseModalProps {
-  handleCloseModal: (event: MouseEvent<HTMLButtonElement>) => void;
+  handleCloseModal: (event: MouseEvent<HTMLElement>) => void;
 }
 
 export interface DeleteLinkProps extends BaseModalProps {
