@@ -25,8 +25,7 @@ export function SignForm() {
     };
 
     try {
-      const data = await checkSignin(inputValue);
-      const { accessToken, refreshToken } = data;
+      const { accessToken, refreshToken } = await checkSignin(inputValue);
       router.push("/folder");
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);

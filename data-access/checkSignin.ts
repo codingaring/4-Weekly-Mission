@@ -1,22 +1,14 @@
-import { BASE_URL } from "./BASE_URL";
+import axios from "axios";
 
 export async function checkSignin(trySignValue: {
   email: string;
   password: string;
 }) {
-  const response = await fetch(`${BASE_URL}sign-in`, {
-    method: "POST",
-    body: JSON.stringify(trySignValue),
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const response = await axios.post(`/linkbrary/v1/auth/sign-in`, {
+    email: trySignValue.email,
+    password: trySignValue.password,
   });
 
-  if (!response.ok) {
-    throw new Error("로그인에 실패했습니다.");
-  }
-
-  const { data } = await response.json();
-  const { accessToken, refreshToken } = data;
+  const { accessToken, refreshToken } = response.data;
   return { accessToken, refreshToken };
 }
