@@ -1,7 +1,6 @@
 import * as S from "@styles/pages/SharedStyled";
 import { SearchBar } from "@components/common/SearchBar";
 import { CardList } from "@components/common/CardList";
-import { useEffect, useState } from "react";
 import { CardItem } from "@components/common/CardItem";
 import { useRouter } from "next/router";
 import Footer from "@components/common/Footer";
@@ -14,6 +13,7 @@ import { getFolders } from "@data-access/axios/getFolders";
 import { getCategory } from "@data-access/axios/getCategory";
 import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
 import { DEFAULT_IMAGE } from "@components/common/CardImage/constant";
+import { FolderContentsDataForm } from "@data-access/axios/getFolders";
 
 function Shared() {
   const router = useRouter();
@@ -54,8 +54,9 @@ function Shared() {
           <SearchBar />
           {linksData?.length !== 0 ? (
             <CardList>
-              {linksData?.map((link: any) => (
+              {linksData?.map((link: FolderContentsDataForm) => (
                 <CardItem
+                  linkId={link.id}
                   folderList={folderList}
                   url={link.url}
                   image_source={link.image_source}

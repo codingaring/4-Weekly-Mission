@@ -4,7 +4,7 @@ import { UserContext, UserContextProp } from "./UserContext";
 export function UserContextProvider({ children }: { children: ReactNode }) {
   const [loginData, setLoginData] = useState({
     isLogin: false,
-    userId: "",
+    userId: 0,
   });
 
   function handleUserDataState(

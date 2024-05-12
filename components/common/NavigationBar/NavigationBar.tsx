@@ -10,7 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 
 export const NavigationBar = () => {
   const { handleUserDataState } = useContext(UserContext);
-  const router = useRouter();
   const Location = useRouter();
   const LocationPath = Location.pathname;
   const { data: profile } = useQuery({
@@ -20,7 +19,7 @@ export const NavigationBar = () => {
 
   useEffect(() => {
     profile && handleUserDataState({ isLogin: true, userId: profile.id });
-  }, [profile]);
+  }, [handleUserDataState, profile]);
 
   return (
     <S.NavigationBarContainer pathName={LocationPath}>

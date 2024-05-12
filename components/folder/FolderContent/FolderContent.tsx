@@ -1,7 +1,6 @@
 import * as S from "./FolderContentStyled";
 import { useEffect, useState, MouseEvent } from "react";
 import { CategoryNav } from "../CategoryNav/CategoryNav";
-import { getFolderDataForm } from "../../../types/DataForm";
 import { useRecoilValue } from "recoil";
 import { searchState } from "recoil/SearchKeyWord";
 import { getFolders } from "@data-access/axios/getFolders";
@@ -47,23 +46,6 @@ export function FolderContent({
     queryFn: () => getFolders({ folderId: Number(folderId) }),
   });
 
-  const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
-    if (data) {
-      setFolder(data);
-    }
-
-    if (searchKeyWord) {
-      setFolder((prevFolder) =>
-        prevFolder.filter(
-          (link) =>
-            link.description?.includes(searchKeyWord) ||
-            link.url?.includes(searchKeyWord) ||
-            link.title?.includes(searchKeyWord)
-        )
-      );
-    }
-  };
-
   const handleCategoryActive = (e: MouseEvent<HTMLButtonElement>) => {
     setActiveCategoryName(e.currentTarget.value);
     setFolderId(e.currentTarget.id);
@@ -73,6 +55,22 @@ export function FolderContent({
   };
 
   useEffect(() => {
+    const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
+      if (data) {
+        setFolder(data);
+      }
+
+      if (searchKeyWord) {
+        setFolder((prevFolder) =>
+          prevFolder.filter(
+            (link) =>
+              link.description?.includes(searchKeyWord) ||
+              link.url?.includes(searchKeyWord) ||
+              link.title?.includes(searchKeyWord)
+          )
+        );
+      }
+    };
     handleLoadFolder({ folderId, searchKeyWord });
   }, [folderId, searchKeyWord, data]);
 

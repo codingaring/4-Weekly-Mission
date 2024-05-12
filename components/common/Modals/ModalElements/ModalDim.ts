@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalDim = styled.div`
+export const ModalDim = styled.button`
   background-color: #000;
   opacity: 0.4;
   position: fixed;
