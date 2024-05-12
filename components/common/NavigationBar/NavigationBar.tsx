@@ -18,7 +18,9 @@ export const NavigationBar = () => {
   });
 
   useEffect(() => {
-    profile && handleUserDataState({ isLogin: true, userId: profile.id });
+    if (profile) {
+      handleUserDataState({ isLogin: true, userId: profile.id });
+    }
   }, [handleUserDataState, profile]);
 
   return (
