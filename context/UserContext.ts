@@ -3,7 +3,7 @@ import React from "react";
 export interface UserContextProp {
   loginData: {
     isLogin: boolean;
-    userId: string;
+    userId: number;
   };
   handleUserDataState: (
     newState: Partial<UserContextProp["loginData"]>
@@ -13,7 +13,7 @@ export interface UserContextProp {
 const InitialModalStateValue: UserContextProp = {
   loginData: {
     isLogin: false,
-    userId: "",
+    userId: 0,
   },
   handleUserDataState: () => {},
 };
