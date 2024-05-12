@@ -21,9 +21,9 @@ export function SignUpForm() {
     mode: "onBlur",
   });
 
-  const isConfirmPassword = async (insertEmail: { email: string }) => {
+  const isConfirmPassword = async (insertEmail: string) => {
     try {
-      await checkValidationEmail(insertEmail);
+      await checkValidationEmail({ email: insertEmail });
       return true;
     } catch {
       return "이미 사용 중인 이메일입니다.";
@@ -67,7 +67,7 @@ export function SignUpForm() {
             message: "올바른 이메일 주소가 아닙니다.",
           },
           validate: async (value) => {
-            const result = await isConfirmPassword({ email: value });
+            const result = await isConfirmPassword(value);
             return result;
           },
         })}
