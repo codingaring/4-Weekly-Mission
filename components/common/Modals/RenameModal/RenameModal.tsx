@@ -5,13 +5,14 @@ import { RenameFolderProps } from "../ModalProp";
 import { MouseEvent } from "react";
 import { useInputValue } from "@hooks/useInputValue";
 import { putRenameFolder } from "@data-access/axios/putRenameFolder";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function RenameModal({
   handleCloseModal,
   selectFolderId,
 }: RenameFolderProps) {
   const { insertValue, onChange } = useInputValue();
+  const queryClient = useQueryClient();
   const renameFolderMutation = useMutation({
     mutationFn: ({
       folderId,
@@ -20,6 +21,9 @@ export function RenameModal({
       folderId: number;
       folderTitle: string;
     }) => putRenameFolder({ folderId, folderTitle }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["folderList"] });
+    },
   });
 
   async function handleRenameFolder(event: MouseEvent<HTMLButtonElement>) {
