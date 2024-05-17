@@ -120,6 +120,8 @@ export function FolderContent({
               description={link.description}
               created_at={link.created_at}
               linkId={link.id}
+              favorite={link.favorite}
+              folderId={Number(folderId)}
             />
           ))
         ) : (

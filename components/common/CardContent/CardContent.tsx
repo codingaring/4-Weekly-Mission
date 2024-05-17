@@ -2,7 +2,7 @@ import { KebabMenu } from "@components/folder/KebabMenu/KebabMenu";
 import * as S from "./CardContentStyled";
 import Image from "next/image";
 import { usePortalContents } from "@hooks/usePortalContents";
-import { FolderListDataForm } from "@data-access/axios/getCategory";
+import { FolderListDataForm } from "@data-access/getCategory";
 
 interface CardContentProps {
   elapsedTime: string;

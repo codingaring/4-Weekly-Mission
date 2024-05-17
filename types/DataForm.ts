@@ -1,7 +1,5 @@
 //favorite, link, name, user_id
 
-import { FolderListDataForm } from "@data-access/axios/getCategory";
-
 //getFolders
 export interface getFolderDataForm {
   created_at: string;
@@ -62,6 +60,8 @@ export interface CardInfoDataForm {
   created_at: string;
   folderList: any;
   linkId: number;
+  favorite: boolean;
+  folderId: number;
 }
 
 // getLoginUserInfo

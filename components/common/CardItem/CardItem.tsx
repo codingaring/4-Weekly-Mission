@@ -15,6 +15,8 @@ export const CardItem = ({
   created_at,
   folderList,
   linkId,
+  favorite,
+  folderId,
 }: CardInfoDataForm) => {
   const [isHovered, setIsHovered] = useState(false);
   const location = useRouter();
@@ -28,7 +30,13 @@ export const CardItem = ({
       <a href={url} target="_blank" rel="noopener noreferrer">
         <Card onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
           <CardImage imageSource={image_source} isZoomedIn={isHovered} />
-          {currentLocation === "/folder" && <WishListButton />}
+          {currentLocation.includes("folder") && (
+            <WishListButton
+              folderId={folderId}
+              linkId={linkId}
+              isFavorite={favorite}
+            />
+          )}
           <CardContent
             elapsedTime={getElapsedTime(created_at)}
             description={description}
