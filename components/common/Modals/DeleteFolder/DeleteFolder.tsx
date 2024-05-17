@@ -2,7 +2,7 @@ import * as S from "./DeleteFolderStyled";
 import { ModalButtonRed } from "../ModalElements/ModalButtonRed";
 import { DeleteFolderProps } from "../ModalProp";
 import Modal from "../Modal";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteFolder } from "@data-access/axios/deleteFolder";
 import { MouseEvent } from "react";
 
@@ -11,9 +11,15 @@ export default function DeleteFolder({
   folderId,
   handleCloseModal,
 }: DeleteFolderProps) {
+  const queryClient = useQueryClient();
   const deleteFolderMutation = useMutation({
     mutationFn: ({ folderId }: { folderId: number | string }) =>
       deleteFolder({ folderId }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["folderList"],
+      });
+    },
   });
 
   const handleDeleteFolder = (event: MouseEvent<HTMLButtonElement>) => {
