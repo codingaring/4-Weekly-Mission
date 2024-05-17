@@ -2,7 +2,7 @@ import * as S from "./AddToFolderStyled";
 import Modal from "../Modal";
 import { AddToFolderProps } from "../ModalProp";
 import { PrimaryButton } from "@styles/common/PrimaryButton";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postAddToFolder } from "@data-access/axios/postAddToFolder";
 import { MouseEvent, useState } from "react";
 
@@ -10,11 +10,18 @@ export function AddToFolder({
   linkURL,
   folderList,
   handleCloseModal,
+  handleReset,
 }: AddToFolderProps) {
   const [selectFolderId, setSelectFolderId] = useState<number>();
+  const queryClient = useQueryClient();
   const addToFolderMutation = useMutation({
     mutationFn: ({ url, folderId }: { url: string; folderId: number }) =>
       postAddToFolder({ url, folderId }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [`folderContents-${selectFolderId}`],
+      });
+    },
   });
 
   const handleFolderId = (event: MouseEvent<HTMLButtonElement>) => {
@@ -24,6 +31,8 @@ export function AddToFolder({
   const handleAddToFolder = async (event: MouseEvent<HTMLButtonElement>) => {
     if (linkURL && selectFolderId) {
       addToFolderMutation.mutate({ url: linkURL, folderId: selectFolderId });
+      handleCloseModal(event);
+      handleReset();
     }
   };
 

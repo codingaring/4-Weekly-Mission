@@ -41,7 +41,7 @@ export function FolderContent({
   const searchKeyWord = useRecoilValue(searchState);
   const router = useRouter();
   const addFolderModal = usePortalContents();
-  const { data } = useQuery({
+  const { data: folderContents } = useQuery({
     queryKey: [`folderContents-${folderId}`],
     queryFn: () => getFolders({ folderId: Number(folderId) }),
   });
@@ -56,8 +56,8 @@ export function FolderContent({
 
   useEffect(() => {
     const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
-      if (data) {
-        setFolder(data);
+      if (folderContents) {
+        setFolder(folderContents);
       }
 
       if (searchKeyWord) {
@@ -72,7 +72,7 @@ export function FolderContent({
       }
     };
     handleLoadFolder({ folderId, searchKeyWord });
-  }, [folderId, searchKeyWord, data]);
+  }, [folderId, searchKeyWord, folderContents]);
 
   return (
     <>

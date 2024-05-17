@@ -7,5 +7,9 @@ export function useInputValue() {
     setInsertValue(e.target.value);
   };
 
-  return { insertValue, onChange: handleChange };
+  const handleReset = () => {
+    setInsertValue("");
+  };
+
+  return { insertValue, onChange: handleChange, handleReset };
 }
