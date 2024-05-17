@@ -7,6 +7,7 @@ export const CardListContainer = styled.div`
   width: 100%;
   max-width: 106rem;
   row-gap: 2rem;
+  min-height: 10rem;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fill, 34rem);
