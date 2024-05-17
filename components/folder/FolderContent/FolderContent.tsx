@@ -83,7 +83,7 @@ export function FolderContent({
 
       <S.ClassificationContainer>
         <S.ClassificationButtons>
-          <Button onClick={handleCategoryActive} id={null} value="전체">
+          <Button onClick={handleCategoryActive} value="전체">
             전체
           </Button>
           {folderInfo &&
