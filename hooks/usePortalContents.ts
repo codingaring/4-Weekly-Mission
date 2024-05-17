@@ -5,7 +5,7 @@ export function usePortalContents() {
 
   function toggleContents(event: MouseEvent<HTMLElement>) {
     event.preventDefault();
-    setIsOpenContents(!isOpenContents);
+    setIsOpenContents((prevIsOpenContents) => !isOpenContents);
   }
 
   return { isOpenModal: isOpenContents, toggleContents };
