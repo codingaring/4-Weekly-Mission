@@ -4,7 +4,7 @@ import { ModalInput } from "../ModalElements/ModalInput";
 import { RenameFolderProps } from "../ModalProp";
 import { MouseEvent } from "react";
 import { useInputValue } from "@hooks/useInputValue";
-import { putRenameFolder } from "@data-access/axios/putRenameFolder";
+import { putRenameFolder } from "@data-access/putRenameFolder";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function RenameModal({

@@ -3,8 +3,8 @@ import { ModalButtonRed } from "../ModalElements/ModalButtonRed";
 import { DeleteFolderProps } from "../ModalProp";
 import Modal from "../Modal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteFolder } from "@data-access/axios/deleteFolder";
 import { MouseEvent } from "react";
+import { deleteFolder } from "@data-access/deleteFolder";
 
 export default function DeleteFolder({
   selectFolder,

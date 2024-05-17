@@ -3,7 +3,7 @@ import * as S from "./DeleteLinkStyled";
 import { DeleteLinkProps } from "../ModalProp";
 import Modal from "../Modal";
 import { useMutation } from "@tanstack/react-query";
-import { deleteLink } from "@data-access/axios/deleteLink";
+import { deleteLink } from "@data-access/deleteLink";
 import { MouseEvent } from "react";
 
 export default function DeleteLink({

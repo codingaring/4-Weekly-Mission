@@ -3,8 +3,8 @@ import Modal from "../Modal";
 import { AddToFolderProps } from "../ModalProp";
 import { PrimaryButton } from "@styles/common/PrimaryButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postAddToFolder } from "@data-access/axios/postAddToFolder";
 import { MouseEvent, useState } from "react";
+import { postAddToFolder } from "@data-access/postAddToFolder";
 
 export function AddToFolder({
   linkURL,
