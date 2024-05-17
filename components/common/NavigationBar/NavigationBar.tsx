@@ -10,7 +10,6 @@ import { UserContext } from "context/UserContext";
 
 export const NavigationBar = () => {
   const { handleUserDataState } = useContext(UserContext);
-  const router = useRouter();
   const [profile, setProfile] = useState({
     auth_id: "",
     email: "",
@@ -30,7 +29,7 @@ export const NavigationBar = () => {
       });
       handleUserDataState({ userId: auth_id });
     } catch (error) {
-      router.push("/signin");
+      console.error(Error);
     }
   }
 

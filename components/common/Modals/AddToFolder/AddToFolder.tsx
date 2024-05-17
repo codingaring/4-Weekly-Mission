@@ -14,7 +14,7 @@ export function AddToFolder({
   const [selectFolderId, setSelectFolderId] = useState<number>();
   const addToFolderMutation = useMutation({
     mutationFn: ({ url, folderId }: { url: string; folderId: number }) =>
-      postAddToFolder({ url: url, folderId: folderId }),
+      postAddToFolder({ url, folderId }),
   });
 
   const handleFolderId = (event: MouseEvent<HTMLButtonElement>) => {
