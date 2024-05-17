@@ -1,7 +1,6 @@
 import * as S from "./FolderContentStyled";
 import { useEffect, useState, MouseEvent } from "react";
 import { CategoryNav } from "../CategoryNav/CategoryNav";
-import { getFolderDataForm } from "../../../types/DataForm";
 import { useRecoilValue } from "recoil";
 import { searchState } from "recoil/SearchKeyWord";
 import { getFolders } from "@data-access/axios/getFolders";
@@ -34,7 +33,7 @@ interface FolderContents {
 export function FolderContent({
   folderInfo,
 }: {
-  folderInfo: FolderListDataForm[];
+  folderInfo: FolderListDataForm[] | undefined;
 }) {
   const [folder, setFolder] = useState<FolderContents[]>([]);
   const [folderId, setFolderId] = useState("");
@@ -42,27 +41,10 @@ export function FolderContent({
   const searchKeyWord = useRecoilValue(searchState);
   const router = useRouter();
   const addFolderModal = usePortalContents();
-  const { data, isSuccess } = useQuery({
-    queryKey: ["folderContents", folderId],
+  const { data } = useQuery({
+    queryKey: [`folderContents-${folderId}`],
     queryFn: () => getFolders({ folderId: Number(folderId) }),
   });
-
-  const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
-    if (isSuccess) {
-      setFolder(data);
-    }
-
-    if (searchKeyWord) {
-      setFolder((prevFolder) =>
-        prevFolder.filter(
-          (link) =>
-            link.description?.includes(searchKeyWord) ||
-            link.url?.includes(searchKeyWord) ||
-            link.title?.includes(searchKeyWord)
-        )
-      );
-    }
-  };
 
   const handleCategoryActive = (e: MouseEvent<HTMLButtonElement>) => {
     setActiveCategoryName(e.currentTarget.value);
@@ -73,8 +55,24 @@ export function FolderContent({
   };
 
   useEffect(() => {
+    const handleLoadFolder = async ({ searchKeyWord }: LoadFolderDataProps) => {
+      if (data) {
+        setFolder(data);
+      }
+
+      if (searchKeyWord) {
+        setFolder((prevFolder) =>
+          prevFolder.filter(
+            (link) =>
+              link.description?.includes(searchKeyWord) ||
+              link.url?.includes(searchKeyWord) ||
+              link.title?.includes(searchKeyWord)
+          )
+        );
+      }
+    };
     handleLoadFolder({ folderId, searchKeyWord });
-  }, [folderId, searchKeyWord]);
+  }, [folderId, searchKeyWord, data]);
 
   return (
     <>
@@ -85,7 +83,7 @@ export function FolderContent({
 
       <S.ClassificationContainer>
         <S.ClassificationButtons>
-          <Button onClick={handleCategoryActive} id="" value="전체">
+          <Button onClick={handleCategoryActive} id={null} value="전체">
             전체
           </Button>
           {folderInfo &&
@@ -93,7 +91,7 @@ export function FolderContent({
               <Button
                 onClick={handleCategoryActive}
                 value={category.name}
-                id={category.id as string}
+                id={category.id}
                 key={category.id}
               >
                 {category.name}
@@ -111,22 +109,23 @@ export function FolderContent({
         activeCategoryName={activeCategoryName}
         folderId={folderId}
       />
-      {!folder ? (
-        <EmptyLink />
-      ) : (
-        <CardList>
-          {folder?.map((link) => (
+      <CardList>
+        {folder && folder.length !== 0 ? (
+          folder.map((link) => (
             <CardItem
               folderList={folderInfo}
-              key={link?.id}
+              key={link.id}
               url={link.url}
               image_source={link.image_source}
               description={link.description}
               created_at={link.created_at}
+              linkId={link.id}
             />
-          ))}
-        </CardList>
-      )}
+          ))
+        ) : (
+          <EmptyLink />
+        )}
+      </CardList>
     </>
   );
 }

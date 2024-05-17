@@ -7,7 +7,7 @@ export async function postAddToFolder({
   url: string;
   folderId: number;
 }) {
-  const response = await axiosInstance.post(`/linkbrary/1v/links`, {
+  const response = await axiosInstance.post(`/linkbrary/v1/links`, {
     url: url,
     folderId: folderId,
   });

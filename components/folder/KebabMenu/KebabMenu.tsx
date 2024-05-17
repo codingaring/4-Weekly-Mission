@@ -7,9 +7,10 @@ import { FolderListDataForm } from "@data-access/axios/getCategory";
 interface KebabProps {
   selectURL: string;
   folderList: FolderListDataForm[];
+  linkId: number;
 }
 
-export function KebabMenu({ selectURL, folderList }: KebabProps) {
+export function KebabMenu({ selectURL, folderList, linkId }: KebabProps) {
   const deleteLinkModal = usePortalContents();
   const addToFolderModal = usePortalContents();
 
@@ -19,6 +20,7 @@ export function KebabMenu({ selectURL, folderList }: KebabProps) {
         <DeleteLink
           deleteURL={selectURL}
           handleCloseModal={deleteLinkModal.toggleContents}
+          linkId={linkId}
         />
       )}
       {addToFolderModal.isOpenModal && (
@@ -32,14 +34,12 @@ export function KebabMenu({ selectURL, folderList }: KebabProps) {
         <S.CardContentKebabMenuDelete
           type="button"
           onClick={deleteLinkModal.toggleContents}
-          id="deleteLink"
         >
           삭제하기
         </S.CardContentKebabMenuDelete>
         <S.CardContentKebabMenuDelete
           type="button"
           onClick={addToFolderModal.toggleContents}
-          id="addToFolder"
         >
           폴더에 추가
         </S.CardContentKebabMenuDelete>

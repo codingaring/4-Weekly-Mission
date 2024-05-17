@@ -7,10 +7,12 @@ export interface BaseModalProps {
 
 export interface DeleteLinkProps extends BaseModalProps {
   deleteURL: string;
+  linkId: number;
 }
 
 export interface DeleteFolderProps extends BaseModalProps {
   selectFolder: string;
+  folderId: number;
 }
 
 export interface ModalProps extends BaseModalProps {
@@ -25,4 +27,8 @@ export interface AddToFolderProps extends BaseModalProps {
 
 export interface RenameFolderProps extends BaseModalProps {
   selectFolderId: number;
+}
+
+export interface SharedFolderProps extends BaseModalProps {
+  selectFolder: string;
 }

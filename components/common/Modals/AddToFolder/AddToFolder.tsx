@@ -23,8 +23,6 @@ export function AddToFolder({
 
   const handleAddToFolder = async (event: MouseEvent<HTMLButtonElement>) => {
     if (linkURL && selectFolderId) {
-      console.log(linkURL);
-      console.log(selectFolderId);
       addToFolderMutation.mutate({ url: linkURL, folderId: selectFolderId });
     }
   };
@@ -40,7 +38,7 @@ export function AddToFolder({
             onClick={handleFolderId}
           >
             <S.FolderName>{folder.name}</S.FolderName>
-            <S.FolderCount>{folder.link.count}개 링크</S.FolderCount>
+            <S.FolderCount>{folder.link_count}개 링크</S.FolderCount>
             <S.SelectFolderIcon />
           </S.SelectFolder>
         ))}

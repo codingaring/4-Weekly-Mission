@@ -1,32 +1,21 @@
 import { BASE_URL } from "./BASE_URL";
+import { axiosInstance } from "./axios/axiosInstance";
 
 export async function checkSignup(trySignUpValue: {
   email: string;
   password: string;
 }) {
-  const response = await fetch(`${BASE_URL}sign-up`, {
-    method: "POST",
-    body: JSON.stringify(trySignUpValue),
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const response = await axiosInstance.post(`/linkbrary/v1/auth/sign-up`, {
+    email: trySignUpValue.email,
+    password: trySignUpValue.password,
   });
-
-  if (!response.ok) {
-    throw new Error("회원가입에 실패했습니다.");
-  }
+  return response.data;
 }
 
-export async function checkValidationEmail(insertEmail: { email: string }) {
-  const response = await fetch(`${BASE_URL}check-email`, {
-    method: "POST",
-    body: JSON.stringify(insertEmail),
-    headers: {
-      "Content-Type": "application/json",
-    },
+export async function checkValidationEmail({ email }: { email: string }) {
+  const response = await axiosInstance.post(`/linkbrary/v1/users/check-email`, {
+    email: email,
   });
 
-  if (!response.ok) {
-    throw new Error("이메일 중복 여부를 확인에 실패했습니다.");
-  }
+  return response.data;
 }

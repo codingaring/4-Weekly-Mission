@@ -3,10 +3,10 @@ import { Profile } from "./Profile";
 import { LOGO_IMAGE, TEXT } from "./constant";
 import { useRouter } from "next/router";
 import { ROUTE } from "@util/constant";
-import { useEffectOnce } from "@hooks/useEffectOnce";
 import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "context/UserContext";
+import { useQuery } from "@tanstack/react-query";
 
 interface ProfileState {
   auth_id: string;
@@ -16,10 +16,18 @@ interface ProfileState {
 
 export const NavigationBar = () => {
   const { handleUserDataState } = useContext(UserContext);
+<<<<<<< HEAD
   const [profile, setProfile] = useState<ProfileState>();
+=======
+>>>>>>> a23006954a5f04461317edcce92949be866d067c
   const Location = useRouter();
   const LocationPath = Location.pathname;
+  const { data: profile } = useQuery({
+    queryKey: ["loginUserProfile"],
+    queryFn: getLoginUserInfo,
+  });
 
+<<<<<<< HEAD
   async function handleLoadUserInfo() {
     try {
       const { data } = await getLoginUserInfo();
@@ -32,10 +40,13 @@ export const NavigationBar = () => {
       handleUserDataState({ userId: auth_id });
     } catch (error) {
       console.error(Error);
+=======
+  useEffect(() => {
+    if (profile) {
+      handleUserDataState({ isLogin: true, userId: profile.id });
+>>>>>>> a23006954a5f04461317edcce92949be866d067c
     }
-  }
-
-  useEffectOnce(handleLoadUserInfo);
+  }, [handleUserDataState, profile]);
 
   return (
     <S.NavigationBarContainer pathName={LocationPath}>

@@ -9,7 +9,7 @@ const FolderHeader = forwardRef(
     {
       folderInfo,
       isFloating,
-    }: { folderInfo: FolderListDataForm[]; isFloating: boolean },
+    }: { folderInfo: FolderListDataForm[] | undefined; isFloating: boolean },
     ref
   ) => {
     return (

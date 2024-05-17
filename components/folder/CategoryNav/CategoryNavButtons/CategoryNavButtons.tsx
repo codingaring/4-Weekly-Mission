@@ -33,6 +33,7 @@ export function CategoryNavButtons({
       )}
       {deleteFolderModal.isOpenModal && (
         <DeleteFolder
+          folderId={Number(folderId)}
           selectFolder={selectFolder}
           handleCloseModal={deleteFolderModal.toggleContents}
         />

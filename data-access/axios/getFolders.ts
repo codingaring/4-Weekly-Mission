@@ -1,6 +1,6 @@
 import { axiosInstance } from "./axiosInstance";
 
-interface FolderContents {
+export interface FolderContentsDataForm {
   id: number;
   favorite: boolean;
   created_at: string;
@@ -10,7 +10,11 @@ interface FolderContents {
   description: string;
 }
 
-export async function getFolders({ folderId }: { folderId?: number }) {
+export async function getFolders({
+  folderId,
+}: {
+  folderId: number;
+}): Promise<FolderContentsDataForm[]> {
   const query = folderId ? `/folders/${folderId}` : "";
 
   const response = await axiosInstance.get(`/linkbrary/v1${query}/links`);

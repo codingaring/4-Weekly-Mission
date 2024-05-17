@@ -12,6 +12,7 @@ interface CardContentProps {
   currentLocation: string;
   selectURL: string;
   folderList: FolderListDataForm[];
+  linkId: number;
 }
 
 export const CardContent = ({
@@ -22,6 +23,7 @@ export const CardContent = ({
   currentLocation,
   selectURL,
   folderList,
+  linkId,
 }: CardContentProps) => {
   const kebabMenu = usePortalContents();
 
@@ -35,7 +37,11 @@ export const CardContent = ({
           </S.KebabButton>
         )}
         {kebabMenu.isOpenModal && (
-          <KebabMenu folderList={folderList} selectURL={selectURL} />
+          <KebabMenu
+            folderList={folderList}
+            selectURL={selectURL}
+            linkId={linkId}
+          />
         )}
       </>
 
