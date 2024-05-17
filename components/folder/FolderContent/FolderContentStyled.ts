@@ -5,10 +5,18 @@ export const ClassificationContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const ClassificationButtons = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  max-width: 97rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  cursor: grab;
+  use-select: none;
+  scrollbar-width: thin;
+  padding-bottom: 0.5rem;
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
@@ -16,6 +24,7 @@ export const ClassificationButtons = styled.div`
     flex-wrap: wrap;
   }
 `;
+
 export const AddFolderButton = styled.button`
   line-height: 1.909rem;
   text-align: center;
