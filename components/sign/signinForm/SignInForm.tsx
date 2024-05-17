@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../constant";
 import * as S from "../SignFormStyled";
 import { useEffectOnce } from "@hooks/useEffectOnce";
+import { getToken, removeToken } from "@util/handleToken";
 
 interface IFormInput {
   email: string;
@@ -41,8 +42,7 @@ export function SignForm() {
   };
 
   function hasAccessToken() {
-    const localStorageToken = localStorage.getItem("accessToken");
-    if (localStorageToken === null) {
+    if (getToken()) {
       return;
     } else {
       router.push("/folder");

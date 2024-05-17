@@ -44,7 +44,7 @@ export function SignUpForm() {
 
     try {
       await checkSignup(insertValue);
-      router.push("/folder");
+      router.push("/signin");
     } catch {
       return;
     }
