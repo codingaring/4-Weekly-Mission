@@ -8,13 +8,15 @@ import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
 import { useContext, useState } from "react";
 import { UserContext } from "context/UserContext";
 
+interface ProfileState {
+  auth_id: string;
+  email: string;
+  image_source: string;
+}
+
 export const NavigationBar = () => {
   const { handleUserDataState } = useContext(UserContext);
-  const [profile, setProfile] = useState({
-    auth_id: "",
-    email: "",
-    image_source: "",
-  });
+  const [profile, setProfile] = useState<ProfileState>();
   const Location = useRouter();
   const LocationPath = Location.pathname;
 
