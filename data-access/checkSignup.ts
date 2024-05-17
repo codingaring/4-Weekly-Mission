@@ -1,4 +1,3 @@
-import { BASE_URL } from "./BASE_URL";
 import { axiosInstance } from "./axios/axiosInstance";
 
 export async function checkSignup(trySignUpValue: {

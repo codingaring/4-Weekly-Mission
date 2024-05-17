@@ -2,10 +2,10 @@ import { ModalInput } from "../ModalElements/ModalInput";
 import Modal from "../Modal";
 import { BaseModalProps } from "../ModalProp";
 import { PrimaryButton } from "@styles/common/PrimaryButton";
-import { postNewFolder } from "@data-access/axios/postNewFolder";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useInputValue } from "@hooks/useInputValue";
 import { MouseEvent } from "react";
+import { postNewFolder } from "@data-access/postNewFolder";
 
 export function AddFolder({ handleCloseModal }: BaseModalProps) {
   const { insertValue, onChange } = useInputValue();

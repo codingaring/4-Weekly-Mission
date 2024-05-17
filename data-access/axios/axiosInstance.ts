@@ -34,7 +34,7 @@ axios.interceptors.response.use(
 
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return axios(originalRequest);
-      } catch (error) {
+      } catch (error: any) {
         console.log("회원 정보 인증에 실패했습니다.");
       }
     }

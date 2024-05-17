@@ -3,17 +3,17 @@ import { useEffect, useState, MouseEvent } from "react";
 import { CategoryNav } from "../CategoryNav/CategoryNav";
 import { useRecoilValue } from "recoil";
 import { searchState } from "recoil/SearchKeyWord";
-import { getFolders } from "@data-access/axios/getFolders";
 import { SearchResultComment } from "@components/common/SearchResultComment";
 import { Button } from "../CategoryButton/CategoryButtonStyled";
 import { EmptyLink } from "@components/common/EmptyLink";
 import { CardList } from "@components/common/CardList";
 import { CardItem } from "@components/common/CardItem";
 import { useRouter } from "next/router";
-import { FolderListDataForm } from "@data-access/axios/getCategory";
 import { usePortalContents } from "@hooks/usePortalContents";
 import { AddFolder } from "@components/common/Modals/AddFolder";
 import { useQuery } from "@tanstack/react-query";
+import { getFolders } from "@data-access/getFolders";
+import { FolderListDataForm } from "@data-access/getCategory";
 
 interface LoadFolderDataProps {
   folderId: string;

@@ -1,8 +1,19 @@
-import { BASE_URL } from "./BASE_URL";
+import { axiosInstance } from "./axios/axiosInstance";
 
-// export async function getFolderInfo(folderId: string | string[] | undefined) {
-//   const response = await fetch(`${BASE_URL}folders/${folderId}`);
-//   const result = await response.json();
+interface FolderInfo {
+  id: number;
+  created_at: string;
+  favorite: boolean;
+  name: string;
+  user_id: number;
+}
 
-//   return result;
-// }
+export async function getFolderInfo({
+  folderId,
+}: {
+  folderId?: any;
+}): Promise<FolderInfo> {
+  const response = await axiosInstance.get(`/linkbrary/v1/folders/${folderId}`);
+
+  return response.data[0];
+}

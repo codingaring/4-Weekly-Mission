@@ -1,8 +1,18 @@
-import { BASE_URL } from "./BASE_URL";
+import { axiosInstance } from "./axios/axiosInstance";
 
-// export async function getUserProfile(userId: string) {
-//   const response = await fetch(`${BASE_URL}users/${userId}`);
-//   const result = response.json();
+interface FolderOwnerProfile {
+  id: number;
+  created_at: string;
+  name: string;
+  image_source: string;
+  email: string;
+}
 
-//   return result;
-// }
+export async function getUserProfile({
+  userId,
+}: {
+  userId: any;
+}): Promise<FolderOwnerProfile> {
+  const response = await axiosInstance.get(`/linkbrary/v1/users/${userId}`);
+  return response.data[0];
+}

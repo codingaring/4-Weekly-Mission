@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
 import * as S from "../../styles/pages/FolderStyled";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
-import {
-  FolderListDataForm,
-  getCategory,
-} from "@data-access/axios/getCategory";
 import FolderHeader from "@components/folder/FolderHeader";
 import { FolderContent } from "@components/folder/FolderContent/FolderContent";
 import Footer from "@components/common/Footer";
 import { SearchBar } from "@components/common/SearchBar";
 import { useQuery } from "@tanstack/react-query";
+import { getCategory } from "@data-access/getCategory";
 
 function Folder() {
   const { isVisible: isHeaderVisible, targetRef: headerRef } =
