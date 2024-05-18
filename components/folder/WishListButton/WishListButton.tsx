@@ -3,6 +3,13 @@ import { EMPTY_STAR, FULL_STAR } from "./constant";
 import * as S from "./WishListButtonStyled";
 import { MouseEvent } from "react";
 import Image from "next/image";
+import { useMutation } from "@tanstack/react-query";
+import { putBookmark } from "@data-access/putBookmark";
+
+interface WishListButtonProp {
+  wishListBtn: string;
+  isFavorite: boolean;
+}
 
 export default function WishListButton({
   linkId,
@@ -13,20 +20,39 @@ export default function WishListButton({
   isFavorite: boolean;
   folderId: number;
 }) {
-  const [wishListBtn, setWishListBtn] = useState(EMPTY_STAR);
+  const [wishListState, setWishListState] = useState<WishListButtonProp>({
+    wishListBtn: EMPTY_STAR,
+    isFavorite: false,
+  });
+  const wishListMutation = useMutation({
+    mutationFn: async ({
+      linkId,
+      isFavorite,
+    }: {
+      linkId: number;
+      isFavorite: boolean;
+    }) => {
+      await putBookmark({ linkId, isFavorite });
+    },
+  });
 
   const handleWishListBtn = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    wishListBtn === EMPTY_STAR
-      ? setWishListBtn(FULL_STAR)
-      : setWishListBtn(EMPTY_STAR);
-    console.log(isFavorite);
+    setWishListState((prevState) => ({
+      wishListBtn: prevState.isFavorite ? FULL_STAR : EMPTY_STAR,
+      isFavorite: !prevState.isFavorite,
+    }));
+    wishListMutation.mutate({ linkId, isFavorite: wishListState.isFavorite });
   };
 
   return (
     <S.WishListButtonContainer onClick={handleWishListBtn} id={linkId}>
-      <Image fill src={wishListBtn} alt="즐겨찾기로 추가하기 버튼" />
+      <Image
+        fill
+        src={wishListState.wishListBtn}
+        alt="즐겨찾기로 추가하기 버튼"
+      />
     </S.WishListButtonContainer>
   );
 }
