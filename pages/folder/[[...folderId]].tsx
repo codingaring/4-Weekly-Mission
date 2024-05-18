@@ -12,7 +12,7 @@ function Folder() {
     useIntersectionObserver();
   const { isVisible: isFooterVisible, targetRef: footerRef } =
     useIntersectionObserver();
-  const { data } = useQuery({
+  const { data: folderNameList } = useQuery({
     queryKey: ["folderList"],
     queryFn: getCategory,
   });
@@ -22,13 +22,13 @@ function Folder() {
   return (
     <>
       <FolderHeader
-        folderInfo={data}
+        folderInfo={folderNameList}
         ref={headerRef}
         isFloating={floatingState}
       />
       <S.ItemsContainer>
         <SearchBar />
-        <FolderContent folderInfo={data} />
+        <FolderContent folderInfo={folderNameList} />
       </S.ItemsContainer>
       <Footer ref={footerRef} />
     </>
