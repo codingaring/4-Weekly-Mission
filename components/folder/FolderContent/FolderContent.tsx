@@ -83,12 +83,17 @@ export function FolderContent({
 
       <S.ClassificationContainer>
         <S.ClassificationButtons>
-          <Button onClick={handleCategoryActive} value="전체">
+          <Button
+            isSelectCategory={activeCategoryName === "전체"}
+            onClick={handleCategoryActive}
+            value="전체"
+          >
             전체
           </Button>
           {folderInfo &&
             folderInfo.map((category) => (
               <Button
+                isSelectCategory={activeCategoryName === category.name}
                 onClick={handleCategoryActive}
                 value={category.name}
                 id={category.id}

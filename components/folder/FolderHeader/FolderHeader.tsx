@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import * as S from "./FolderHeaderStyled";
 import { NavigationBar } from "@components/common/NavigationBar";
 import { AddLinkBar } from "@components/shared/AddLinkBar/AddLinkBar";
-import { FolderListDataForm } from "@data-access/axios/getCategory";
+import { FolderListDataForm } from "@data-access/getCategory";
 
 const FolderHeader = forwardRef(
   (
