@@ -13,17 +13,15 @@ export const FolderListContainer = styled.div`
   overflow: hidden scroll;
 `;
 
-export const SelectFolder = styled.button`
+export const SelectFolder = styled.button<{ isSelect: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding: 0.8rem;
   gap: 0.8rem;
-
-  &:hover {
-    background-color: var(--light-blue);
-  }
+  background-color: ${({ isSelect }) =>
+    isSelect ? "var(--light-blue)" : "transparent"};
 `;
 
 export const SelectLink = styled.p`
