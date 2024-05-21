@@ -7,13 +7,12 @@ import Footer from "@components/common/Footer";
 import { NavigationBar } from "@components/common/NavigationBar";
 import { EmptyLink } from "@components/common/EmptyLink";
 import { useQuery } from "@tanstack/react-query";
-import { getFolderInfo } from "@data-access/axios/getFolderInfo";
-import { getUserProfile } from "@data-access/axios/getUserProfile";
-import { getFolders } from "@data-access/axios/getFolders";
-import { getCategory } from "@data-access/axios/getCategory";
 import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
 import { DEFAULT_IMAGE } from "@components/common/CardImage/constant";
-import { FolderContentsDataForm } from "@data-access/axios/getFolders";
+import { getFolderInfo } from "@data-access/getFolderInfo";
+import { getUserProfile } from "@data-access/getUserProfile";
+import { FolderContentsDataForm, getFolders } from "@data-access/getFolders";
+import { getCategory } from "@data-access/getCategory";
 
 function Shared() {
   const router = useRouter();
@@ -56,7 +55,9 @@ function Shared() {
             <CardList>
               {linksData?.map((link: FolderContentsDataForm) => (
                 <CardItem
-                  linkId={link.id}
+                  folderId={link.id}
+                  favorite={link.favorite}
+                  linkId={Number(link.id)}
                   folderList={folderList}
                   url={link.url}
                   image_source={link.image_source}
