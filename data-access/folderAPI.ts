@@ -25,14 +25,14 @@ interface PutRenameFolder {
 export function folderAPI() {
   const folderAPI = "/folders";
 
-  async function getFolders({ folderId }: { folderId: number }) {
-    const baseHttp = createHttpClient();
-    const query = folderId ? `/folders/${folderId}` : "";
-    const response = await baseHttp.get<FolderContentsDataForm[]>(
-      `${folderAPI}${query}/links`
-    );
-    return response;
-  }
+  // async function getFolders({ folderId }: { folderId: number }) {
+  //   const baseHttp = createHttpClient();
+  //   const query = folderId ? `/folders/${folderId}` : "";
+  //   const response = await baseHttp.get<FolderContentsDataForm[]>(
+  //     `${folderAPI}${query}/links`
+  //   );
+  //   return response;
+  // }
 
   // async function deleteFolder({ folderId }: { folderId: number }) {
   //   const baseHttp = createHttpClient();
