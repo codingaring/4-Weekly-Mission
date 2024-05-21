@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios/axiosInstance";
+import { createHttpClient } from "./createHttpClient";
 
 export interface FolderContentsDataForm {
   id: number;
@@ -10,14 +10,11 @@ export interface FolderContentsDataForm {
   description: string;
 }
 
-export async function getFolders({
-  folderId,
-}: {
-  folderId: number;
-}): Promise<FolderContentsDataForm[]> {
+export async function getFolders({ folderId }: { folderId: number }) {
+  const baseHttp = createHttpClient();
   const query = folderId ? `/folders/${folderId}` : "";
-
-  const response = await axiosInstance.get(`/linkbrary/v1${query}/links`);
-
-  return response.data;
+  const response = await baseHttp.get<FolderContentsDataForm[]>(
+    `/linkbrary/v1${query}/links`
+  );
+  return response;
 }
