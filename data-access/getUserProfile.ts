@@ -13,6 +13,6 @@ export async function getUserProfile({
 }: {
   userId: any;
 }): Promise<FolderOwnerProfile> {
-  const response = await axiosInstance.get(`/linkbrary/v1/users/${userId}`);
+  const response = await axiosInstance.get(`/users/${userId}`);
   return response.data[0];
 }

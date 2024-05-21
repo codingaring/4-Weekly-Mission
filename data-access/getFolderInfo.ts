@@ -13,7 +13,7 @@ export async function getFolderInfo({
 }: {
   folderId?: any;
 }): Promise<FolderInfo> {
-  const response = await axiosInstance.get(`/linkbrary/v1/folders/${folderId}`);
+  const response = await axiosInstance.get(`/folders/${folderId}`);
 
   return response.data[0];
 }

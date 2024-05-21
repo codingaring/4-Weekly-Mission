@@ -12,7 +12,7 @@ export async function postNewFolder({
 }: {
   folderName: string;
 }): Promise<createNewFolder[]> {
-  const response = await axiosInstance.post(`/linkbrary/v1/folders`, {
+  const response = await axiosInstance.post(`/folders`, {
     name: folderName,
   });
 

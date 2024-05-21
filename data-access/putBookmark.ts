@@ -14,7 +14,7 @@ export async function putBookmark({
   linkId: number;
   isFavorite: boolean;
 }): Promise<PutBookmarkRequest> {
-  const response = await axiosInstance.put(`/linkbrary/v1/links/${linkId}`, {
+  const response = await axiosInstance.put(`/links/${linkId}`, {
     favorite: isFavorite,
   });
 

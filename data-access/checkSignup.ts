@@ -4,7 +4,7 @@ export async function checkSignup(trySignUpValue: {
   email: string;
   password: string;
 }) {
-  const response = await axiosInstance.post(`/linkbrary/v1/auth/sign-up`, {
+  const response = await axiosInstance.post(`/auth/sign-up`, {
     email: trySignUpValue.email,
     password: trySignUpValue.password,
   });
@@ -12,7 +12,7 @@ export async function checkSignup(trySignUpValue: {
 }
 
 export async function checkValidationEmail({ email }: { email: string }) {
-  const response = await axiosInstance.post(`/linkbrary/v1/users/check-email`, {
+  const response = await axiosInstance.post(`/users/check-email`, {
     email: email,
   });
 

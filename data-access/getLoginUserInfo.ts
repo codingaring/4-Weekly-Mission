@@ -8,7 +8,7 @@ interface loginUserProfile {
 }
 
 export async function getLoginUserInfo(): Promise<loginUserProfile> {
-  const response = await axiosInstance.get(`/linkbrary/v1/users`);
+  const response = await axiosInstance.get(`/users`);
 
   return response.data[0];
 }

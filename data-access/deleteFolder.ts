@@ -5,9 +5,7 @@ export async function deleteFolder({
 }: {
   folderId: number | string;
 }) {
-  const response = await axiosInstance.delete(
-    `/linkbrary/v1/folders/${folderId}`
-  );
+  const response = await axiosInstance.delete(`/folders/${folderId}`);
 
   return response.status;
 }

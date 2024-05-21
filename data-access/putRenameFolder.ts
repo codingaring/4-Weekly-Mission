@@ -15,10 +15,9 @@ export async function putRenameFolder({
   folderId: number;
   folderTitle: string;
 }): Promise<PutRenameFolder> {
-  const response = await axiosInstance.put(
-    `/linkbrary/v1/folders/${folderId}`,
-    { name: folderTitle }
-  );
+  const response = await axiosInstance.put(`/folders/${folderId}`, {
+    name: folderTitle,
+  });
 
   return response.data;
 }
