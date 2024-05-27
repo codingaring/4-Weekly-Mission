@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as S from "../SignFormStyled";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constant";
-import { useMutation } from "@tanstack/react-query";
 
 interface IFormInput {
   email: string;
