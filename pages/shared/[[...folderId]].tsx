@@ -10,9 +10,9 @@ import { useQuery } from "@tanstack/react-query";
 import FolderInfo from "@components/shared/AddLinkBar/FolderInfo";
 import { DEFAULT_IMAGE } from "@components/common/CardImage/constant";
 import { getFolderInfo } from "@data-access/getFolderInfo";
-import { getUserProfile } from "@data-access/getUserProfile";
 import { FolderContentsDataForm, getFolders } from "@data-access/getFolders";
 import { getCategory } from "@data-access/getCategory";
+import { authAPI } from "@data-access/authAPI";
 
 function Shared() {
   const router = useRouter();
@@ -26,7 +26,7 @@ function Shared() {
   const userId = folderInfo && folderInfo?.user_id;
   const { data: folderOwnerInfo } = useQuery({
     queryKey: [`ownerProfile-${userId}`],
-    queryFn: () => getUserProfile({ userId: userId }),
+    queryFn: () => authAPI.getUserProfile({ userId: userId }),
     enabled: !!userId,
   });
   const { data: linksData } = useQuery({

@@ -1,4 +1,3 @@
-import { checkSignin } from "@data-access/checkSignin";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../constant";
@@ -7,6 +6,7 @@ import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { getToken, removeToken } from "@util/handleToken";
+import { authAPI } from "@data-access/authAPI";
 
 interface IFormInput {
   email: string;
@@ -39,7 +39,8 @@ export function SignForm() {
     };
 
     try {
-      const { accessToken, refreshToken } = await checkSignin(inputValue);
+      const { accessToken, refreshToken } =
+        await authAPI.checkSignin(inputValue);
       router.push("/folder");
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);

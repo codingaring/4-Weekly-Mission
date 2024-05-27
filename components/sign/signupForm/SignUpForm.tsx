@@ -1,8 +1,9 @@
-import { checkSignup, checkValidationEmail } from "@data-access/checkSignup";
+import { authAPI } from "@data-access/authAPI";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as S from "../SignFormStyled";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constant";
+import { useMutation } from "@tanstack/react-query";
 
 interface IFormInput {
   email: string;
@@ -23,10 +24,10 @@ export function SignUpForm() {
 
   const isConfirmPassword = async (insertEmail: string) => {
     try {
-      await checkValidationEmail({ email: insertEmail });
+      await authAPI.checkValidationEmail({ email: insertEmail });
       return true;
-    } catch {
-      return "이미 사용 중인 이메일입니다.";
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
@@ -43,10 +44,10 @@ export function SignUpForm() {
     };
 
     try {
-      await checkSignup(insertValue);
+      await authAPI.checkSignup(insertValue);
       router.push("/signin");
-    } catch {
-      return;
+    } catch (error: any) {
+      console.error(error.message);
     }
   };
 
