@@ -3,12 +3,21 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_REGEX } from "../constant";
 import * as S from "../SignFormStyled";
-import { useEffectOnce } from "@hooks/useEffectOnce";
-import { getToken } from "@util/handleToken";
+import { getLoginUserInfo } from "@data-access/getLoginUserInfo";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { getToken, removeToken } from "@util/handleToken";
 
 interface IFormInput {
   email: string;
   password: string;
+}
+
+interface loginUserProfile {
+  id: number;
+  name: string;
+  image_source: string;
+  email: string;
 }
 
 export function SignForm() {
@@ -19,6 +28,10 @@ export function SignForm() {
     formState: { errors },
     setError,
   } = useForm<IFormInput>({ mode: "onBlur" });
+  const { data: profile } = useQuery({
+    queryKey: ["loginUserProfile"],
+    queryFn: getLoginUserInfo,
+  });
   const handleInputValue: SubmitHandler<IFormInput> = async (data) => {
     const inputValue = {
       email: data.email,
@@ -40,16 +53,22 @@ export function SignForm() {
     }
   };
 
-  function hasAccessToken() {
+  function hasValidateAccessToken({ profile }: { profile?: loginUserProfile }) {
     const accessToken = getToken();
-    if (!accessToken) {
-      return;
+    if (accessToken) {
+      if (profile) {
+        router.push("/folder");
+      } else {
+        return;
+      }
     } else {
-      router.push("/folder");
+      removeToken();
     }
   }
 
-  useEffectOnce(hasAccessToken);
+  useEffect(() => {
+    hasValidateAccessToken({ profile });
+  }, []);
 
   return (
     <S.InputContainer onSubmit={handleSubmit(handleInputValue)}>
