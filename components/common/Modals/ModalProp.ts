@@ -1,4 +1,4 @@
-import { FolderListDataForm } from "@data-access/axios/getCategory";
+import { FolderListDataForm } from "@data-access/getCategory";
 import { MouseEvent } from "react";
 
 export interface BaseModalProps {
@@ -23,7 +23,7 @@ export interface ModalProps extends BaseModalProps {
 export interface AddToFolderProps extends BaseModalProps {
   linkURL: string | undefined;
   folderList: FolderListDataForm[] | undefined;
-  handleReset: () => void;
+  handleReset?: () => void;
 }
 
 export interface RenameFolderProps extends BaseModalProps {
