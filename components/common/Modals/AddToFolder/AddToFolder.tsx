@@ -38,6 +38,10 @@ export function AddToFolder({
       if(handleReset){
         handleReset();
       } 
+    } else if (!linkURL && selectFolderId){
+      alert("url을 입력해주세요.");
+    } else if (linkURL && !selectFolderId){
+      alert("폴더를 선택해주세요.");
     }
   };
 
